@@ -2,17 +2,31 @@
   <main>
     <div class="wrapper">
       <h3>追蹤浪浪</h3>
+      <section>
+        <Card />
+      </section>
     </div>
   </main>
 </template>
 
+<script>
+import Card from "@/components/Card.vue";
+export default {
+  components: {
+    Card,
+  },
+  data() {
+    return {};
+  },
+};
+</script>
 <style lang="scss" scoped>
 main {
   background: color.$brown_100;
   min-height: calc(100vh - 60px);
   margin-top: 60px;
 
-  @include breakpoint.desktop {
+  @include breakpoint.tablet {
     min-height: calc(100vh - 103px);
     margin-top: 103px;
   }
@@ -26,6 +40,16 @@ main {
         font-size: 50px;
       }
     }
+  }
+}
+section {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  @include breakpoint.tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include breakpoint.bgScreen {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 </style>
