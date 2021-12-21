@@ -1,12 +1,14 @@
 <template>
-  <router-link to="/">Home | </router-link>
-  <router-link to="Search">尋找浪浪 | </router-link>
-  <router-link to="Track">追蹤浪浪 | </router-link>
-  <router-link to="Volunteer">志工招募 | </router-link>
-  <router-link to="Custom">愛心項圈 |</router-link>
+  <NavBar />
   <router-view />
 </template>
 
+<script>
+import NavBar from "@/components/NavBar.vue";
+export default {
+  components: { NavBar },
+};
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
