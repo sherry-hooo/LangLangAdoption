@@ -5,15 +5,18 @@
       <section>
         <Card v-for="card in 10" :key="card"></Card>
       </section>
+      <div class="pagination"><Pagination /></div>
     </div>
   </main>
 </template>
 
 <script>
 import Card from "@/components/Card.vue";
+import Pagination from "@/components/Pagination.vue";
 export default {
   components: {
     Card,
+    Pagination,
   },
   data() {
     return {};
