@@ -6,6 +6,7 @@
     <AdoptionNotice
       v-if="showAdoptionNotice"
       @goNextPage="goNextPage"
+      @noticeFormAnswer="receiveNoticeFormAnswer"
     ></AdoptionNotice>
     <AdoptionApply v-if="AdoptionApply"></AdoptionApply>
   </main>
@@ -21,12 +22,17 @@ export default {
     return {
       showAdoptionNotice: false,
       AdoptionApply: false,
+      noticeForm: {},
     };
   },
   methods: {
     goNextPage(data) {
       this.showAdoptionNotice = false;
       this.AdoptionApply = data;
+    },
+    receiveNoticeFormAnswer(answer) {
+      console.log(answer);
+      this.noticeForm = answer;
     },
   },
 };
