@@ -1,5 +1,16 @@
 <template>
   <main>
+    <div class="description">
+      <div class="des_container">
+        <h2>浪浪資料</h2>
+        <div class="case">
+          <div class="case_img_box">
+            <img src="images/cat2.svg" alt="" />
+          </div>
+          <div class="case_des_box"></div>
+        </div>
+      </div>
+    </div>
     <button class="sample" @click="showAdoptionNotice = true">
       我有意願認養
     </button>
@@ -35,5 +46,17 @@ export default {
 .sample {
   padding: 10px;
   cursor: pointer;
+}
+@use "../utilities/color";
+@use "../utilities/breakpoint";
+
+.description {
+  padding: 103px 100px 100px 100px;
+}
+.des_container {
+  margin: 0 auto;
+  & h2 {
+    width: fit-content;
+  }
 }
 </style>
