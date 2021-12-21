@@ -9,21 +9,33 @@
             1.
             您是否看過犬貓之行為健康評估表?您是否與管理人員或志工討論過該犬貓之狀況。
           </p>
-          <label><input type="radio" name="q1" /><span />是</label>
-          <label><input type="radio" name="q1" checked /><span />否</label>
+          <label @click="q1 = true"
+            ><input type="radio" name="q1" /><span />是</label
+          >
+          <label @click="q1 = false"
+            ><input type="radio" name="q1" checked /><span />否</label
+          >
         </li>
         <li>
           <p>
             2. 您是否知道犬貓的健康有許多不確定的風險?
             您是否了解當牠生病時立即就醫治療是飼主的責任?
           </p>
-          <label><input type="radio" name="q2" /><span />是</label>
-          <label><input type="radio" name="q2" checked /><span />否</label>
+          <label @click="q2 = true"
+            ><input type="radio" name="q2" /><span />是</label
+          >
+          <label @click="q2 = false"
+            ><input type="radio" name="q2" checked /><span />否</label
+          >
         </li>
         <li>
           <p>3. 您是否了解: 給犬貓良好的教育，是飼主應該努力學習的責任?</p>
-          <label><input type="radio" name="q3" /><span />是</label>
-          <label><input type="radio" name="q3" checked /><span />否</label>
+          <label @click="q3 = true"
+            ><input type="radio" name="q3" /><span />是</label
+          >
+          <label @click="q3 = false"
+            ><input type="radio" name="q3" checked /><span />否</label
+          >
         </li>
         <li>
           <p>
@@ -31,49 +43,77 @@
             1) 運輸過程吹風淋雨 2) 洗澡 3) 過度玩耍 4)
             更換食物等等讓降低抵抗力而爆發疾病
           </p>
-          <label><input type="radio" name="q4" /><span />是</label>
-          <label><input type="radio" name="q4" checked /><span />否</label>
+          <label @click="q4 = true"
+            ><input type="radio" name="q4" /><span />是</label
+          >
+          <label @click="q4 = false"
+            ><input type="radio" name="q4" checked /><span />否</label
+          >
         </li>
         <li>
           <p>
             5.
             您是否了解就外觀判斷犬貓健康是不夠的，必須到動物醫院為牠做基本的檢查
           </p>
-          <label><input type="radio" name="q5" /><span />是</label>
-          <label><input type="radio" name="q5" checked /><span />否</label>
+          <label @click="q5 = true"
+            ><input type="radio" name="q5" /><span />是</label
+          >
+          <label @click="q5 = false"
+            ><input type="radio" name="q5" checked /><span />否</label
+          >
         </li>
         <li>
           <p>6. 犬貓將近有15年的壽命，您是否了解無論人事物的演變</p>
-          <label><input type="radio" name="q6" /><span />是</label>
-          <label><input type="radio" name="q6" checked /><span />否</label>
+          <label @click="q6 = true"
+            ><input type="radio" name="q6" /><span />是</label
+          >
+          <label @click="q6 = false"
+            ><input type="radio" name="q6" checked /><span />否</label
+          >
         </li>
         <li>
           <p>7. 您是否了解飼養動物需要適當的居家條件?</p>
-          <label><input type="radio" name="q7" /><span />是</label>
-          <label><input type="radio" name="q7" checked /><span />否</label>
+          <label @click="q7 = true"
+            ><input type="radio" name="q7" /><span />是</label
+          >
+          <label @click="q7 = false"
+            ><input type="radio" name="q7" checked /><span />否</label
+          >
         </li>
         <li>
           <p>
             8.
             您是否同意在未取得共識之前絕不貿然認養，以免造成日後極大的心理負擔
           </p>
-          <label><input type="radio" name="q8" /><span />是</label>
-          <label><input type="radio" name="q8" checked /><span />否</label>
+          <label @click="q8 = true"
+            ><input type="radio" name="q8" /><span />是</label
+          >
+          <label @click="q8 = false"
+            ><input type="radio" name="q8" checked /><span />否</label
+          >
         </li>
         <li>
           <p>
             9. 您是否了解若縱放犬貓在外，任何人都可以加以協送保護送交收容所。
           </p>
-          <label><input type="radio" name="q9" /><span />是</label>
-          <label><input type="radio" name="q9" checked /><span />否</label>
+          <label @click="q9 = true"
+            ><input type="radio" name="q9" /><span />是</label
+          >
+          <label @click="q9 = false"
+            ><input type="radio" name="q9" checked /><span />否</label
+          >
         </li>
         <li>
           <p>
             10.
             如因任何原因無法續養，本人願為牠找到新的認養家庭，或送至動物保護團體所屬收容所，或再送至貴所辦理不擬續養手續並依收容所規定繳交規費
           </p>
-          <label><input type="radio" name="q10" /><span />是</label>
-          <label><input type="radio" name="q10" checked /><span />否</label>
+          <label @click="q10 = true"
+            ><input type="radio" name="q10" /><span />是</label
+          >
+          <label @click="q10 = false"
+            ><input type="radio" name="q10" checked /><span />否</label
+          >
         </li>
       </ul>
       <div class="notice_buttons">
@@ -89,14 +129,41 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      q1: false,
+      q2: false,
+      q3: false,
+      q4: false,
+      q5: false,
+      q6: false,
+      q7: false,
+      q8: false,
+      q9: false,
+      q10: false,
+    };
   },
   methods: {
     goNextPage() {
       this.$emit("goNextPage", true);
+      this.submitFormAnswer();
     },
-    cancelEdit() {},
+    submitFormAnswer() {
+      let answer = {
+        q1: this.q1,
+        q2: this.q2,
+        q3: this.q3,
+        q4: this.q4,
+        q5: this.q5,
+        q6: this.q6,
+        q7: this.q7,
+        q8: this.q8,
+        q9: this.q9,
+        q10: this.q10,
+      };
+      this.$emit("noticeFormAnswer", answer);
+    },
   },
+  computed: {},
 };
 </script>
 <style lang="scss" scoped>
