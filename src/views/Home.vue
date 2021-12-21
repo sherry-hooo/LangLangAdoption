@@ -43,13 +43,24 @@
 </template>
 
 <style lang="scss" scoped>
+main {
+  padding-top: 60px; //扣除navbar高度
+
+  @include breakpoint.tablet{
+    padding-top: 103px;
+  }
+}
 
 .banner {
   position: relative;
   z-index: -2;
-  height: 100vh;
+  height: calc(100vh - 60px);
   overflow: hidden;
   background: color.$brown_100;
+
+  @include breakpoint.tablet{
+    height: calc(100vh - 103px);
+  }
   
   .decoration_dot{
     display: none;
