@@ -3,7 +3,7 @@
     <div class="wrapper">
       <h3>追蹤浪浪</h3>
       <section>
-        <Card />
+        <Card v-for="card in 10" :key="card"></Card>
       </section>
     </div>
   </main>
@@ -36,6 +36,7 @@ main {
       font-size: 30px;
       color: color.$gray_700;
       text-align: left;
+      margin-bottom: 60px;
       @include breakpoint.desktop {
         font-size: 50px;
       }
@@ -50,6 +51,12 @@ section {
   }
   @include breakpoint.bgScreen {
     grid-template-columns: repeat(3, 1fr);
+  }
+  a {
+    margin-bottom: 16px;
+    @include breakpoint.desktop {
+      margin-bottom: 24px;
+    }
   }
 }
 </style>
