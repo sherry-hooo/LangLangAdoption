@@ -12,8 +12,27 @@ export default {
     Pagination,
   },
   data() {
-    return {};
+    return {
+      petsDataInArray: [],
+    };
   },
+  methods: {
+    getAPI() {
+      fetch(
+        "https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL"
+      )
+        .then((data) => data.json())
+        .then((data) => (this.petsDataInArray = data));
+    },
+  },
+  // computed: {
+  //   petData() {
+  //     return this.petsDataInArray.slice(0, 10);
+  //   },
+  // },
+  // created() {
+  //   this.getAPI();
+  // },
 };
 </script>
 
