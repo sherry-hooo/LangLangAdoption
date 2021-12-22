@@ -11,7 +11,7 @@
             <div class="follow_box">
               <div class="follow">
                 <label class="heart_icon">
-                  <input type="checkbox" @click="tracking = !tracking" />
+                  <input type="checkbox" @click="setToTrack" />
                   <i class="far fa-heart"></i>
                 </label>
                 <span>{{ tracking ? "已追蹤" : "追蹤" }}</span>
@@ -121,6 +121,10 @@ export default {
     receiveApplForm(form) {
       console.log("收到驗證後的資料了", form);
       this.showAdoptionApply = false;
+    },
+    setToTrack() {
+      this.tracking = !this.tracking;
+      console.log("存入localStorage");
     },
   },
 };
