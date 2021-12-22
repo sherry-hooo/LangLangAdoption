@@ -99,9 +99,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-* {
-  outline: solid 1px red;
-}
+// * {
+//   outline: solid 1px red;
+// }
 .sample {
   padding: 10px;
   cursor: pointer;
@@ -109,15 +109,10 @@ export default {
 main {
   padding: 60px 0px 0px 0px;
   background-color: color.$brown-100;
-  // @include breakpoint.tablet {
-  //   margin-top: 103px;
-  // }
 }
 .description {
   padding: 0px 30px 30px 30px;
-  // display: flex;
   @include breakpoint.tablet {
-    // flex-wrap: wrap;
     padding: 0px 50px 50px 50px;
   }
   @include breakpoint.desktop {
@@ -150,10 +145,6 @@ main {
       gap: 50px;
     }
     @include breakpoint.tablet {
-      // display: flex;
-      // justify-content: space-between;
-      // padding: 0 50px;
-      // width: 768px;
     }
     @include breakpoint.desktop {
       flex-direction: column;
@@ -194,14 +185,7 @@ main {
   overflow: hidden;
   max-width: 500px;
   max-height: 400px;
-  // @include breakpoint.tablet {
-  //   border: solid 16px;
-  //   border-color: color.$white;
-  //   width: 468px;
-  //   height: 368px;
-  // }
   & img {
-    // object-fit: cover;
     width: 100%;
   }
 }
