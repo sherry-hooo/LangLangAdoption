@@ -32,12 +32,14 @@
   <div class="volunteer_ad">
     <h2>志工招募</h2>
     <p>我們需要你，成為我們最強的後盾</p>
-    <div class="volunteer_image">
-      <img src="@/assets/img/volunteer4.svg" alt="">
+    <div class="volunteer_entry">
+      <div class="volunteer_image">
+        <img src="@/assets/img/volunteer4.svg" alt="">
+      </div>
+      <button>
+        我有興趣
+      </button>
     </div>
-    <button>
-      我有興趣
-    </button>
   </div>
 </main>
 </template>
@@ -184,7 +186,6 @@ main {
       right: unset;
       bottom: 0;
       padding: 30px 55px;
-
     }
     }
 }
@@ -195,52 +196,99 @@ main {
 }
 
 .volunteer_ad{
-  padding: 40px 0;
+  padding: 20px 0;
   background: color.$brown_100;
 
-  h2{
-    font-size: 30px;
-    color: color.$brown_500;
+  @include breakpoint.tablet{
+    padding: 20px 0;
+  }
 
+  h2{
+    font-size: 24px;
+    color: color.$brown_500;
+    @include breakpoint.tablet{
+      font-size: 30px;
+    }
     @include breakpoint.desktop{
       font-size: 50px;
     }
   }
 
   p{
-    margin-top: 16px;
-    font-size: 20px;
+    margin-top: 5px;
+    font-size: 16px;
     font-weight: 600;
+    @include breakpoint.tablet{
+      font-size: 20px;
+    }
 
     @include breakpoint.desktop{
       font-size: 30px;
     }
   }
+}
 
-  .volunteer_image{
-    margin: 20px auto;
-    max-width: 1024px;
+.volunteer_entry{
+  margin: 0 auto;
+  width: fit-content;
 
-    img{
-      width: 100%;
-      height: 100%;
-      object-position: center;
+  @include breakpoint.desktop{
+    position: relative;
+
+    // 在桌機尺寸下，button是在hover圖片時才會出現
+    &:hover button{
+      opacity: 1;
+      transition: opacity 0.6s ease-in-out;
     }
+    &:not(:hover) button{
+      opacity: 0;
+    }
+    
+    &:hover .volunteer_image{
+      opacity: 0.7;
+      transition: opacity 0.6s ease-in-out;
+    }
+    }
+
+  // button的樣式與位置
+  button{
+  position: static;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+  background: color.$brown_300;
+  font-size: 18px;
+  font-weight: 600;
+
+  @include breakpoint.tablet{
+    padding: 15px 25px;
+    font-size: 20px;
   }
 
-  button{
-    padding: 10px 20px;
-    border-radius: 10px;
-    color: white;
-    background: color.$brown_300;
-    font-size: 20px;
-    font-weight: 600;
+  @include breakpoint.desktop{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 25px 65px;
+    font-size: 24px;
+  }
+}
+}
 
+.volunteer_image{
+  margin: 10px auto;
+  max-width: 1000px;
 
-    @include breakpoint.desktop{
-      padding: 25px 65px;
-      font-size: 25px;
-    }
+  @include breakpoint.desktop{
+    margin: 20px auto;
+    width: 1024px;
+  }
+
+  img{
+    width: 100%;
+    height: 100%;
+    object-position: center;
   }
 }
 
