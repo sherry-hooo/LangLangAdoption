@@ -1,4 +1,4 @@
-<template v-if="petData">
+<template>
   <router-link
     :to="{ name: 'Description', params: { petID: petData.animal_id } }"
   >
@@ -30,21 +30,27 @@ export default {
     flex-direction: row;
     flex-wrap: nowrap;
     padding: 16px;
-    margin: 0 auto;
     width: 270px;
     height: 170px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-    @include breakpoint.mobile {
+    @include breakpoint.tablet{
       flex-direction: column;
       width: 270px;
       height: 340px;
     }
 
-    @include breakpoint.desktop {
+    @include breakpoint.desktop{
+      width: 300px;
+      height: auto;
+    }
+
+    @include breakpoint.bgScreen {
       width: 400px;
       height: 425px;
     }
+
+
   }
   &_image {
     flex-basis: 60%;
