@@ -1,4 +1,5 @@
 <template>
+  <Dropdown />
   <section>
     <Card v-for="petData in petData" :key="petData" :petData="petData"></Card>
   </section>
@@ -8,12 +9,14 @@
 <script>
 import Card from "@/components/Card.vue";
 import Pagination from "@/components/Pagination.vue";
+import Dropdown from "@/components/Dropdown.vue";
 import getApi from "@/service/getApi.js";
 
 export default {
   components: {
     Card,
     Pagination,
+    Dropdown,
   },
   data() {
     return {
