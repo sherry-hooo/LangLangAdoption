@@ -2,15 +2,15 @@
   <main>
     <div class="flex_2">
       <div class="img_box">
-        <img src="@/assets/img/volunteer3.svg" alt="" />
+        <img src="@/assets/img/volunteer3.jpg" alt="" />
       </div>
       <div class="img_box">
-        <img src="@/assets/img/volunteer2.svg" alt="" />
+        <img src="@/assets/img/volunteer2.jpg" alt="" />
       </div>
     </div>
     <div class="flex_1">
       <div class="img_box">
-        <img src="@/assets/img/volunteer1.svg" alt="" />
+        <img src="@/assets/img/volunteer1.jpg" alt="" />
       </div>
       <div class="info">
         <div class="info_content">
@@ -59,6 +59,13 @@ export default {
 * {
   outline: solid 1px red;
 }
+main {
+  padding-top: 60px;
+  background-color: color.$brown_100;
+  @include breakpoint.tablet {
+    padding-top: 103px;
+  }
+}
 .flex_1 {
   display: flex;
   flex-direction: column;
@@ -73,8 +80,8 @@ export default {
 }
 .info {
   text-align: start;
-  &_content {
-  }
+  // &_content {
+  // }
 }
 .item {
   margin-top: 12px;
