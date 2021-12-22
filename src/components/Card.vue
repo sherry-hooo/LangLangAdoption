@@ -34,13 +34,13 @@ export default {
     height: 170px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-    @include breakpoint.tablet{
+    @include breakpoint.tablet {
       flex-direction: column;
       width: 270px;
       height: 340px;
     }
 
-    @include breakpoint.desktop{
+    @include breakpoint.desktop {
       width: 300px;
       height: auto;
     }
@@ -49,8 +49,6 @@ export default {
       width: 400px;
       height: 425px;
     }
-
-
   }
   &_image {
     flex-basis: 60%;
