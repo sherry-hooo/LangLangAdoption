@@ -2,17 +2,24 @@
   <router-link :to="{ name: 'Description' }">
     <div class="case_card">
       <div class="case_image">
-        <img src="@/assets/img/cat2.svg" alt="" />
+        <img :src="petData.album_file" alt="浪浪圖片" />
       </div>
       <div class="case_info">
-        <span>貓狗</span>
-        <span>毛花色</span>
-        <span>性別</span>
-        <p><i class="fas fa-map-marker-alt"></i>澎湖縣馬公市收容所</p>
+        <span>{{ petData.animan_kind }}</span>
+        <span>{{ petData.animan_colour }}</span>
+        <span>{{ petData.animan_sex }}</span>
+        <p><i class="fas fa-map-marker-alt"></i>{{ petData.animal_place }}</p>
       </div>
     </div>
   </router-link>
 </template>
+
+<script>
+export default {
+  props: ["petData"],
+  data() {},
+};
+</script>
 
 <style lang="scss" scoped>
 .case {
