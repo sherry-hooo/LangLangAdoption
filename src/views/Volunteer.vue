@@ -15,25 +15,25 @@
       <div class="info">
         <div class="info_content">
           <div class="item">
-            <p class="item_title">招募單位：</p>
+            <p class="item_title">招募單位&colon;</p>
             <p class="item_text">好想浪你回家基金會</p>
           </div>
           <div class="item">
-            <p class="item_title">服務地點：</p>
+            <p class="item_title">服務地點&colon;</p>
             <p class="item_text">701台南市東區北門路二段16號 L2A</p>
           </div>
           <div class="item">
-            <p class="item_title">服務內容簡介：</p>
+            <p class="item_title">服務內容簡介&colon;</p>
             <p class="item_text">1. 協助浪浪社會化訓練</p>
             <p class="item_text">2. 引導領養者認識浪浪</p>
             <p class="item_text">3. 協助假日領養活動</p>
           </div>
           <div class="item">
-            <p class="item_title">聯絡人及聯絡方式：</p>
+            <p class="item_title">聯絡人及聯絡方式&colon;</p>
             <p class="item_text">Chris 0966666666</p>
           </div>
           <div class="item">
-            <p class="item_title">招募對象：</p>
+            <p class="item_title">招募對象&colon;</p>
             <p class="item_text">18 歲以上一般民眾</p>
           </div>
         </div>
