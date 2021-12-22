@@ -1,18 +1,27 @@
 <template>
-  <router-link :to="{ name: 'Description' }">
+  <router-link
+    :to="{ name: 'Description', params: { petID: petData.animal_id } }"
+  >
     <div class="case_card">
       <div class="case_image">
-        <img src="@/assets/img/cat2.svg" alt="" />
+        <img :src="petData.album_file" alt="浪浪圖片" />
       </div>
       <div class="case_info">
-        <span>貓狗</span>
-        <span>毛花色</span>
-        <span>性別</span>
-        <p><i class="fas fa-map-marker-alt"></i>澎湖縣馬公市收容所</p>
+        <span>{{ petData.animan_kind }}</span>
+        <span>{{ petData.animan_colour }}</span>
+        <span>{{ petData.animan_sex }}</span>
+        <p><i class="fas fa-map-marker-alt"></i>{{ petData.animal_place }}</p>
       </div>
     </div>
   </router-link>
 </template>
+
+<script>
+export default {
+  props: ["petData"],
+  data() {},
+};
+</script>
 
 <style lang="scss" scoped>
 .case {
@@ -21,21 +30,27 @@
     flex-direction: row;
     flex-wrap: nowrap;
     padding: 16px;
-    margin: 0 auto;
     width: 270px;
     height: 170px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-    @include breakpoint.mobile {
+    @include breakpoint.tablet{
       flex-direction: column;
       width: 270px;
       height: 340px;
     }
 
-    @include breakpoint.desktop {
+    @include breakpoint.desktop{
+      width: 300px;
+      height: auto;
+    }
+
+    @include breakpoint.bgScreen {
       width: 400px;
       height: 425px;
     }
+
+
   }
   &_image {
     flex-basis: 60%;
