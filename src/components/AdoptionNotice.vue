@@ -145,9 +145,9 @@ export default {
   methods: {
     goNextPage() {
       this.$emit("goNextPage", true);
-      this.submitFormAnswer();
+      this.submitNoticeForm();
     },
-    submitFormAnswer() {
+    submitNoticeForm() {
       let answer = {
         q1: this.q1,
         q2: this.q2,
@@ -160,7 +160,10 @@ export default {
         q9: this.q9,
         q10: this.q10,
       };
-      this.$emit("noticeFormAnswer", answer);
+      this.$emit("submitNoticeForm", answer);
+    },
+    cancelEdit() {
+      this.$emit("cancelEdit", "AdoptionNotice");
     },
   },
   computed: {},
@@ -173,12 +176,16 @@ export default {
   right: 0;
   left: 0;
   width: 100vw;
+  height: 100%;
   min-height: 100vh;
+  padding-top: 60px;
   background: #bebabaab;
   backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;
-  align-items: center;
+  @include breakpoint.desktop {
+    padding-top: 114px;
+  }
 }
 .adoption_notice {
   color: color.$gray_700;
