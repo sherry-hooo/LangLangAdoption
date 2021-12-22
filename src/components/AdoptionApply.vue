@@ -58,44 +58,48 @@
       </ol>
       <form>
         <h5>申請資料</h5>
-        <label for=""
-          >飼養地點:
-          <input type="text" />
+        <label>
+          飼養地點:
+          <input
+            type="text"
+            v-model="place"
+            placeholder="請輸入地址及型態(公寓、透天)"
+          />
         </label>
-        <label for="" class="space"
-          >空間大小:
-          <input type="text" />
+        <label class="space">
+          空間大小:
+          <input type="text" v-model="space" placeholder="請輸入坪數" />
         </label>
-        <label for="" class="pet_number"
-          >現有動物支數:
-          <input type="text" />
+        <label class="pet_number">
+          現有動物隻數:
+          <input type="text" v-model="petCount" />
         </label>
-        <label for=""
-          >認養人名稱:
-          <input type="text" />
+        <label>
+          認養人名稱:
+          <input type="text" v-model="adopterName" />
         </label>
-        <label for="" class="birth"
-          >認養人出生日期:
-          <input type="text" />
+        <label class="birth">
+          認養人出生日期:
+          <input type="text" v-model="adoptorBirth" />
         </label>
-        <label for=""
-          >認養人聯絡電話:
-          <input type="text" />
+        <label>
+          認養人聯絡電話:
+          <input type="text" v-model="adoptorContact" />
         </label>
-        <label for="" class="email"
-          >電子信箱:
-          <input type="text" />
+        <label class="email">
+          電子信箱:
+          <input type="text" v-model="adoptorEmail" />
         </label>
-        <label for="" class="adress"
-          >通訊地址:
-          <input type="text" />
+        <label class="adress">
+          通訊地址:
+          <input type="text" v-model="adoptorAddress" />
         </label>
       </form>
       <div class="notice_buttons">
         <button class="cancel_btn" type="cancel" @click="cancelEdit">
           取消
         </button>
-        <button class="submit_btn" @click="goNextPage">下一頁</button>
+        <button class="submit_btn" @click="submitApplyForm">申請</button>
       </div>
     </div>
   </section>
@@ -104,11 +108,36 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      place: "",
+      space: "",
+      petCount: null,
+      adopterName: "",
+      adoptorBirth: "",
+      adoptorContact: "",
+      adoptorEmail: "",
+      adoptorAddress: "",
+    };
   },
   methods: {
     cancelEdit() {
       this.$emit("cancelEdit", "AdoptionApply");
+    },
+    submitApplyForm() {
+      const applyFormContent = {
+        place: this.place,
+        space: this.space,
+        petCount: this.petCount,
+        adoptorName: this.adoptorName,
+        adoptorBirth: this.adoptorBirth,
+        adoptorEmail: this.adoptorEmail,
+        adoptorAddress: this.adoptorAddress,
+      };
+      this.validateData(applyFormContent);
+      this.$emit("submitApplyForm", applyFormContent);
+    },
+    validateData() {
+      console.log("驗證");
     },
   },
 };
