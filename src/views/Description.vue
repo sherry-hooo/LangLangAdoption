@@ -6,7 +6,7 @@
         <div class="case">
           <div class="case_img_box">
             <div class="img_box">
-              <img src="@/assets/img/cat2.svg" alt="" />
+              <img :src="petData.album_file" alt="浪浪圖片" />
             </div>
             <div class="follow_box">
               <div class="follow">
@@ -22,46 +22,48 @@
             </div>
           </div>
           <div class="case_des_box">
-            <div class="case_wrapper">
+            <div v-if="petData.animal_status" class="case_wrapper">
               <p class="case_title">狀態 &colon;</p>
-              <p class="case_content">待領養</p>
+              <p class="case_content">
+                {{ petData.animal_status === "OPEN" ? "待領養" : "已領養" }}
+              </p>
             </div>
-            <div class="case_wrapper">
+            <div v-if="petData.animal_kind" class="case_wrapper">
               <p class="case_title">類型 &colon;</p>
-              <p class="case_content">貓</p>
+              <p class="case_content">{{ petData.animal_kind }}</p>
             </div>
-            <div class="case_wrapper">
+            <div v-if="petData.animal_colour" class="case_wrapper">
               <p class="case_title">顏色 &colon;</p>
-              <p class="case_content">灰白色</p>
+              <p class="case_content">{{ petData.animal_colour }}</p>
             </div>
-            <div class="case_wrapper">
+            <div v-if="petData.animal_sex" class="case_wrapper">
               <p class="case_title">性別 &colon;</p>
-              <p class="case_content">女孩</p>
+              <p class="case_content">{{ petData.animal_sex === "F" }}</p>
             </div>
-            <div class="case_wrapper">
+            <div v-if="petData.animal_bodytype" class="case_wrapper">
               <p class="case_title">體型 &colon;</p>
-              <p class="case_content">小</p>
+              <p class="case_content">{{ petData.animal_bodytype }}</p>
             </div>
-            <div class="case_wrapper">
+            <div v-if="petData.animal_place" class="case_wrapper">
               <p class="case_title">收容地點 &colon;</p>
-              <p class="case_content">澎湖縣流浪動物收容中心</p>
+              <p class="case_content">{{ petData.animal_place }}</p>
             </div>
-            <div class="case_wrapper">
+            <div v-if="petData.shelter_address" class="case_wrapper">
               <p class="case_title">收容地址 &colon;</p>
-              <p class="case_content">澎湖縣流浪動物收容中心</p>
+              <p class="case_content">{{ petData.shelter_address }}</p>
             </div>
-            <div class="case_wrapper">
+            <div v-if="petData.shelter_tel" class="case_wrapper">
               <p class="case_title">聯絡電話 &colon;</p>
-              <p class="case_content">06-9213559</p>
+              <p class="case_content">{{ petData.shelter_tel }}</p>
             </div>
-            <div class="case_wrapper">
+            <div v-if="petData.animal_createtime" class="case_wrapper">
               <p class="case_title">入所日期 &colon;</p>
-              <p class="case_content">2021/09/23</p>
+              <p class="case_content">{{ petData.animal_createtime }}</p>
             </div>
-            <div class="case_wrapper">
+            <div v-if="petData.animal_remark" class="case_wrapper">
               <p class="case_title">備註 &colon;</p>
               <p class="case_content">
-                本站動物皆採現場互動面談後評估能否認養，不接受系統上的預約
+                {{ petData.animal_remark }}
               </p>
             </div>
           </div>
@@ -93,7 +95,10 @@
 <script>
 import AdoptionApply from "@/components/AdoptionApply.vue";
 import AdoptionNotice from "@/components/AdoptionNotice.vue";
+import getApi from "@/service/getApi.js";
+
 export default {
+  props: ["petID", "petKind"],
   components: { AdoptionApply, AdoptionNotice },
   data() {
     return {
@@ -102,6 +107,7 @@ export default {
       noticeForm: {},
       applyForm: {},
       tracking: false,
+      petData: {},
     };
   },
   methods: {
@@ -126,6 +132,14 @@ export default {
       this.tracking = !this.tracking;
       console.log("存入localStorage");
     },
+    getAnimalData(petKind, petID) {
+      getApi
+        .getAnimalData(petKind, petID)
+        .then((res) => (this.petData = res.data.Data[0]));
+    },
+  },
+  created() {
+    this.getAnimalData(this.petKind, this.petID);
   },
 };
 </script>
