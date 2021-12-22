@@ -1,5 +1,5 @@
 <template>
-  <Dropdown />
+  <Dropdown @animalKind="receiveAnimalKind"></Dropdown>
   <section>
     <Card v-for="petData in petData" :key="petData" :petData="petData"></Card>
   </section>
@@ -21,6 +21,7 @@ export default {
   data() {
     return {
       petsDataInArray: [],
+      animalKind: "",
     };
   },
   methods: {
@@ -29,15 +30,20 @@ export default {
         .getAnimalData("貓")
         .then((res) => (this.petsDataInArray = res.data.Data));
     },
+    receiveAnimalKind(data) {
+      console.log(data);
+      this.animalKind = data;
+      this.getAPI(this.animalKind);
+    },
   },
   computed: {
     petData() {
       return this.petsDataInArray.slice(0, 10);
     },
   },
-  created() {
-    this.getAPI();
-  },
+  // created() {
+  //   this.getAPI();
+  // },
 };
 </script>
 
