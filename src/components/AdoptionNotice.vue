@@ -173,12 +173,16 @@ export default {
   right: 0;
   left: 0;
   width: 100vw;
+  height: 100%;
   min-height: 100vh;
+  padding-top: 60px;
   background: #bebabaab;
   backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;
-  align-items: center;
+  @include breakpoint.desktop {
+    padding-top: 114px;
+  }
 }
 .adoption_notice {
   color: color.$gray_700;

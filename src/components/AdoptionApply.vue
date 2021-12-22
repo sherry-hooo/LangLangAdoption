@@ -1,10 +1,10 @@
 <template>
   <section class="transparent_container">
-    <section class="container">
-      <div class="progress_icon">
-        <span class="first"></span><span class="inner"></span><span></span>
+    <div class="wrapper">
+      <div class="progress_bar">
+        <span></span>
       </div>
-      <h2>步驟二 認養申請</h2>
+      <h4>步驟二 認養申請</h4>
       <label class="accept_container">
         <input type="checkbox" />
         <span class="fake_button"></span>
@@ -57,7 +57,7 @@
         </li>
       </ol>
       <form>
-        <h2>申請資料</h2>
+        <h5>申請資料</h5>
         <label for=""
           >飼養地點:
           <input type="text" />
@@ -91,95 +91,46 @@
           <input type="text" />
         </label>
       </form>
-      <div class="confirm_button_container">
-        <button disabled>取消</button><input type="submit" placeholder="申請" />
+      <div class="notice_buttons">
+        <button class="cancel_btn" type="cancel" @click="cancelEdit">
+          取消
+        </button>
+        <button class="submit_btn" @click="goNextPage">下一頁</button>
       </div>
-    </section>
+    </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
-.progress_icon {
-  color: #af9380;
-
-  position: relative;
-  text-align: center;
-  padding: 32px 36px;
-
-  .first {
-    margin-right: 100px;
-  }
-  span {
-    width: 20px;
-    height: 20px;
-
-    &.first {
-      margin-right: 100px;
-    }
-  }
-  span.inner {
-    width: 105px;
-    height: 5px;
-
-    position: absolute;
-    top: 40px;
-    right: 0;
-    left: 0;
-    margin: 0 auto;
-  }
-
-  @include breakpoint.desktop {
-    .first {
-      margin-right: 140px;
-    }
-
-    span {
-      width: 40px;
-      height: 40px;
-    }
-    span.inner {
-      width: 140px;
-      height: 5px;
-      position: absolute;
-      //!? 這裏
-      top: 47px;
-      right: 0;
-      left: 0;
-      margin: 0 auto;
-    }
-  }
-  span {
-    display: inline-block;
-
-    border-radius: 50px;
-    background-color: #af9380;
-    border: 0;
-  }
-}
 .transparent_container {
-  padding: 35px;
+  padding: 60px 0 20px 0;
   background: rgba(190, 188, 188, 0.6);
+  backdrop-filter: blur(1px);
   display: flex;
   justify-content: center;
-
   //達成滿版效果
   position: absolute;
   top: 0;
-  bottom: 0;
   left: 0;
   right: 0;
-  min-height: fit-content;
   width: 100vw;
+  min-height: 100vh;
+  height: fit-content;
 
-  .container {
+  @include breakpoint.desktop {
+    padding: 114px 0 20px 0;
+  }
+
+  .wrapper {
     display: flex;
     flex-direction: column;
-    padding: 0 16px;
+    padding: 20px 10px;
     width: 90%;
-
-    width: auto;
     background-color: #fbf8f5;
 
+    @include breakpoint.desktop {
+      padding: 20px;
+    }
     .accept_container {
       text-align: center;
 
@@ -211,23 +162,23 @@
       text-align: start;
     }
 
-    h2 {
-      margin: 0 auto;
-      // font-family: Roboto;
-      text-align: center;
+    h4 {
       font-size: 30px;
+      font-weight: 900;
+      margin-bottom: 16px;
       @include breakpoint.desktop {
         font-size: 50px;
-        margin-top: 60px;
+        margin-bottom: 30px;
       }
     }
     form {
       display: flex;
       flex-wrap: wrap;
       background-color: #fbf8f5;
-
+      margin-bottom: 60px;
       padding: 0 16px;
-      h2 {
+
+      h5 {
         flex: 100%;
         font-size: 20px;
         margin: 15px 0;
@@ -268,26 +219,93 @@
   }
 }
 
-.confirm_button_container {
-  display: flex;
-  justify-content: center;
-  padding: 30px;
-  background-color: #fbf8f5;
-
+.notice_buttons {
   button {
-    background: #e5e5e5;
-  }
-  button,
-  input[type="submit"] {
-    width: 150px;
-    height: 80px;
-
-    border-radius: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
     color: white;
+    font-weight: 900;
+    font-size: 16px;
+    cursor: pointer;
+    + button {
+      margin-left: 10px;
+    }
+    @include breakpoint.desktop {
+      font-size: 25px;
+      padding: 20px 90px;
+    }
   }
+  .cancel_btn {
+    background: color.$gray_100;
+    &:hover {
+      box-shadow: inset 2px -2px 4px color.$gray_300;
+    }
+  }
+  .submit_btn {
+    background: color.$brown_300;
+    &:hover {
+      box-shadow: inset 2px -2px 4px color.$brown_500;
+    }
+  }
+}
 
-  input[type="submit"] {
-    background: #dec39e;
+.progress_bar {
+  height: 20px;
+  line-height: 20px;
+  margin-bottom: 16px;
+
+  @include breakpoint.desktop {
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 36px;
+  }
+  span {
+    display: inline-block;
+    width: 100px;
+    height: 3px;
+    background: color.$gray_300;
+    margin: 0 auto;
+    position: relative;
+    vertical-align: middle;
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: color.$brown_500;
+      position: absolute;
+      left: -20px;
+      top: calc(50% - 10px);
+    }
+    &::after {
+      content: "";
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: color.$gray_300;
+      position: absolute;
+      right: -20px;
+      top: calc(50% - 10px);
+    }
+  }
+  @include breakpoint.desktop {
+    span {
+      width: 140px;
+      &::before {
+        width: 40px;
+        height: 40px;
+        left: -40px;
+        top: calc(50% - 20px);
+      }
+      &::after {
+        width: 40px;
+        height: 40px;
+        right: -40px;
+        top: calc(50% - 20px);
+      }
+    }
   }
 }
 </style>

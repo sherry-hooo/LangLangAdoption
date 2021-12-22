@@ -64,10 +64,12 @@
           </div>
         </div>
         <div class="look_more">
-          <span> 尋找其它浪浪 </span>
-          <div class="arrow_box">
-            <img src="@/assets/img/arrow.svg" alt="" />
-          </div>
+          <router-link :to="{ name: 'Search' }">
+            <span> 尋找其它浪浪 </span>
+            <div class="arrow_box">
+              <img src="@/assets/img/arrow.svg" alt="" />
+            </div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -76,7 +78,7 @@
       @goNextPage="goNextPage"
       @noticeFormAnswer="receiveNoticeFormAnswer"
     ></AdoptionNotice>
-    <AdoptionApply v-if="AdoptionApply"></AdoptionApply>
+    <AdoptionApply v-if="showAdoptionApply"></AdoptionApply>
   </main>
 </template>
 
@@ -88,14 +90,15 @@ export default {
   data() {
     return {
       showAdoptionNotice: false,
-      AdoptionApply: false,
+      showAdoptionApply: false,
       noticeForm: {},
     };
   },
   methods: {
     goNextPage(data) {
+      console.log(data);
       this.showAdoptionNotice = false;
-      this.AdoptionApply = data;
+      this.showAdoptionApply = data;
     },
     receiveNoticeFormAnswer(answer) {
       console.log(answer);
@@ -115,6 +118,7 @@ export default {
 main {
   padding: 60px 0px 0px 0px;
   background-color: color.$brown-100;
+  position: relative;
 }
 .description {
   padding: 0px 30px 30px 30px;
@@ -122,7 +126,7 @@ main {
     padding: 0px 50px 50px 50px;
   }
   @include breakpoint.desktop {
-    padding: 0px 100px 100px 100px;
+    padding: 0px 100px 60px 100px;
   }
 }
 .des_container {
@@ -223,16 +227,10 @@ main {
 }
 .look_more {
   margin-top: 30px;
-  & span {
-    font-size: 30px;
-    font-weight: 900;
-    color: color.$brown_500;
-    @include breakpoint.tablet {
-      font-size: 40px;
-    }
+  a {
+    display: block;
     &::before {
       content: "";
-
       height: 2px;
       display: inline-block;
       background-color: color.$brown_300;
@@ -242,15 +240,23 @@ main {
       }
     }
   }
-}
-.arrow_box {
-  display: inline-block;
-  max-width: 75px;
-  & img {
-    width: 100%;
+  & span {
+    font-size: 30px;
+    font-weight: 900;
+    color: color.$brown_500;
+    @include breakpoint.tablet {
+      font-size: 40px;
+    }
   }
-  @include breakpoint.tablet {
-    max-width: 175px;
+  .arrow_box {
+    display: inline-block;
+    max-width: 75px;
+    & img {
+      width: 100%;
+    }
+    @include breakpoint.tablet {
+      max-width: 175px;
+    }
   }
 }
 </style>
