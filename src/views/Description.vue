@@ -210,6 +210,7 @@ main {
   border-radius: 10px;
   font-size: 20px;
   color: color.$white;
+  cursor: pointer;
   @include breakpoint.tablet {
     font-size: 25px;
   }
