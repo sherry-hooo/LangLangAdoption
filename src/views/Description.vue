@@ -20,43 +20,43 @@
           </div>
           <div class="case_des_box">
             <div class="case_wrapper">
-              <p class="case_title">狀態：</p>
+              <p class="case_title">狀態 &colon;</p>
               <p class="case_content">待領養</p>
             </div>
             <div class="case_wrapper">
-              <p class="case_title">類型：</p>
+              <p class="case_title">類型 &colon;</p>
               <p class="case_content">貓</p>
             </div>
             <div class="case_wrapper">
-              <p class="case_title">顏色：</p>
+              <p class="case_title">顏色 &colon;</p>
               <p class="case_content">灰白色</p>
             </div>
             <div class="case_wrapper">
-              <p class="case_title">性別：</p>
+              <p class="case_title">性別 &colon;</p>
               <p class="case_content">女孩</p>
             </div>
             <div class="case_wrapper">
-              <p class="case_title">體型：</p>
+              <p class="case_title">體型 &colon;</p>
               <p class="case_content">小</p>
             </div>
             <div class="case_wrapper">
-              <p class="case_title">收容地點：</p>
+              <p class="case_title">收容地點 &colon;</p>
               <p class="case_content">澎湖縣流浪動物收容中心</p>
             </div>
             <div class="case_wrapper">
-              <p class="case_title">收容地址：</p>
+              <p class="case_title">收容地址 &colon;</p>
               <p class="case_content">澎湖縣流浪動物收容中心</p>
             </div>
             <div class="case_wrapper">
-              <p class="case_title">聯絡電話：</p>
+              <p class="case_title">聯絡電話 &colon;</p>
               <p class="case_content">06-9213559</p>
             </div>
             <div class="case_wrapper">
-              <p class="case_title">入所日期：</p>
+              <p class="case_title">入所日期 &colon;</p>
               <p class="case_content">2021/09/23</p>
             </div>
             <div class="case_wrapper">
-              <p class="case_title">備註：</p>
+              <p class="case_title">備註 &colon;</p>
               <p class="case_content">
                 本站動物皆採現場互動面談後評估能否認養，不接受系統上的預約
               </p>
@@ -76,9 +76,14 @@
     <AdoptionNotice
       v-if="showAdoptionNotice"
       @goNextPage="goNextPage"
-      @noticeFormAnswer="receiveNoticeFormAnswer"
+      @submitNoticeForm="receiveNoticeForm"
+      @cancelEdit="cancelEdit"
     ></AdoptionNotice>
-    <AdoptionApply v-if="showAdoptionApply"></AdoptionApply>
+    <AdoptionApply
+      v-if="showAdoptionApply"
+      @cancelEdit="cancelEdit"
+      @submitApplyForm="receiveApplForm"
+    ></AdoptionApply>
   </main>
 </template>
 
@@ -92,17 +97,26 @@ export default {
       showAdoptionNotice: false,
       showAdoptionApply: false,
       noticeForm: {},
+      applyForm: {},
     };
   },
   methods: {
     goNextPage(data) {
-      console.log(data);
       this.showAdoptionNotice = false;
       this.showAdoptionApply = data;
     },
-    receiveNoticeFormAnswer(answer) {
+    receiveNoticeForm(answer) {
       console.log(answer);
       this.noticeForm = answer;
+    },
+    cancelEdit(componentName) {
+      componentName === "AdoptionApply"
+        ? (this.showAdoptionApply = false)
+        : (this.showAdoptionNotice = false);
+    },
+    receiveApplForm(form) {
+      console.log("收到驗證後的資料了", form);
+      this.showAdoptionApply = false;
     },
   },
 };
