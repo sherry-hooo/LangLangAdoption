@@ -58,11 +58,11 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 999;
   background: rgba(190, 188, 188, 0.6);
   backdrop-filter: blur(1px);
   display: flex;
   justify-content: center;
-  align-items: center;
   @include breakpoint.desktop {
     padding: 110px 0;
   }

@@ -157,6 +157,8 @@ main {
   padding: 60px 0px 0px 0px;
   background-color: color.$brown-100;
   position: relative;
+  height: fit-content;
+  min-height: 100vh;
 }
 .description {
   padding: 0px 30px 30px 30px;

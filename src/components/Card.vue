@@ -12,7 +12,7 @@
           :src="petData.album_file"
           alt="浪浪圖片"
         />
-        <img v-else src="@/assets/img/dog1.svg" alt="替代圖片" />
+        <img v-else src="@/assets/img/dog1.jpg" alt="替代圖片" />
       </div>
       <div class="case_info">
         <span>{{ petData.animal_kind }}</span>

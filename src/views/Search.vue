@@ -40,13 +40,18 @@ export default {
         .then((res) => (this.petsDataInArray = res.data.Data));
     },
     receiveAnimalKind(data) {
-      console.log(data);
       this.animalKind = data;
       this.getAPI(this.animalKind);
     },
     receiveCurrentPage(page) {
-      console.log(page);
       this.currentPage = page;
+      this.scrollToTop();
+    },
+    scrollToTop() {
+      window.scroll({
+        top: 0,
+        behavior: "smooth",
+      });
     },
   },
   computed: {

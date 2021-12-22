@@ -5,7 +5,7 @@
         <img src="@/assets/img/circles.svg" alt="" />
       </div>
       <div class="banner_figure">
-        <img src="@/assets/img/dog4.svg" alt="cute dog" />
+        <img src="@/assets/img/dog4.jpg" alt="cute dog" />
       </div>
       <div class="banner_content_area">
         <div class="decoration_house">
@@ -33,7 +33,7 @@
       <p>我們需要你，成為我們最強的後盾</p>
       <div class="volunteer_entry">
         <div class="volunteer_image">
-          <img src="@/assets/img/volunteer4.svg" alt="" />
+          <img src="@/assets/img/volunteer4.jpg" alt="" />
         </div>
         <button>我有興趣</button>
       </div>

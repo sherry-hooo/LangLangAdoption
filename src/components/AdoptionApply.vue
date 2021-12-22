@@ -155,12 +155,14 @@ export default {
   top: 0;
   left: 0;
   right: 0;
+  z-index: 999;
   width: 100vw;
   height: 100%;
-  min-height: 100vh;
+  min-height: fit-content;
 
   @include breakpoint.desktop {
     padding: 114px 0 20px 0;
+    height: fit-content;
   }
 
   .adoption_apply {

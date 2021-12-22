@@ -31,7 +31,7 @@
               <p class="item_text">18 歲以上一般民眾</p>
             </div>
           </div>
-          <button class="apply" @click="volunteerApply = true">報名加入</button>
+          <button class="apply" @click="applyVolunteer">報名加入</button>
         </div>
       </div>
       <div class="layout_line">
@@ -78,6 +78,16 @@ export default {
           break;
         }
       }
+    },
+    applyVolunteer() {
+      this.volunteerApply = true;
+      this.scrollToTop();
+    },
+    scrollToTop() {
+      window.scroll({
+        top: 0,
+        behavior: "smooth",
+      });
     },
   },
 };
