@@ -1,5 +1,7 @@
-<template>
-  <router-link :to="{ name: 'Description' }">
+<template v-if="petData">
+  <router-link
+    :to="{ name: 'Description', params: { petID: petData.animal_id } }"
+  >
     <div class="case_card">
       <div class="case_image">
         <img :src="petData.album_file" alt="浪浪圖片" />
