@@ -10,8 +10,11 @@
             </div>
             <div class="follow_box">
               <div class="follow">
-                <i class="fas fa-heart"></i>
-                <span> 取消追蹤</span>
+                <label class="heart_icon">
+                  <input type="checkbox" @click="tracking = !tracking" />
+                  <i class="far fa-heart"></i>
+                </label>
+                <span>{{ tracking ? "已追蹤" : "追蹤" }}</span>
               </div>
               <button class="button_adopt" @click="showAdoptionNotice = true">
                 我有意願認養
@@ -98,6 +101,7 @@ export default {
       showAdoptionApply: false,
       noticeForm: {},
       applyForm: {},
+      tracking: false,
     };
   },
   methods: {
@@ -224,7 +228,26 @@ main {
 }
 .follow {
   margin-top: 40px;
-  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  .heart_icon {
+    margin-right: 15px;
+    input[type="checkbox"] {
+      display: none;
+    }
+    i {
+      font-size: 30px;
+      color: red;
+    }
+    input[type="checkbox"]:checked + i {
+      font-weight: 900;
+    }
+  }
+  span {
+    font-size: 20px;
+    font-weight: 900;
+  }
 }
 .button_adopt {
   display: block;
