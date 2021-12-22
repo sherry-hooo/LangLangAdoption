@@ -32,17 +32,27 @@
         單位收到資料後，三日內會有專人與您聯絡，感謝您的參與。
       </p>
       <div class="button_groups">
-        <button class="cancel_btn">取消</button>
-        <button class="submit_btn">送出</button>
+        <button class="cancel_btn" @click="formAction('cancel')">取消</button>
+        <button class="submit_btn" @click="formAction('submit')">送出</button>
       </div>
     </form>
   </section>
 </template>
 
+<script>
+export default {
+  methods: {
+    formAction(status) {
+      this.$emit("applyFormAction", status);
+    },
+  },
+};
+</script>
+
 <style lang="scss" scoped>
 .wrapper {
   width: 100vw;
-  height: fit-content;
+  height: 100%;
   min-height: 100vh;
   padding: 5% 0;
   position: absolute;

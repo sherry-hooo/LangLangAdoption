@@ -48,8 +48,11 @@
         </div>
       </div>
     </div>
+    <VolunteerApply
+      v-if="volunteerApply"
+      @applyFormAction="applyFormAction"
+    ></VolunteerApply>
   </main>
-  <VolunteerApply v-if="volunteerApply"></VolunteerApply>
 </template>
 
 <script>
@@ -60,6 +63,21 @@ export default {
     return {
       volunteerApply: false,
     };
+  },
+  methods: {
+    applyFormAction(status) {
+      console.log("check");
+      this.volunteerApply = false;
+      switch (status) {
+        case "cancel": {
+          break;
+        }
+        case "submit": {
+          console.log("送出資料到後端");
+          break;
+        }
+      }
+    },
   },
 };
 </script>
