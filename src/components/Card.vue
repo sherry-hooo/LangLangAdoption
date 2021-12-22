@@ -7,9 +7,9 @@
         <img :src="petData.album_file" alt="浪浪圖片" />
       </div>
       <div class="case_info">
-        <span>{{ petData.animan_kind }}</span>
-        <span>{{ petData.animan_colour }}</span>
-        <span>{{ petData.animan_sex }}</span>
+        <span>{{ petData.animal_kind }}</span>
+        <span>{{ petData.animal_colour }}</span>
+        <span>{{ petData.animal_sex }}</span>
         <p><i class="fas fa-map-marker-alt"></i>{{ petData.animal_place }}</p>
       </div>
     </div>
