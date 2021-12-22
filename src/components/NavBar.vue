@@ -69,7 +69,8 @@ header {
   width: 100px;
   text-align: right;
   background-color: color.$brown_100;
-  padding: 0;
+  // padding: 0;
+  padding: 10px;
   margin: 0;
   gap: 60px;
   list-style-type: none;
