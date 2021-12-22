@@ -5,7 +5,7 @@
       type="button"
       @click="switchPreviousPage"
     >
-      第一頁
+      上一頁
     </button>
     <ol class="pagination_numbers">
       <li
