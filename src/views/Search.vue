@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <section>
     <Card v-for="petData in petData" :key="petData" :petData="petData"></Card>
-  </div>
+  </section>
   <Pagination />
 </template>
 
@@ -38,4 +38,21 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+section {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  @include breakpoint.tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include breakpoint.bgScreen {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  a {
+    margin-bottom: 16px;
+    @include breakpoint.desktop {
+      margin-bottom: 24px;
+    }
+  }
+}
+</style>
