@@ -1,10 +1,28 @@
 <template>
   <div class="pagination">
-    <button class="pagination_button first" type="button">第一頁</button>
+    <button
+      class="pagination_button first"
+      type="button"
+      @click="switchPreviousPage"
+    >
+      第一頁
+    </button>
     <ol class="pagination_numbers">
-      <li v-for="page in totalPages" :key="page">{{ page }}</li>
+      <li
+        v-for="(page, index) in totalPages"
+        :key="page"
+        :class="{ number_current: currentPage === index + 1 }"
+      >
+        {{ page }}
+      </li>
     </ol>
-    <button class="pagination_button last" type="button">最後一頁</button>
+    <button
+      class="pagination_button last"
+      type="button"
+      @click="switchNextPage"
+    >
+      下一頁
+    </button>
   </div>
 </template>
 
@@ -13,7 +31,22 @@ export default {
   data() {
     return {
       totalPages: 10,
+      currentPage: 1,
     };
+  },
+  methods: {
+    switchNextPage() {
+      this.currentPage++;
+
+      this.$emit("currentPage", this.currentPage);
+    },
+    switchPreviousPage() {
+      if (this.currentPage <= 1) {
+        return;
+      }
+      this.currentPage--;
+      this.$emit("currentPage", this.currentPage);
+    },
   },
 };
 </script>

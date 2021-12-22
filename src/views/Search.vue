@@ -3,7 +3,7 @@
   <section>
     <Card v-for="petData in petData" :key="petData" :petData="petData"></Card>
   </section>
-  <Pagination />
+  <Pagination @currentPage="receiveCurrentPage"></Pagination>
 </template>
 
 <script>
@@ -22,6 +22,8 @@ export default {
     return {
       petsDataInArray: [],
       animalKind: "",
+      currentPage: 1,
+      cardAmount: 10,
     };
   },
   methods: {
@@ -35,10 +37,21 @@ export default {
       this.animalKind = data;
       this.getAPI(this.animalKind);
     },
+    receiveCurrentPage(page) {
+      console.log(page);
+      this.currentPage = page;
+    },
   },
   computed: {
     petData() {
-      return this.petsDataInArray.slice(0, 10);
+      console.log(this.startIndex, this.endIndex);
+      return this.petsDataInArray.slice(this.startIndex, this.endIndex);
+    },
+    startIndex() {
+      return (this.currentPage - 1) * this.cardAmount;
+    },
+    endIndex() {
+      return this.currentPage * this.cardAmount;
     },
   },
   // created() {
