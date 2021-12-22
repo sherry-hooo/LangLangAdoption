@@ -98,6 +98,7 @@ import AdoptionNotice from "@/components/AdoptionNotice.vue";
 import getApi from "@/service/getApi.js";
 
 export default {
+  name: "Description",
   props: ["petID", "petKind"],
   components: { AdoptionApply, AdoptionNotice },
   data() {

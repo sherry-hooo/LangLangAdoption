@@ -13,6 +13,7 @@ import Dropdown from "@/components/Dropdown.vue";
 import getApi from "@/service/getApi.js";
 
 export default {
+  name: "Search",
   components: {
     Card,
     Pagination,

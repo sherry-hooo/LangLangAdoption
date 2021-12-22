@@ -3,7 +3,11 @@
     <div class="wrapper">
       <h3>追蹤浪浪</h3>
       <section>
-        <Card v-for="card in 10" :key="card"></Card>
+        <Card
+          v-for="card in 10"
+          :key="card"
+          :petData="{ animal_id: 0, animal_kind: '' }"
+        ></Card>
       </section>
       <div class="pagination"><Pagination /></div>
     </div>
@@ -14,6 +18,7 @@
 import Card from "@/components/Card.vue";
 import Pagination from "@/components/Pagination.vue";
 export default {
+  name: "Track",
   components: {
     Card,
     Pagination,

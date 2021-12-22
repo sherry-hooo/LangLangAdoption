@@ -8,6 +8,7 @@
 <script>
 import VolunteerApply from "@/components/VolunteerApply.vue";
 export default {
+  name: "Volunteer",
   components: { VolunteerApply },
   data() {
     return {

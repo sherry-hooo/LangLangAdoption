@@ -9,10 +9,12 @@
       <label for="burger">&#9776;</label>
       <input type="checkbox" id="burger" />
       <ul class="navbar">
-        <li><router-link to="Search">尋找浪浪</router-link></li>
-        <li><router-link to="Track">追蹤浪浪 </router-link></li>
-        <li><router-link to="Volunteer">志工招募 </router-link></li>
-        <li><router-link to="Custom">愛心項圈 </router-link></li>
+        <li><router-link :to="{ name: 'Search' }">尋找浪浪</router-link></li>
+        <li><router-link :to="{ name: 'Track' }">追蹤浪浪 </router-link></li>
+        <li>
+          <router-link :to="{ name: 'Volunteer' }">志工招募 </router-link>
+        </li>
+        <li><router-link :to="{ name: 'Custom' }">愛心項圈 </router-link></li>
       </ul>
     </div>
   </header>

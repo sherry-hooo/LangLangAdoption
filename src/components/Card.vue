@@ -1,4 +1,4 @@
-<template>
+<template v-if="petData">
   <router-link
     :to="{
       name: 'Description',
