@@ -15,11 +15,22 @@ export default {
       },
     });
   },
-  getShelterData(kind, pkid) {
+  getShelterData(kind, areaPkid, pkid) {
     return apiClient.get(`/`, {
       params: {
         animal_kind: kind,
+        animal_area_pkid: areaPkid,
         animal_shelter_pkid: pkid,
+        Page: 1,
+        api_key: "PLFET0ETCEA6U8T0TI0R0NCEUJDLHE",
+      },
+    });
+  },
+  getCityShelter(kind, areaPkid) {
+    return apiClient.get(`/`, {
+      params: {
+        animal_kind: kind,
+        animal_area_pkid: areaPkid,
         Page: 1,
         api_key: "PLFET0ETCEA6U8T0TI0R0NCEUJDLHE",
       },
