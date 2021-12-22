@@ -28,12 +28,14 @@ const routes = [
   {
     path: "/Custom",
     name: "Custom",
+    props: true,
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Custom.vue"),
   },
   {
     path: "/Description/:petID",
     name: "Description",
+    props: true,
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Description.vue"),
   },
