@@ -4,7 +4,7 @@
       <h3 class="serach_title">動物品種</h3>
       <div class="dropdown">
         <div class="dropdown_items dropdown_click" @click="showMenu">
-          <div>請選擇</div>
+          <div>{{ animalKind === "" ? "請選擇" : animalKind }}</div>
           <i class="fas fa-caret-down dropdown_click_icon"></i>
         </div>
         <ul :class="{ show_dropdown: openMenu }">
@@ -47,9 +47,9 @@ export default {
       this.showShelterList = !this.showShelterList;
     },
     clickAnimalMenu(animal) {
-      // console.log(animal);
       this.animalKind = animal;
       this.$emit("animalKind", animal);
+      this.openMenu = false;
     },
   },
 };
@@ -132,12 +132,11 @@ export default {
 
 .dropdown_container {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
 
   @include breakpoint.tablet {
     justify-content: space-around;
   }
-  padding-top: 16px;
 
   .serach_title {
     @extend %dropdown_title;

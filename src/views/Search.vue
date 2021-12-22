@@ -1,9 +1,15 @@
 <template>
-  <Dropdown @animalKind="receiveAnimalKind"></Dropdown>
-  <section>
-    <Card v-for="petData in petData" :key="petData" :petData="petData"></Card>
-  </section>
-  <Pagination @currentPage="receiveCurrentPage"></Pagination>
+  <main>
+    <h3>尋找浪浪</h3>
+    <Dropdown @animalKind="receiveAnimalKind"></Dropdown>
+    <section>
+      <Card v-for="petData in petData" :key="petData" :petData="petData"></Card>
+    </section>
+    <Pagination
+      @currentPage="receiveCurrentPage"
+      :totalPage="totalPage"
+    ></Pagination>
+  </main>
 </template>
 
 <script>
@@ -24,13 +30,13 @@ export default {
       petsDataInArray: [],
       animalKind: "",
       currentPage: 1,
-      cardAmount: 10,
+      cardAmount: 9,
     };
   },
   methods: {
     getAPI() {
       getApi
-        .getAnimalData("貓")
+        .getAnimalData(this.animalKind)
         .then((res) => (this.petsDataInArray = res.data.Data));
     },
     receiveAnimalKind(data) {
@@ -54,6 +60,9 @@ export default {
     endIndex() {
       return this.currentPage * this.cardAmount;
     },
+    totalPage() {
+      return parseInt(this.petsDataInArray.length / this.cardAmount);
+    },
   },
   // created() {
   //   this.getAPI();
@@ -62,7 +71,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+main {
+  background: color.$brown_100;
+  min-height: calc(100vh - 60px);
+  height: fit-content;
+  margin-top: 60px;
+  padding: 5px 10px;
+
+  @include breakpoint.tablet {
+    min-height: calc(100vh - 103px);
+    margin-top: 103px;
+    padding: 10px 100px;
+  }
+  h3 {
+    font-size: 30px;
+    color: color.$gray_700;
+    text-align: middle;
+    margin-bottom: 16px;
+    @include breakpoint.desktop {
+      font-size: 50px;
+      text-align: left;
+      margin-bottom: 60px;
+    }
+  }
+}
 section {
+  // 暫時設定高度 500px
+  min-height: 500px;
+  height: fit-content;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   @include breakpoint.tablet {

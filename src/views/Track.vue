@@ -4,7 +4,7 @@
       <h3>追蹤浪浪</h3>
       <section>
         <Card
-          v-for="card in 10"
+          v-for="card in 0"
           :key="card"
           :petData="{ animal_id: 0, animal_kind: '' }"
         ></Card>
@@ -33,25 +33,29 @@ main {
   background: color.$brown_100;
   min-height: calc(100vh - 60px);
   margin-top: 60px;
+  padding: 5px 10px;
 
   @include breakpoint.tablet {
     min-height: calc(100vh - 103px);
     margin-top: 103px;
+    padding: 10px 100px;
   }
-  .wrapper {
-    padding: 5px 100px;
-    h3 {
-      font-size: 30px;
-      color: color.$gray_700;
+
+  h3 {
+    font-size: 30px;
+    color: color.$gray_700;
+    text-align: middle;
+    margin-bottom: 16px;
+    @include breakpoint.desktop {
+      font-size: 50px;
       text-align: left;
       margin-bottom: 60px;
-      @include breakpoint.desktop {
-        font-size: 50px;
-      }
     }
   }
 }
 section {
+  min-height: 500px;
+  height: fit-content;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   @include breakpoint.tablet {

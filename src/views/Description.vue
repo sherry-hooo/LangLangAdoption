@@ -132,6 +132,7 @@ export default {
     setToTrack() {
       this.tracking = !this.tracking;
       console.log("存入localStorage");
+      sessionStorage.set("trackList", JSON.stringify());
     },
     getAnimalData(petKind, petID) {
       getApi

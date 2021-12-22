@@ -9,7 +9,7 @@
     </button>
     <ol class="pagination_numbers">
       <li
-        v-for="(page, index) in totalPages"
+        v-for="(page, index) in 5"
         :key="page"
         :class="{ number_current: currentPage === index + 1 }"
       >
@@ -28,16 +28,15 @@
 
 <script>
 export default {
+  props: ["totalPage"],
   data() {
     return {
-      totalPages: 10,
       currentPage: 1,
     };
   },
   methods: {
     switchNextPage() {
       this.currentPage++;
-
       this.$emit("currentPage", this.currentPage);
     },
     switchPreviousPage() {
@@ -55,6 +54,7 @@ export default {
 .pagination {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 50px;
   &_button {
     background: #dec39e;
@@ -63,10 +63,16 @@ export default {
     padding: 5px 16px;
   }
   .first {
-    margin-right: 24px;
+    margin-right: 5px;
+    @include breakpoint.tablet {
+      margin-right: 24px;
+    }
   }
   .last {
-    margin-left: 24px;
+    margin-left: 5px;
+    @include breakpoint.tablet {
+      margin-left: 24px;
+    }
   }
   &_numbers {
     display: flex;
