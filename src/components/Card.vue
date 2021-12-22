@@ -65,13 +65,13 @@ export default {
     height: 100%;
     background: color.$brown_100;
 
-    @include breakpoint.mobile {
+    @include breakpoint.tablet {
       flex-basis: auto;
       height: 230px;
       width: auto;
     }
 
-    @include breakpoint.desktop {
+    @include breakpoint.bgScreen {
       width: 370px;
       height: 300px;
     }
@@ -91,17 +91,18 @@ export default {
     padding-left: 5px;
     font-size: 16px;
 
-    @include breakpoint.mobile {
+    @include breakpoint.tablet {
       flex-grow: 1;
       flex-direction: row;
       flex-wrap: wrap;
       align-content: space-between;
       margin-top: 10px;
+      padding-left: 0;
       font-size: 18px;
     }
 
     p {
-      @include breakpoint.mobile {
+      @include breakpoint.tablet {
         flex-basis: 100%;
         text-align: left;
       }
