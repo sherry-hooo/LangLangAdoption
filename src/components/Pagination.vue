@@ -21,7 +21,7 @@ export default {
 <style lang="scss" scoped>
 .pagination {
   display: flex;
-
+  justify-content: center;
   padding: 50px;
   &_button {
     background: #dec39e;
