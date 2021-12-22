@@ -1,6 +1,6 @@
 <template>
-  <section class="transparent_container">
-    <div class="wrapper">
+  <section class="wrapper">
+    <div class="adoption_apply">
       <div class="progress_bar">
         <span></span>
       </div>
@@ -101,8 +101,21 @@
   </section>
 </template>
 
+<script>
+export default {
+  data() {
+    return {};
+  },
+  methods: {
+    cancelEdit() {
+      this.$emit("cancelEdit", "AdoptionApply");
+    },
+  },
+};
+</script>
+
 <style lang="scss" scoped>
-.transparent_container {
+.wrapper {
   padding: 60px 0 20px 0;
   background: rgba(190, 188, 188, 0.6);
   backdrop-filter: blur(1px);
@@ -114,18 +127,19 @@
   left: 0;
   right: 0;
   width: 100vw;
+  height: 100%;
   min-height: 100vh;
-  height: fit-content;
 
   @include breakpoint.desktop {
     padding: 114px 0 20px 0;
   }
 
-  .wrapper {
+  .adoption_apply {
     display: flex;
     flex-direction: column;
     padding: 20px 10px;
     width: 90%;
+    height: fit-content;
     background-color: #fbf8f5;
 
     @include breakpoint.desktop {
@@ -133,7 +147,6 @@
     }
     .accept_container {
       text-align: center;
-
       margin-top: 60px;
       margin-bottom: 16px;
       input[type="checkbox"] {
