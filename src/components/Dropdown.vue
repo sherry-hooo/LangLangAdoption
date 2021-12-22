@@ -79,16 +79,16 @@ export default {
 }
 %dropdown_items {
   width: 100px;
-
+  background-color: white;
   @include breakpoint.tablet {
   }
   @include breakpoint.desktop {
     width: 250px;
     padding: 10px 0;
-    &:hover {
-      color: white;
-      background-color: #dec39e;
-    }
+  }
+  &:hover {
+    color: white;
+    background-color: #dec39e;
   }
 }
 %dropdown_menu {
@@ -111,7 +111,6 @@ export default {
   @include breakpoint.tablet {
   }
   @include breakpoint.desktop {
-    margin-left: 25px;
   }
 }
 
