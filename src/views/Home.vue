@@ -41,6 +41,23 @@
       </button>
     </div>
   </div>
+
+  <section class="topic">
+    <div class="topic_img">
+      <img src="@/assets/img/cat3.jpg" alt="lovely cat">
+    </div>
+    <div class="topic_content_area">
+      <h2>領養前的那些事</h2>
+      <p>多的是，你不知道的事。</p>
+      <button>我想知道</button>
+    </div>
+    <div class="solid_circle">
+      <img src="@/assets/img/solidCircle.svg">
+    </div>
+    <div class="hollow_circle">
+      <img src="@/assets/img/hollowCircle.svg">
+    </div>
+  </section>
 </main>
 </template>
 
@@ -289,6 +306,140 @@ main {
     width: 100%;
     height: 100%;
     object-position: center;
+  }
+}
+
+// 你在Topic分支
+// 上面的東西不要改
+%title_h2{
+  font-size: 24px;
+  color: color.$brown_500;
+  @include breakpoint.tablet{
+    font-size: 30px;
+  }
+  @include breakpoint.desktop{
+    font-size: 50px;
+  }
+}
+
+%content_p{
+  margin-top: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  @include breakpoint.tablet{
+    font-size: 20px;
+  }
+
+  @include breakpoint.desktop{
+    font-size: 30px;
+  }
+}
+%button_toPagination{
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+  background: color.$brown_300;
+  font-size: 18px;
+  font-weight: 600;
+
+  @include breakpoint.tablet{
+    padding: 15px 25px;
+    font-size: 20px;
+    }
+
+  @include breakpoint.desktop{
+    padding: 25px 65px;
+    font-size: 24px;
+    }
+}
+
+@mixin imgbox_fill{
+  width: 100%;
+  height: 100%;
+}
+
+.topic {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 20px 0;
+  height: calc(100vh - 60px);
+  background: color.$brown_100;
+
+  @include breakpoint.tablet{
+    height: calc(100vh - 103px);
+  }
+
+  &_img{
+    width: 50%;
+    height: 100%
+  }
+
+  img{
+    @include imgbox_fill;
+    object-fit: cover;
+  }
+
+  .hollow_circle{
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  width: 60px;
+
+  @include breakpoint.tablet{
+    right: 5%;
+    width: 90px;
+  }
+
+  @include breakpoint.desktop{
+    width: 120px;
+  }
+
+  @include breakpoint.bgScreen{
+    // width: 150px;
+    }
+  }
+
+  .solid_circle{
+    position: absolute;
+    right: 20%;
+    top: 12%;
+    width: 20px;
+    height: 20px;
+
+    @include breakpoint.tablet{
+      top: 18%;
+      right: 15%;
+      width: 30px;
+      height: 30px;
+    }
+
+    @include breakpoint.desktop{
+      width: 40px;
+      height: 40px;
+    }
+
+    @include breakpoint.bgScreen{
+      // width: 50px;
+      // height: 50px;
+    }
+  }
+}
+
+.topic_content_area{
+  flex-grow: 1;
+
+  h2{
+    @extend %title_h2;
+  }
+
+  p{
+    @extend %content_p;
+  }
+
+  button{
+    @extend %button_toPagination;
+    margin-top: 30px;
   }
 }
 
