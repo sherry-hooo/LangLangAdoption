@@ -205,7 +205,7 @@ export default {
     },
     checkTrackingStatus() {
       let inTrackingList = this.getLocalStorage()
-        .map((pet) => pet.petID)
+        .map((pet) => pet.animal_id)
         .includes(parseInt(this.petID));
       if (inTrackingList) {
         this.tracking = true;
