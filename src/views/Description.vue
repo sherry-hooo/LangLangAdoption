@@ -6,13 +6,23 @@
         <div class="case">
           <div class="case_img_box">
             <div class="img_box">
-              <img :src="petData.album_file" alt="浪浪圖片" />
+              <img
+                v-if="petData.album_file"
+                :src="petData.album_file"
+                alt="浪浪圖片"
+              />
+              <img
+                v-else-if="petKind === '狗'"
+                src="@/assets/img/dog1.jpg"
+                alt="狗狗替代圖片"
+              />
+              <img v-else src="@/assets/img/cat1.jpg" alt="貓貓替代圖片" />
             </div>
             <div class="follow_box">
               <div class="follow">
                 <label class="heart_icon">
-                  <input type="checkbox" @click="setToTrack" />
-                  <i class="far fa-heart"></i>
+                  <input type="checkbox" @click="setTrack" />
+                  <i class="far fa-heart" :class="{ onTrack: tracking }"></i>
                 </label>
                 <span>{{ tracking ? "已追蹤" : "追蹤" }}</span>
               </div>
@@ -21,7 +31,7 @@
               </button>
             </div>
           </div>
-          <div class="case_des_box">
+          <div class="case_des_box" v-if="petData">
             <div v-if="petData.animal_status" class="case_wrapper">
               <p class="case_title">狀態 &colon;</p>
               <p class="case_content">
@@ -38,11 +48,11 @@
             </div>
             <div v-if="petData.animal_sex" class="case_wrapper">
               <p class="case_title">性別 &colon;</p>
-              <p class="case_content">{{ petData.animal_sex === "F" }}</p>
+              <p class="case_content">{{ petSex }}</p>
             </div>
             <div v-if="petData.animal_bodytype" class="case_wrapper">
               <p class="case_title">體型 &colon;</p>
-              <p class="case_content">{{ petData.animal_bodytype }}</p>
+              <p class="case_content">{{ petBodyType }}</p>
             </div>
             <div v-if="petData.animal_place" class="case_wrapper">
               <p class="case_title">收容地點 &colon;</p>
@@ -112,16 +122,36 @@ export default {
     };
   },
   computed: {
-    // tracking() {
-    //   let ifTracking = this.getLocalStorage().find({
-    //     petID: this.petID,
-    //     petKind: this.petKind,
-    //   })
-    //     ? true
-    //     : false;
-    //   console.log(ifTracking);
-    //   return false;
-    // },
+    petBodyType() {
+      let bodyType = this.petData.animal_bodytype;
+      switch (bodyType) {
+        case "MEDIUM":
+          bodyType = "中型";
+          break;
+        case "BIG":
+          bodyType = "大型";
+          break;
+        case "SMALL":
+          bodyType = "小型";
+          break;
+      }
+      return bodyType;
+    },
+    petSex() {
+      let gender = this.petData.animal_sex;
+      switch (gender) {
+        case "F":
+          gender = "女孩";
+          break;
+        case "M":
+          gender = "男孩";
+          break;
+        case "N":
+          gender = "中性";
+          break;
+      }
+      return gender;
+    },
   },
   methods: {
     goNextPage(data) {
@@ -129,7 +159,6 @@ export default {
       this.showAdoptionApply = data;
     },
     receiveNoticeForm(answer) {
-      console.log(answer);
       this.noticeForm = answer;
     },
     cancelEdit(componentName) {
@@ -141,12 +170,23 @@ export default {
       console.log("收到驗證後的資料了", form);
       this.showAdoptionApply = false;
     },
-    setToTrack() {
+    setTrack() {
       this.tracking = !this.tracking;
       let trackingList = this.getLocalStorage();
-      const trackingPet = { petID: this.petID, petKind: this.petKind };
-      trackingList.push(trackingPet);
-      this.setLocalStorage(trackingList);
+      const trackingPet = {
+        petID: parseInt(this.petID),
+        petKind: this.petKind,
+      };
+      if (this.tracking) {
+        trackingList.push(trackingPet);
+        this.setLocalStorage(trackingList);
+      } else {
+        const removeTrackingIndex = trackingList.findIndex(
+          (trackedPet) => trackedPet.petID === trackingPet.petID
+        );
+        trackingList.splice(removeTrackingIndex, 1);
+        this.setLocalStorage(trackingList);
+      }
     },
     getLocalStorage() {
       return JSON.parse(localStorage.getItem("trackList")) || [];
@@ -161,12 +201,12 @@ export default {
     },
     checkTrackingStatus() {
       let inTrackingList = this.getLocalStorage()
-        .map((pet) => pet.id)
-        .includes(this.petID);
+        .map((pet) => pet.petID)
+        .includes(parseInt(this.petID));
       if (inTrackingList) {
         this.tracking = true;
       } else {
-        return false;
+        this.tracking = false;
       }
     },
   },
@@ -293,8 +333,9 @@ main {
       font-size: 30px;
       color: red;
     }
-    input[type="checkbox"]:checked + i {
+    .onTrack {
       font-weight: 900;
+      transition: all 0.3s ease-in-out;
     }
   }
   span {
