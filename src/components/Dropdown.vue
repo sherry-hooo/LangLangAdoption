@@ -18,12 +18,16 @@
       <h3 class="serach_title">收容所</h3>
       <div class="shelter">
         <div class="shelter_items shelter_click" @click="openShelterMenu">
-          <div>請選擇</div>
+          <div>{{ shelterPlace === "" ? "請選擇" : shelterPlace }}</div>
           <i class="fas fa-caret-down shelter_click_icon"></i>
         </div>
         <ul :class="{ show_dropdown: showShelterList }">
-          <li class="shelter_items">屏東收容所</li>
-          <li class="shelter_items">高雄收容所</li>
+          <li class="shelter_items" @click="clickShelterMenu('屏東收容所')">
+            屏東收容所
+          </li>
+          <li class="shelter_items" @click="clickShelterMenu('高雄收容所')">
+            高雄收容所
+          </li>
         </ul>
       </div>
       <div></div>
@@ -37,6 +41,7 @@ export default {
       openMenu: false,
       showShelterList: false,
       animalKind: "",
+      shelterPlace: "",
     };
   },
   methods: {
@@ -50,6 +55,11 @@ export default {
       this.animalKind = animal;
       this.$emit("animalKind", animal);
       this.openMenu = false;
+    },
+    clickShelterMenu(place) {
+      this.shelterPlace = place;
+      this.$emit("shelterPlace", place);
+      this.showShelterList = false;
     },
   },
 };
