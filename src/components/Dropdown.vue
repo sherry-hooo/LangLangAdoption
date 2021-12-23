@@ -28,6 +28,7 @@
       </div>
       <div></div>
     </section>
+    <button class="sumbit_button">搜尋</button>
   </div>
 </template>
 <script>
@@ -130,6 +131,25 @@ export default {
   }
 }
 
+%button_toPagination {
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+  background: color.$brown_300;
+  font-size: 18px;
+  font-weight: 600;
+
+  @include breakpoint.tablet {
+    padding: 15px 25px;
+    font-size: 20px;
+  }
+
+  @include breakpoint.desktop {
+    padding: 25px 65px;
+    font-size: 24px;
+  }
+}
+
 .dropdown_container {
   display: flex;
   justify-content: space-evenly;
@@ -140,6 +160,9 @@ export default {
 
   .serach_title {
     @extend %dropdown_title;
+  }
+  .sumbit_button {
+    @extend %button_toPagination;
   }
   .categroy_container {
     @extend %container;
