@@ -5,27 +5,32 @@
       <div class="col">
         <label>
           <p class="form_subtitle">姓名</p>
-          <input class="form_text" type="text" />
+          <input class="form_text" type="text" v-model="userData.name" />
         </label>
         <label>
           <p class="form_subtitle">聯絡電話</p>
-          <input class="form_text" type="text" />
+          <input class="form_text" type="text" v-model="userData.phone" />
         </label>
       </div>
       <div class="col">
         <label>
           <p class="form_subtitle">電子信箱</p>
-          <input class="form_text" type="text" />
+          <input class="form_text" type="text" v-model="userData.email" />
         </label>
         <label>
           <p class="form_subtitle">通訊地址</p>
-          <input class="form_text" type="text" />
+          <input class="form_text" type="text" v-model="userData.adress" />
         </label>
       </div>
       <div class="col">
         <label class="full_width">
           <p class="form_subtitle">為什麼您想要來當志工呢？</p>
-          <textarea class="form_textArea" cols="30" rows="10"></textarea>
+          <textarea
+            class="form_textArea"
+            cols="30"
+            rows="10"
+            v-model="userData.joinReason"
+          ></textarea>
         </label>
       </div>
       <p class="notice_message">
@@ -41,9 +46,27 @@
 
 <script>
 export default {
+  data() {
+    return {
+      userData: {
+        name: "",
+        phone: "",
+        email: "",
+        adress: "",
+        joinReason: "",
+      },
+    };
+  },
   methods: {
     formAction(status) {
+      if (status === "submit") {
+        this.$emit("applyFormAction", status);
+        this.getUserData();
+      }
       this.$emit("applyFormAction", status);
+    },
+    getUserData() {
+      console.log(this.userData);
     },
   },
 };
