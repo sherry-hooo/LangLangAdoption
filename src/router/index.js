@@ -34,7 +34,7 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/Custom.vue"),
   },
   {
-    path: "/Description/:petID",
+    path: "/Description/:petKind/:petID",
     name: "Description",
     props: true,
     component: () =>

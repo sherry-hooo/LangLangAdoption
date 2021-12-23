@@ -8,9 +8,9 @@
           <i class="fas fa-caret-down dropdown_click_icon"></i>
         </div>
         <ul :class="{ show_dropdown: openMenu }">
-          <li class="dropdown_items" @click="clickAnimalMenu('狗')">犬</li>
+          <li class="dropdown_items" @click="clickAnimalMenu('狗')">狗</li>
           <li class="dropdown_items" @click="clickAnimalMenu('貓')">貓</li>
-          <li class="dropdown_items" @click="clickAnimalMenu('鼠')">鼠</li>
+          <li class="dropdown_items" @click="clickAnimalMenu('其他')">其他</li>
         </ul>
       </div>
     </div>
