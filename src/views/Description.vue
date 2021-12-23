@@ -176,6 +176,10 @@ export default {
       const trackingPet = {
         petID: parseInt(this.petID),
         petKind: this.petKind,
+        petImg: this.petData.album_file,
+        petColour: this.petData.animal_colour,
+        petSex: this.petData.animal_sex,
+        petPlace: this.petData.animal_place,
       };
       if (this.tracking) {
         trackingList.push(trackingPet);
