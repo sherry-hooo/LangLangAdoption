@@ -1,71 +1,68 @@
 <template>
-<main>
-  <div class="banner">
-    <div class="decoration_dot">
-      <img src="@/assets/img/circles.svg" alt="">
-    </div>
-    <div class="banner_figure">
-      <img src="@/assets/img/dog4.jpg" alt="cute dog">
-    </div>
-    <div class="banner_content_area">
-      <div class="decoration_house">
-        <img src="@/assets/img/bigArrow.svg" alt="cute dog">
+  <main>
+    <div class="banner">
+      <div class="decoration_dot">
+        <img src="@/assets/img/circles.svg" alt="" />
       </div>
-      <div class="banner_caption">
-        <h1>浪我陪你等家</h1>
-        <h2>領養代替購買</h2>
-        <p>
-          零撲殺後<br>
-          長住收容所的浪浪們<br>
-          你願意給他們一個家嗎<br>
-        </p>
+      <div class="banner_figure">
+        <img src="@/assets/img/dog4.jpg" alt="cute dog" />
       </div>
-      <button>
-        <img src="@/assets/img/buttonArrow.svg" alt="">
-      </button>
-    </div>    
-  </div>
-
-  <div class="gallery">
-  </div>
-
-  <div class="volunteer_ad">
-    <h2>志工招募</h2>
-    <p>我們需要你，成為我們最強的後盾</p>
-    <div class="volunteer_entry">
-      <div class="volunteer_image">
-        <img src="@/assets/img/volunteer4.jpg" alt="">
+      <div class="banner_content_area">
+        <div class="decoration_house">
+          <img src="@/assets/img/bigArrow.svg" alt="cute dog" />
+        </div>
+        <div class="banner_caption">
+          <h1>浪我陪你等家</h1>
+          <h2>領養代替購買</h2>
+          <p>
+            零撲殺後<br />
+            長住收容所的浪浪們<br />
+            你願意給他們一個家嗎<br />
+          </p>
+        </div>
+        <button>
+          <img src="@/assets/img/buttonArrow.svg" alt="" />
+        </button>
       </div>
-      <button>
-        我有興趣
-      </button>
     </div>
-  </div>
 
-  <section class="topic">
-    <div class="topic_img">
-      <img src="@/assets/img/cat3.jpg" alt="lovely cat">
+    <div class="gallery"></div>
+
+    <div class="volunteer_ad">
+      <h2>志工招募</h2>
+      <p>我們需要你，成為我們最強的後盾</p>
+      <div class="volunteer_entry">
+        <div class="volunteer_image">
+          <img src="@/assets/img/volunteer4.jpg" alt="" />
+        </div>
+        <button>我有興趣</button>
+      </div>
     </div>
-    <div class="topic_content_area">
-      <h2>領養前的那些事</h2>
-      <p>多的是，你不知道的事。</p>
-      <button>我想知道</button>
-    </div>
-    <div class="solid_circle">
-      <img src="@/assets/img/solidCircle.svg">
-    </div>
-    <div class="hollow_circle">
-      <img src="@/assets/img/hollowCircle.svg">
-    </div>
-  </section>
-</main>
+
+    <section class="topic">
+      <div class="topic_img">
+        <img src="@/assets/img/cat3.jpg" alt="lovely cat" />
+      </div>
+      <div class="topic_content_area">
+        <h2>領養前的那些事</h2>
+        <p>多的是，你不知道的事。</p>
+        <button>我想知道</button>
+      </div>
+      <div class="solid_circle">
+        <img src="@/assets/img/solidCircle.svg" />
+      </div>
+      <div class="hollow_circle">
+        <img src="@/assets/img/hollowCircle.svg" />
+      </div>
+    </section>
+  </main>
 </template>
 
 <style lang="scss" scoped>
 main {
   padding-top: 60px; //扣除navbar高度
 
-  @include breakpoint.tablet{
+  @include breakpoint.tablet {
     padding-top: 103px;
   }
 }
@@ -77,11 +74,11 @@ main {
   overflow: hidden;
   background: color.$brown_100;
 
-  @include breakpoint.tablet{
+  @include breakpoint.tablet {
     height: calc(100vh - 103px);
   }
-  
-  .decoration_dot{
+
+  .decoration_dot {
     display: none;
 
     @include breakpoint.desktop {
@@ -118,7 +115,7 @@ main {
     object-fit: cover;
   }
 
-  &_content_area{
+  &_content_area {
     position: relative;
     padding: 30px 30px;
     width: 100%;
@@ -129,13 +126,13 @@ main {
       width: 50%;
     }
 
-    @include breakpoint.desktop{
+    @include breakpoint.desktop {
       padding: 30px 100px;
     }
   }
 
   &_caption {
-    // relative to content_area 
+    // relative to content_area
     position: absolute;
     bottom: 20%;
 
@@ -144,7 +141,7 @@ main {
     background: rgba(255, 255, 255, 0.7);
     text-align: left;
 
-    @include breakpoint.tablet{
+    @include breakpoint.tablet {
       top: 30%;
       bottom: auto;
       width: fit-content;
@@ -152,44 +149,43 @@ main {
     }
   }
 
-  &_caption h1{
+  &_caption h1 {
     color: color.$gray_700;
     font-size: 40px;
     font-weight: 500;
 
-    @include breakpoint.tablet{
+    @include breakpoint.tablet {
       font-size: 54px;
     }
 
-    @include breakpoint.desktop{
+    @include breakpoint.desktop {
       font-size: 70px;
     }
   }
 
-  &_caption h2{
+  &_caption h2 {
     margin-top: 10px;
 
     color: color.$brown_500;
     font-size: 20px;
     font-weight: 500;
 
-    @include breakpoint.tablet{
+    @include breakpoint.tablet {
       font-size: 30px;
     }
   }
 
-  &_caption p{
+  &_caption p {
     margin-top: 50px;
     color: color.$gray_500;
     font-size: 16px;
 
-    @include breakpoint.tablet{
+    @include breakpoint.tablet {
       font-size: 20px;
     }
-
   }
-  button{
-    // relative to content_area 
+  button {
+    // relative to content_area
     position: absolute;
     right: 0;
     bottom: 15%;
@@ -199,110 +195,110 @@ main {
 
     transform: scale(0.8);
 
-    @include breakpoint.tablet{
+    @include breakpoint.tablet {
       right: unset;
       bottom: 0;
       padding: 30px 55px;
     }
-    }
+  }
 }
 
-.gallery{
+.gallery {
   height: 100vh;
   background: white;
 }
 
-.volunteer_ad{
+.volunteer_ad {
   padding: 20px 0;
   background: color.$brown_100;
 
-  @include breakpoint.tablet{
+  @include breakpoint.tablet {
     padding: 20px 0;
   }
 
-  h2{
+  h2 {
     font-size: 24px;
     color: color.$brown_500;
-    @include breakpoint.tablet{
+    @include breakpoint.tablet {
       font-size: 30px;
     }
-    @include breakpoint.desktop{
+    @include breakpoint.desktop {
       font-size: 50px;
     }
   }
 
-  p{
+  p {
     margin-top: 5px;
     font-size: 16px;
     font-weight: 600;
-    @include breakpoint.tablet{
+    @include breakpoint.tablet {
       font-size: 20px;
     }
 
-    @include breakpoint.desktop{
+    @include breakpoint.desktop {
       font-size: 30px;
     }
   }
 }
 
-.volunteer_entry{
+.volunteer_entry {
   margin: 0 auto;
   width: fit-content;
 
-  @include breakpoint.desktop{
+  @include breakpoint.desktop {
     position: relative;
 
     // 在桌機尺寸下，button是在hover圖片時才會出現
-    &:hover button{
+    &:hover button {
       opacity: 1;
       transition: opacity 0.6s ease-in-out;
     }
-    &:not(:hover) button{
+    &:not(:hover) button {
       opacity: 0;
     }
-    
-    &:hover .volunteer_image{
+
+    &:hover .volunteer_image {
       opacity: 0.7;
       transition: opacity 0.6s ease-in-out;
     }
-    }
+  }
 
   // button的樣式與位置
-  button{
-  position: static;
-  padding: 10px 20px;
-  border-radius: 10px;
-  color: white;
-  background: color.$brown_300;
-  font-size: 18px;
-  font-weight: 600;
+  button {
+    position: static;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+    background: color.$brown_300;
+    font-size: 18px;
+    font-weight: 600;
 
-  @include breakpoint.tablet{
-    padding: 15px 25px;
-    font-size: 20px;
-  }
+    @include breakpoint.tablet {
+      padding: 15px 25px;
+      font-size: 20px;
+    }
 
-  @include breakpoint.desktop{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 25px 65px;
-    font-size: 24px;
+    @include breakpoint.desktop {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 25px 65px;
+      font-size: 24px;
+    }
   }
 }
-}
 
-.volunteer_image{
+.volunteer_image {
   margin: 10px auto;
   max-width: 1000px;
 
-  @include breakpoint.desktop{
+  @include breakpoint.desktop {
     margin: 20px auto;
     width: 1024px;
   }
 
-  img{
+  img {
     width: 100%;
     height: 100%;
     object-position: center;
@@ -311,30 +307,30 @@ main {
 
 // 你在Topic分支
 // 上面的東西不要改
-%title_h2{
+%title_h2 {
   font-size: 24px;
   color: color.$brown_500;
-  @include breakpoint.tablet{
+  @include breakpoint.tablet {
     font-size: 30px;
   }
-  @include breakpoint.desktop{
+  @include breakpoint.desktop {
     font-size: 50px;
   }
 }
 
-%content_p{
+%content_p {
   margin-top: 5px;
   font-size: 16px;
   font-weight: 600;
-  @include breakpoint.tablet{
+  @include breakpoint.tablet {
     font-size: 20px;
   }
 
-  @include breakpoint.desktop{
+  @include breakpoint.desktop {
     font-size: 30px;
   }
 }
-%button_toPagination{
+%button_toPagination {
   padding: 10px 20px;
   border-radius: 10px;
   color: white;
@@ -342,18 +338,18 @@ main {
   font-size: 18px;
   font-weight: 600;
 
-  @include breakpoint.tablet{
+  @include breakpoint.tablet {
     padding: 15px 25px;
     font-size: 20px;
-    }
+  }
 
-  @include breakpoint.desktop{
+  @include breakpoint.desktop {
     padding: 25px 65px;
     font-size: 24px;
-    }
+  }
 }
 
-@mixin imgbox_fill{
+@mixin imgbox_fill {
   width: 100%;
   height: 100%;
 }
@@ -366,81 +362,80 @@ main {
   height: calc(100vh - 60px);
   background: color.$brown_100;
 
-  @include breakpoint.tablet{
+  @include breakpoint.tablet {
     height: calc(100vh - 103px);
   }
 
-  &_img{
+  &_img {
     width: 50%;
-    height: 100%
+    height: 100%;
   }
 
-  img{
+  img {
     @include imgbox_fill;
     object-fit: cover;
   }
 
-  .hollow_circle{
-  position: absolute;
-  right: 5%;
-  top: 5%;
-  width: 60px;
-
-  @include breakpoint.tablet{
+  .hollow_circle {
+    position: absolute;
     right: 5%;
-    width: 90px;
-  }
+    top: 5%;
+    width: 60px;
 
-  @include breakpoint.desktop{
-    width: 120px;
-  }
+    @include breakpoint.tablet {
+      right: 5%;
+      width: 90px;
+    }
 
-  @include breakpoint.bgScreen{
-    // width: 150px;
+    @include breakpoint.desktop {
+      width: 120px;
+    }
+
+    @include breakpoint.bgScreen {
+      // width: 150px;
     }
   }
 
-  .solid_circle{
+  .solid_circle {
     position: absolute;
     right: 20%;
     top: 12%;
     width: 20px;
     height: 20px;
 
-    @include breakpoint.tablet{
+    @include breakpoint.tablet {
       top: 18%;
       right: 15%;
       width: 30px;
       height: 30px;
     }
 
-    @include breakpoint.desktop{
+    @include breakpoint.desktop {
       width: 40px;
       height: 40px;
     }
 
-    @include breakpoint.bgScreen{
+    @include breakpoint.bgScreen {
       // width: 50px;
       // height: 50px;
     }
   }
 }
 
-.topic_content_area{
+.topic_content_area {
   flex-grow: 1;
 
-  h2{
+  h2 {
     @extend %title_h2;
   }
 
-  p{
+  p {
     @extend %content_p;
   }
 
-  button{
+  button {
     @extend %button_toPagination;
     margin-top: 30px;
   }
 }
-
 </style>
