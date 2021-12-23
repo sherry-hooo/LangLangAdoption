@@ -111,6 +111,18 @@ export default {
       petData: {},
     };
   },
+  computed: {
+    // tracking() {
+    //   let ifTracking = this.getLocalStorage().find({
+    //     petID: this.petID,
+    //     petKind: this.petKind,
+    //   })
+    //     ? true
+    //     : false;
+    //   console.log(ifTracking);
+    //   return false;
+    // },
+  },
   methods: {
     goNextPage(data) {
       this.showAdoptionNotice = false;
@@ -131,17 +143,36 @@ export default {
     },
     setToTrack() {
       this.tracking = !this.tracking;
-      console.log("存入localStorage");
-      sessionStorage.set("trackList", JSON.stringify());
+      let trackingList = this.getLocalStorage();
+      const trackingPet = { petID: this.petID, petKind: this.petKind };
+      trackingList.push(trackingPet);
+      this.setLocalStorage(trackingList);
+    },
+    getLocalStorage() {
+      return JSON.parse(localStorage.getItem("trackList")) || [];
+    },
+    setLocalStorage(trackingList) {
+      localStorage.setItem("trackList", JSON.stringify(trackingList));
     },
     getAnimalData(petKind, petID) {
       getApi
         .getAnimalData(petKind, petID)
         .then((res) => (this.petData = res.data.Data[0]));
     },
+    checkTrackingStatus() {
+      let inTrackingList = this.getLocalStorage()
+        .map((pet) => pet.id)
+        .includes(this.petID);
+      if (inTrackingList) {
+        this.tracking = true;
+      } else {
+        return false;
+      }
+    },
   },
   created() {
     this.getAnimalData(this.petKind, this.petID);
+    this.checkTrackingStatus();
   },
 };
 </script>
