@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="adoption_notice">
       <div class="progress_bar"><span></span></div>
-      <h4 class="notice_header">步驟一 認養須知</h4>
+      <h3 class="notice_header">步驟一 認養須知</h3>
       <ul class="notice_list">
         <li>
           <p>
@@ -191,15 +191,26 @@ export default {
 }
 
 // 新增表單title共用樣式
-%title_h2 {
+%title_h3 {
   font-size: 24px;
   font-weight: 500;
   color: color.$gray_700;
   @include breakpoint.tablet {
-    font-size: 36px;
+    font-size: 30px;
   }
   @include breakpoint.desktop {
-    font-size: 50px;
+    font-size: 36px;
+    // font-weight: 600;
+  }
+}
+
+%form_content {
+  color: color.$gray_700;
+  font-size: 16px;
+  font-weight: 500;
+
+  @include breakpoint.desktop{
+    font-size: 18px;
   }
 }
 
@@ -211,6 +222,7 @@ export default {
   left: 0;
   z-index: 999;
   width: 100vw;
+  height: 100%;
   min-height: 100vh;
   padding: 20px 0;
   background: #bebabaab;
@@ -304,28 +316,17 @@ export default {
   }
 
   //統一表單表頭
-  h4 {
-    font-size: 24px;
-    font-weight: 900;
-    margin-bottom: 16px;
-
-    @include breakpoint.tablet{
-      font-size: 30px;
-    }
-
-    @include breakpoint.desktop {
-      font-size: 36px;
-      margin-bottom: 24px;
-    }
+  h3 {
+    @extend %title_h3;
   }
 
   .notice_list {
     margin-bottom: 30px;
     li {
+      @extend %form_content;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      font-weight: 900;
       + li {
         margin-top: 16px;
       }
