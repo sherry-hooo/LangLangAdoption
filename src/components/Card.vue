@@ -59,8 +59,8 @@ export default {
     }
 
     @include breakpoint.bgScreen {
-      width: 400px;
-      height: 425px;
+      width: 300px;
+      height: 350px;
     }
   }
   &_image {
@@ -75,8 +75,8 @@ export default {
     }
 
     @include breakpoint.bgScreen {
-      width: 370px;
-      height: 300px;
+      height: 250px;
+      width: auto;
     }
 
     img {

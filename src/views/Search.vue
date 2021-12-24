@@ -100,7 +100,11 @@ main {
   @include breakpoint.tablet {
     min-height: calc(100vh - 103px);
     margin-top: 103px;
-    padding: 10px 100px;
+    padding: 10px 50px 30px;
+  }
+
+  @include breakpoint.desktop{
+    padding: 10px 100px 60px;
   }
 
   h2 {
