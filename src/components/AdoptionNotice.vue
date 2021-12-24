@@ -6,7 +6,6 @@
       <ul class="notice_list">
         <li>
           <p>
-            1.
             您是否看過犬貓之行為健康評估表?您是否與管理人員或志工討論過該犬貓之狀況。
           </p>
           <label @click="q1 = true"
@@ -18,7 +17,7 @@
         </li>
         <li>
           <p>
-            2. 您是否知道犬貓的健康有許多不確定的風險?
+            您是否知道犬貓的健康有許多不確定的風險?
             您是否了解當牠生病時立即就醫治療是飼主的責任?
           </p>
           <label @click="q2 = true"
@@ -29,7 +28,7 @@
           >
         </li>
         <li>
-          <p>3. 您是否了解: 給犬貓良好的教育，是飼主應該努力學習的責任?</p>
+          <p>您是否了解: 給犬貓良好的教育，是飼主應該努力學習的責任?</p>
           <label @click="q3 = true"
             ><input type="radio" name="q3" /><span />是</label
           >
@@ -39,7 +38,7 @@
         </li>
         <li>
           <p>
-            4. 您是否了解犬貓剛到新環境時，許多潛在的疾病會因 &colon;<br />
+            您是否了解犬貓剛到新環境時，許多潛在的疾病會因 &colon;<br />
             1) 運輸過程吹風淋雨 2) 洗澡 3) 過度玩耍 4)
             更換食物等等讓降低抵抗力而爆發疾病
           </p>
@@ -52,7 +51,6 @@
         </li>
         <li>
           <p>
-            5.
             您是否了解就外觀判斷犬貓健康是不夠的，必須到動物醫院為牠做基本的檢查
           </p>
           <label @click="q5 = true"
@@ -63,7 +61,7 @@
           >
         </li>
         <li>
-          <p>6. 犬貓將近有15年的壽命，您是否了解無論人事物的演變</p>
+          <p>犬貓將近有15年的壽命，您是否了解無論人事物的演變</p>
           <label @click="q6 = true"
             ><input type="radio" name="q6" /><span />是</label
           >
@@ -72,7 +70,7 @@
           >
         </li>
         <li>
-          <p>7. 您是否了解飼養動物需要適當的居家條件?</p>
+          <p>您是否了解飼養動物需要適當的居家條件?</p>
           <label @click="q7 = true"
             ><input type="radio" name="q7" /><span />是</label
           >
@@ -82,7 +80,6 @@
         </li>
         <li>
           <p>
-            8.
             您是否同意在未取得共識之前絕不貿然認養，以免造成日後極大的心理負擔
           </p>
           <label @click="q8 = true"
@@ -94,7 +91,7 @@
         </li>
         <li>
           <p>
-            9. 您是否了解若縱放犬貓在外，任何人都可以加以協送保護送交收容所。
+            您是否了解若縱放犬貓在外，任何人都可以加以協送保護送交收容所。
           </p>
           <label @click="q9 = true"
             ><input type="radio" name="q9" /><span />是</label
@@ -105,7 +102,6 @@
         </li>
         <li>
           <p>
-            10.
             如因任何原因無法續養，本人願為牠找到新的認養家庭，或送至動物保護團體所屬收容所，或再送至貴所辦理不擬續養手續並依收容所規定繳交規費
           </p>
           <label @click="q10 = true"
@@ -192,6 +188,7 @@ export default {
 
 // 新增表單title共用樣式
 %title_h3 {
+  margin-bottom: 16px;
   font-size: 24px;
   font-weight: 500;
   color: color.$gray_700;
@@ -199,8 +196,8 @@ export default {
     font-size: 30px;
   }
   @include breakpoint.desktop {
+    margin-bottom: 24px;
     font-size: 36px;
-    // font-weight: 600;
   }
 }
 
@@ -327,14 +324,28 @@ export default {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      counter-increment: notice;
+
+      &::before{
+        content: counter(notice) ". ";
+        list-style-type: none;
+        align-self: flex-start;
+        flex-shrink: 0;
+        padding-top: 5px;
+        width: 24px;
+        font-size: 16px;
+        font-weight: 600;
+      }
+
       + li {
-        margin-top: 16px;
+        margin-top: 12px;
       }
       @include breakpoint.desktop {
-        margin-top: 27px;
+        margin-top: 16px;
       }
       p {
         flex: 1;
+        align-self: flex-start;
         text-align: left;
         margin-right: 16px;
       }
