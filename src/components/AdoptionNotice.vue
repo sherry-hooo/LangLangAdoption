@@ -118,7 +118,8 @@
       </ul>
       <div class="notice_buttons">
         <button class="cancel_btn" type="cancel" @click="cancelEdit">
-          取消
+          <!-- 中間加入一個全形空格，讓取消＆提交按鈕等寬 -->
+          取&emsp;消
         </button>
         <button class="submit_btn" @click="goNextPage">下一頁</button>
       </div>
@@ -170,6 +171,39 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+// 通用button樣式，除了banner的滑動按鈕，其他都用此樣式
+%button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+  background: color.$brown_300;
+  font-size: 18px;
+  font-weight: 500;
+  
+  &:hover {
+    box-shadow: inset 2px -2px 4px color.$brown_500;
+    }
+
+  @include breakpoint.desktop {
+    padding: 15px 30px;
+    font-size: 22px;
+  }
+}
+
+// 新增表單title共用樣式
+%title_h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: color.$gray_700;
+  @include breakpoint.tablet {
+    font-size: 36px;
+  }
+  @include breakpoint.desktop {
+    font-size: 50px;
+  }
+}
+
+// 統一表單wrapper樣式
 .wrapper {
   position: absolute;
   top: 0;
@@ -177,27 +211,36 @@ export default {
   left: 0;
   z-index: 999;
   width: 100vw;
-  height: 100%;
   min-height: 100vh;
-  padding-top: 60px;
+  padding: 20px 0;
   background: #bebabaab;
   backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;
+
+  @include breakpoint.tablet{
+    height: 100%;
+  }
+
   @include breakpoint.desktop {
-    padding-top: 114px;
+    padding: 40px 0;
   }
 }
+// 統一表單樣式
 .adoption_notice {
   color: color.$gray_700;
   background: color.$brown_100;
   width: 90%;
   height: fit-content;
-  padding: 20px 10px 60px;
+  padding: 20px 10px 20px;
   border-radius: 2px;
 
+  @include breakpoint.tablet{
+    padding: 20px 20px 20px;
+  }
+
   @include breakpoint.desktop {
-    padding: 20px 20px 60px;
+    padding: 20px 20px 40px;
   }
 
   .progress_bar {
@@ -208,7 +251,7 @@ export default {
     @include breakpoint.desktop {
       height: 40px;
       line-height: 40px;
-      margin-bottom: 36px;
+      margin-bottom: 20px;
     }
     span {
       display: inline-block;
@@ -260,13 +303,19 @@ export default {
     }
   }
 
+  //統一表單表頭
   h4 {
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 900;
     margin-bottom: 16px;
+
+    @include breakpoint.tablet{
+      font-size: 30px;
+    }
+
     @include breakpoint.desktop {
-      font-size: 50px;
-      margin-bottom: 30px;
+      font-size: 36px;
+      margin-bottom: 24px;
     }
   }
 
@@ -342,15 +391,17 @@ export default {
       }
     }
     .cancel_btn {
+      @extend %button;
       background: color.$gray_100;
       &:hover {
         box-shadow: inset 2px -2px 4px color.$gray_300;
       }
     }
     .submit_btn {
+      @extend %button;
       background: color.$brown_300;
       &:hover {
-        box-shadow: inset 2px -2px 4px color.$brown_500;
+        // box-shadow: inset 2px -2px 4px color.$brown_500;
       }
     }
   }
