@@ -78,9 +78,9 @@ header {
 .navbar {
   display: none;
   position: absolute;
-  right: 0;
+  right: -30px;
   top: 42px;
-  width: calc(100vw - 60px);
+  width: 100vw;
   text-align: right;
   background-color: color.$brown_100;
   // padding: 10px;
