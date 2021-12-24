@@ -1,7 +1,12 @@
 <template>
   <main>
     <h3>尋找浪浪</h3>
-    <Dropdown @animalKind="receiveAnimalKind"></Dropdown>
+    <Dropdown
+      @selectedAnimalKind="receiveAnimalKind"
+      @selectedShelter="receiveSelectedShelter"
+      @selection="receiveSelection"
+      :filteredShelter="filteredShelter"
+    ></Dropdown>
     <section>
       <Card v-for="petData in petData" :key="petData" :petData="petData"></Card>
     </section>
@@ -28,21 +33,37 @@ export default {
   data() {
     return {
       petsDataInArray: [],
-      animalKind: "",
+      selectedAnimanlKind: "",
       currentPage: 1,
       cardAmount: 9,
+      selectedShelter: "",
     };
   },
   methods: {
-    getAPI() {
+    getAnimalAPI(kind) {
       getApi
-        .getAnimalData(this.animalKind)
+        .getAnimalData(kind)
+        .then((res) => (this.petsDataInArray = res.data.Data));
+    },
+    getShelterAPI(kind, shelterPkid) {
+      getApi
+        .getShelterData(kind, shelterPkid)
         .then((res) => (this.petsDataInArray = res.data.Data));
     },
     receiveAnimalKind(data) {
-      this.animalKind = data;
-      this.getAPI(this.animalKind);
+      this.selectedAnimanlKind = data;
+      this.getAnimalAPI(data);
     },
+    receiveSelectedShelter(shelterPkid) {
+      this.selectedShelter = shelterPkid;
+
+      this.getShelterAPI(this.selectedAnimanlKind, shelterPkid);
+    },
+    // receiveSelection(data) {
+    //   this.selectedAnimanlKind = data.animalKind;
+    //   this.selectedShelter = data.shelterPlace;
+    //   this.getShelterAPI(data.animalKind, data.shelterPlace);
+    // },
     receiveCurrentPage(page) {
       this.currentPage = page;
       this.scrollToTop();
@@ -67,6 +88,9 @@ export default {
     },
     totalPage() {
       return parseInt(this.petsDataInArray.length / this.cardAmount);
+    },
+    filteredShelter() {
+      return this.petsDataInArray[0];
     },
   },
   // created() {

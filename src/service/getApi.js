@@ -15,11 +15,11 @@ export default {
       },
     });
   },
-  getShelterData(kind, areaPkid, pkid) {
+  getShelterData(kind, pkid) {
+    console.log(kind, pkid);
     return apiClient.get(`/`, {
       params: {
         animal_kind: kind,
-        animal_area_pkid: areaPkid,
         animal_shelter_pkid: pkid,
         Page: 1,
         api_key: "PLFET0ETCEA6U8T0TI0R0NCEUJDLHE",
