@@ -35,7 +35,7 @@ export default {
       singleKindData: [],
       singleShelterData: [],
       selectedAnimanlKind: "",
-      currentPage: 1,
+      pageNumber: 1,
       cardAmount: 9,
       selectedShelterPkid: "",
       shelterList: [],
@@ -70,7 +70,7 @@ export default {
       this.getShelterAPI(data.animalKind, data.shelterPkid);
     },
     receiveCurrentPage(page) {
-      this.currentPage = page;
+      this.pageNumber = page;
       this.scrollToTop();
     },
     scrollToTop() {
@@ -107,10 +107,10 @@ export default {
       return this.singleShelterData.slice(this.startIndex, this.endIndex);
     },
     startIndex() {
-      return (this.currentPage - 1) * this.cardAmount;
+      return (this.pageNumber - 1) * this.cardAmount;
     },
     endIndex() {
-      return this.currentPage * this.cardAmount;
+      return this.pageNumber * this.cardAmount;
     },
     totalPage() {
       return parseInt(this.singleShelterData.length / this.cardAmount);
