@@ -5,21 +5,21 @@
       <div class="col">
         <label>
           <p class="form_subtitle">姓名</p>
-          <input class="form_text" type="text" v-model="userData.name" />
+          <input class="form_text" type="text" v-model="name" />
         </label>
         <label>
           <p class="form_subtitle">聯絡電話</p>
-          <input class="form_text" type="text" v-model="userData.phone" />
+          <input class="form_text" type="text" v-model.number="contact" />
         </label>
       </div>
       <div class="col">
         <label>
           <p class="form_subtitle">電子信箱</p>
-          <input class="form_text" type="text" v-model="userData.email" />
+          <input class="form_text" type="text" v-model="email" />
         </label>
         <label>
           <p class="form_subtitle">通訊地址</p>
-          <input class="form_text" type="text" v-model="userData.adress" />
+          <input class="form_text" type="text" v-model="address" />
         </label>
       </div>
       <div class="col">
@@ -29,7 +29,7 @@
             class="form_textArea"
             cols="30"
             rows="10"
-            v-model="userData.joinReason"
+            v-model="joinReason"
           ></textarea>
         </label>
       </div>
@@ -45,28 +45,48 @@
 </template>
 
 <script>
+import db from "@/firebase/firebase.config.js";
+import { collection, addDoc } from "firebase/firestore";
+
 export default {
   data() {
     return {
-      userData: {
-        name: "",
-        phone: "",
-        email: "",
-        adress: "",
-        joinReason: "",
-      },
+      name: "",
+      contact: "",
+      email: "",
+      address: "",
+      joinReason: "",
     };
   },
   methods: {
     formAction(status) {
       if (status === "submit") {
         this.$emit("applyFormAction", status);
-        this.getUserData();
+        const VolunteerData = this.getUserData();
+        this.storeFirebase(VolunteerData);
       }
       this.$emit("applyFormAction", status);
     },
     getUserData() {
-      console.log(this.userData);
+      const VolunteerData = {
+        name: this.name,
+        contact: this.contact,
+        email: this.email,
+        address: this.address,
+        joinReason: this.joinReason,
+      };
+      return VolunteerData;
+    },
+    async storeFirebase(applyFormData) {
+      console.log({ ...applyFormData });
+      try {
+        const docRef = await addDoc(collection(db, "volunteerApply"), {
+          ...applyFormData,
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
     },
   },
 };

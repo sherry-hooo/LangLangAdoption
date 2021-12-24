@@ -76,7 +76,7 @@
         </label>
         <label>
           認養人名稱:
-          <input type="text" v-model="adopterName" />
+          <input type="text" v-model="adoptorName" />
         </label>
         <label class="birth">
           認養人出生日期:
@@ -112,7 +112,7 @@ export default {
       place: "",
       space: "",
       petCount: null,
-      adopterName: "",
+      adoptorName: "",
       adoptorBirth: "",
       adoptorContact: "",
       adoptorEmail: "",

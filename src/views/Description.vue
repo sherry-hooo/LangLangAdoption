@@ -97,7 +97,7 @@
     <AdoptionApply
       v-if="showAdoptionApply"
       @cancelEdit="cancelEdit"
-      @submitApplyForm="receiveApplForm"
+      @submitApplyForm="receiveApplyForm"
     ></AdoptionApply>
   </main>
 </template>
@@ -106,6 +106,8 @@
 import AdoptionApply from "@/components/AdoptionApply.vue";
 import AdoptionNotice from "@/components/AdoptionNotice.vue";
 import getApi from "@/service/getApi.js";
+import db from "@/firebase/firebase.config.js";
+import { collection, addDoc } from "firebase/firestore";
 
 export default {
   name: "Description",
@@ -166,8 +168,15 @@ export default {
         ? (this.showAdoptionApply = false)
         : (this.showAdoptionNotice = false);
     },
-    receiveApplForm(form) {
+    receiveApplyForm(form) {
       console.log("收到驗證後的資料了", form);
+      // 存取選單
+      this.applyForm = form;
+
+      // 傳到 firebase db
+      this.storeFirebase(form);
+
+      // 選單消失
       this.showAdoptionApply = false;
     },
     setTrack() {
@@ -211,6 +220,16 @@ export default {
         this.tracking = true;
       } else {
         this.tracking = false;
+      }
+    },
+    async storeFirebase(applyFormData) {
+      try {
+        const docRef = await addDoc(collection(db, "adoptionApply"), {
+          applyFormData,
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
       }
     },
   },
