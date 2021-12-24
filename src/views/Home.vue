@@ -243,9 +243,28 @@ main {
 
     @include breakpoint.tablet {
       right: unset;
-      bottom: 0;
+      bottom: -2%;
       padding: 30px 55px;
     }
+
+    img {
+      animation-name: MoveUpDown;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+    }
+  }
+}
+@keyframes MoveUpDown {
+  0% {
+    transform: translateY(0);
+  }
+
+  50%{
+    transform: translateY(10px);
+  }
+
+  100%{
+    transform: translateY(0);
   }
 }
 
