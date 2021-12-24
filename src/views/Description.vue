@@ -2,9 +2,17 @@
   <main>
     <div class="description">
       <div class="des_container">
-        <h2>浪浪資料</h2>
+        <div>
+          <h2>浪浪資料</h2>
+          <div class="circle_box">
+            <img src="@/assets/img/circles.svg" alt="" />
+          </div>
+        </div>
         <div class="case">
           <div class="case_img_box">
+            <!-- <div class="circle_box">
+              <img src="@/assets/img/circles.svg" alt="" />
+            </div> -->
             <div class="img_box">
               <img :src="petData.album_file" alt="浪浪圖片" />
             </div>
@@ -22,41 +30,44 @@
             </div>
           </div>
           <div class="case_des_box">
-            <div v-if="petData.animal_status" class="case_wrapper">
+            <div v-if="petData.animal_status" class="case_wrapper wrapper_2">
               <p class="case_title">狀態 &colon;</p>
               <p class="case_content">
                 {{ petData.animal_status === "OPEN" ? "待領養" : "已領養" }}
               </p>
             </div>
-            <div v-if="petData.animal_kind" class="case_wrapper">
+            <div v-if="petData.animal_kind" class="case_wrapper wrapper_2">
               <p class="case_title">類型 &colon;</p>
               <p class="case_content">{{ petData.animal_kind }}</p>
             </div>
-            <div v-if="petData.animal_colour" class="case_wrapper">
+            <div v-if="petData.animal_colour" class="case_wrapper wrapper_2">
               <p class="case_title">顏色 &colon;</p>
               <p class="case_content">{{ petData.animal_colour }}</p>
             </div>
-            <div v-if="petData.animal_sex" class="case_wrapper">
+            <div v-if="petData.animal_sex" class="case_wrapper wrapper_2">
               <p class="case_title">性別 &colon;</p>
               <p class="case_content">{{ petData.animal_sex === "F" }}</p>
             </div>
-            <div v-if="petData.animal_bodytype" class="case_wrapper">
+            <div v-if="petData.animal_bodytype" class="case_wrapper wrapper_2">
               <p class="case_title">體型 &colon;</p>
               <p class="case_content">{{ petData.animal_bodytype }}</p>
             </div>
-            <div v-if="petData.animal_place" class="case_wrapper">
+            <div v-if="petData.animal_place" class="case_wrapper wrapper_1">
               <p class="case_title">收容地點 &colon;</p>
               <p class="case_content">{{ petData.animal_place }}</p>
             </div>
-            <div v-if="petData.shelter_address" class="case_wrapper">
+            <div v-if="petData.shelter_address" class="case_wrapper wrapper_1">
               <p class="case_title">收容地址 &colon;</p>
               <p class="case_content">{{ petData.shelter_address }}</p>
             </div>
-            <div v-if="petData.shelter_tel" class="case_wrapper">
+            <div v-if="petData.shelter_tel" class="case_wrapper wrapper_2">
               <p class="case_title">聯絡電話 &colon;</p>
               <p class="case_content">{{ petData.shelter_tel }}</p>
             </div>
-            <div v-if="petData.animal_createtime" class="case_wrapper">
+            <div
+              v-if="petData.animal_createtime"
+              class="case_wrapper wrapper_1"
+            >
               <p class="case_title">入所日期 &colon;</p>
               <p class="case_content">{{ petData.animal_createtime }}</p>
             </div>
@@ -188,11 +199,12 @@ main {
   padding: 60px 0px 0px 0px;
   background-color: color.$brown-100;
   position: relative;
+  overflow: hidden;
   height: fit-content;
   min-height: 100vh;
 }
 .description {
-  padding: 0px 30px 30px 30px;
+  padding: 10px 30px 30px 30px;
   @include breakpoint.tablet {
     padding: 0px 50px 50px 50px;
   }
@@ -200,16 +212,28 @@ main {
     padding: 0px 100px 60px 100px;
   }
 }
+@mixin h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: color.$gray_700;
+  width: fit-content;
+  @include breakpoint.tablet {
+    font-size: 36px;
+  }
+  @include breakpoint.bgScreen {
+    font-size: 50px;
+  }
+}
 .des_container {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   & h2 {
-    width: fit-content;
+    @include h2;
   }
 }
 .case {
-  margin-top: 30px;
+  margin-top: 20px;
   @include breakpoint.desktop {
     margin-top: 60px;
     display: flex;
@@ -233,15 +257,25 @@ main {
     }
   }
   &_wrapper {
-    margin-top: 24px;
+    // margin-top: 24px;
     @include breakpoint.desktop {
       &:first-child {
         margin-top: 0;
       }
     }
   }
+  & .wrapper_2 {
+    flex: 40%;
+  }
+  & .wrapper_1 {
+    flex: 60%;
+  }
   &_des_box {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
     text-align: left;
+    gap: 10px;
     @include breakpoint.desktop {
       flex: 50%;
     }
@@ -255,6 +289,15 @@ main {
     font-size: 18px;
     font-weight: 900;
     color: color.$gray_500;
+  }
+}
+.circle_box {
+  position: absolute;
+  right: -25px;
+  top: 478px;
+  width: 30%;
+  & img {
+    width: 100%;
   }
 }
 .img_box {
@@ -271,7 +314,16 @@ main {
   }
 }
 .follow_box {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 5px;
   flex: 40%;
+  @include breakpoint.mobile {
+    margin-top: 0;
+    gap: 30px;
+    justify-content: flex-end;
+  }
   @include breakpoint.tablet {
     flex: unset;
   }
@@ -280,7 +332,6 @@ main {
   }
 }
 .follow {
-  margin-top: 40px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -304,11 +355,13 @@ main {
 }
 .button_adopt {
   display: block;
-  margin-top: 30px;
-  padding: 21px 42px;
+  padding: 10px 20px;
+  margin-left: auto;
+  width: fit-content;
   background-color: color.$brown_300;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: 500;
   color: color.$white;
   cursor: pointer;
   @include breakpoint.tablet {
