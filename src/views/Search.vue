@@ -29,7 +29,7 @@ export default {
     return {
       petsDataInArray: [],
       animalKind: "",
-      currentPage: 1,
+      pageNumber: 1,
       cardAmount: 9,
     };
   },
@@ -44,7 +44,7 @@ export default {
       this.getAPI(this.animalKind);
     },
     receiveCurrentPage(page) {
-      this.currentPage = page;
+      this.pageNumber = page;
       this.scrollToTop();
     },
     scrollToTop() {
@@ -56,17 +56,16 @@ export default {
   },
   computed: {
     petData() {
-      console.log(this.startIndex, this.endIndex);
       return this.petsDataInArray.slice(this.startIndex, this.endIndex);
     },
     startIndex() {
-      return (this.currentPage - 1) * this.cardAmount;
+      return (this.pageNumber - 1) * this.cardAmount;
     },
     endIndex() {
-      return this.currentPage * this.cardAmount;
+      return this.pageNumber * this.cardAmount;
     },
     totalPage() {
-      return parseInt(this.petsDataInArray.length / this.cardAmount);
+      return Math.ceil(this.petsDataInArray.length / this.cardAmount);
     },
   },
   // created() {
