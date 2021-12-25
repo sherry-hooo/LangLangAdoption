@@ -270,19 +270,30 @@ main {
   background: color.$brown_300;
   color: white;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 500;
   border-radius: 5px;
-  padding: 10px 25px;
+  padding: 10px 20px;
   cursor: pointer;
-  @include breakpoint.mobile {
+  @include breakpoint.tablet {
     margin-top: 36px;
     background: color.$brown_300;
     color: white;
-    font-size: 25px;
-    font-weight: 900;
+    font-size: 22px;
+    font-weight: 500;
     border-radius: 10px;
-    padding: 20px 50px;
+    padding: 15px 30px;
     cursor: pointer;
+  }
+}
+h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: color.$gray_700;
+  @include breakpoint.tablet {
+    font-size: 36px;
+  }
+  @include breakpoint.bgScreen {
+    font-size: 50px;
   }
 }
 </style>
