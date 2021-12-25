@@ -221,7 +221,7 @@ export default {
   width: 100vw;
   height: 100%;
   min-height: 100vh;
-  padding: 20px 0;
+  padding: 20px 0 20px;
   background: #bebabaab;
   backdrop-filter: blur(5px);
   display: flex;
@@ -232,7 +232,7 @@ export default {
   }
 
   @include breakpoint.desktop {
-    padding: 40px 0;
+    padding: 20px 0 40px;
   }
 }
 // 統一表單樣式

@@ -103,12 +103,12 @@ export default {
   width: 100vw;
   height: 100%;
   min-height: 100vh;
-  padding: 20px 0;
+  padding: 20px 0 20px;
   background: rgba(190, 188, 188, 0.6);
   backdrop-filter: blur(1px);
 
 @include breakpoint.desktop {
-    padding: 40px 0;
+    padding: 20px 0 40px;
   }
 }
 
@@ -152,7 +152,7 @@ form {
     padding: 20px 20px 20px;
   }
   @include breakpoint.desktop{
-    padding: 20px 20px 40px;
+    padding: 40px 40px 40px;
   }
   .notice_message {
     margin: 16px 0 30px;
@@ -218,8 +218,11 @@ form {
       & + label {
         margin: 0 0 0 16px;
       }
-      .form_text {
-        height: 52px;
+    }
+
+    @include breakpoint.desktop{
+      & + label {
+        margin: 0 0 0 30px;
       }
     }
   }

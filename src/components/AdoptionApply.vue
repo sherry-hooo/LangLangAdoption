@@ -181,7 +181,7 @@ export default {
 
 // 統一表單wrapper樣式
 .wrapper {
-  padding: 20px 0;
+  padding: 20px 0px 20px;
   background: rgba(190, 188, 188, 0.6);
   backdrop-filter: blur(1px);
   display: flex;
@@ -209,17 +209,17 @@ export default {
   .adoption_apply {
     display: flex;
     flex-direction: column;
-    padding: 20px 10px;
+    padding: 20px 10px 20px;
     width: 90%;
     height: fit-content;
     background-color: #fbf8f5;
 
     @include breakpoint.tablet{
-      padding: 20px 20px;
+      padding: 20px 20px 20px;
     }
 
     @include breakpoint.desktop {
-      padding: 20px;
+      padding: 20px 20px 40px;
     }
     .accept_container {
       text-align: center;
@@ -326,7 +326,7 @@ export default {
           width: 100%;
           height: 42px;
           border: 2px solid #dec39e;
-          border-radius: 10px;
+          border-radius: 5px;
         }
 
         input[type='text']{
