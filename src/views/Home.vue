@@ -166,6 +166,7 @@ main {
     text-align: left;
 
     @include breakpoint.tablet {
+      padding: 20px 30px;
       width: 50%;
     }
 
@@ -191,10 +192,14 @@ main {
     text-align: left;
 
     @include breakpoint.tablet {
-      top: 30%;
+      top: 35%;
       bottom: auto;
       width: fit-content;
       background: none;
+    }
+
+    @include breakpoint.desktop{
+      top: 30%;
     }
   }
 
@@ -360,7 +365,7 @@ main {
 
     @include breakpoint.tablet{
       width: 50%;
-      height: calc(100vh - 60px);
+      height: calc(100vh - 103px);
     }
   }
 
@@ -371,49 +376,57 @@ main {
   }
 
   .hollow_circle {
-    position: absolute;
-    right: 5%;
-    top: 5%;
-    width: 50px;
-
-    @include breakpoint.tablet {
-      right: 5%;
-      width: 90px;
-    }
-
-    @include breakpoint.desktop {
-      width: 120px;
-    }
-
-    @include breakpoint.bgScreen {
-      // width: 150px;
-    }
+    display: none;
+    // position: absolute;
+    // right: 5%;
+    // top: 5%;
+    // width: 40px;
   }
 
   .solid_circle {
-    position: absolute;
-    right: 20%;
-    top: 12%;
-    width: 15px;
-    height: 15px;
+    display: none;
+  // position: absolute;
+  // right: 15%;
+  // top: 16%;
+  // width: 15px;
+  // height: 15px;
+  }
 
-    @include breakpoint.tablet {
-      top: 18%;
-      right: 15%;
+  @include breakpoint.tablet {
+    .hollow_circle{
+      display: block;
+      position: absolute;
+      top: 10%;
+      right: 3%;
+      width: 90px;
+    }
+
+    .solid_circle{
+      display: block;
+      position: absolute;
+      top: 20%;
+      right: 13%;
       width: 30px;
       height: 30px;
     }
+  }
 
-    @include breakpoint.desktop {
+  @include breakpoint.desktop {
+    .hollow_circle{
+      width: 120px;
+    }
+
+    .solid_circle{
+      top: 22%;
+      right: 10%;
       width: 40px;
       height: 40px;
     }
-
-    @include breakpoint.bgScreen {
-      // width: 50px;
-      // height: 50px;
-    }
   }
+
+  @include breakpoint.bgScreen {
+  }
+
 }
 
 .topic_content_area {
