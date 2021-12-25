@@ -31,14 +31,15 @@
 
     <section class="gallery">
       <div class="parallax_group">
-        <div class="parallax_layer scroll_three">
-          <img src="@/assets/img/dog1.jpg">
-        </div>
         <div class="parallax_layer scroll_lowest">
           <p>希望能夠有一個家， <br/>
             一個會好好愛我的主人</p>
           <img src="@/assets/img/cat1.jpg">
         </div>
+        <div class="parallax_layer scroll_three">
+          <img src="@/assets/img/dog1.jpg">
+        </div>
+
         <div class="parallax_layer scroll_four">
           <img src="@/assets/img/cat2.jpg">
         </div>
@@ -525,66 +526,64 @@ main {
     background: transparent;
   }
   .scroll_one {
-    transform: translateZ(5px) scale(0.5);
+    transform: translateZ(-15px) scale(2.5);
     p{
+      font-size: 20px;
       position: absolute;
+      left: 100px;
+      bottom: 400px;
+      font-weight: 600;
       color: color.$gray_500;
     }
     img {
       width: 500px;
       position: absolute;
       bottom: 0;
-      // bottom: 5%;
-      // left: 100px;
+      left: 100px;
     }
   }
   .scroll_two {
-    transform: translateZ(0) scale(1);
+    transform: translateZ(-10px) scale(2);
     img {
       width: 480px;
       position: absolute;
       bottom: 0;
-      // bottom: 8%;
-      // right: 70px;
+      right: 100px;
     }
   }
   .scroll_three {
-    transform: translateZ(-5px) scale(1.5);
+    transform: translateZ(2px) scale(0.8);
     img {
       width: 370px;
       position: absolute;
-      bottom: 0;
-      left: 20%;
-      // top: 100%;
-      // left: 520px;
+      bottom: 5%;
+      left: 100px;
     }
   }
   .scroll_four {
-    transform: translateZ(-20px) scale(3);
+    transform: translateZ(0) scale(1);
     img {
       width: 400px;
       position: absolute;
-      bottom: 0;
-      // top: 15%;
-      // right: 100px;
+      bottom: 5%;
+      right: 150px;
     }
   }
   .scroll_lowest {
-    transform: translateZ(-30px) scale(4);
+    transform: translateZ(-5px) scale(1.5);
     p{
       position: absolute;
-      
-      // bottom: 200px;
-      // left: 45%;
-      // top: 40%;
-      font-size: 5px;
+      top: 40%;
+      left: 40%;
+      font-size: 20px;
+      font-weight: 600;
       color: color.$gray_500;
     }
     img {
       width: 460px;
       position: absolute;
-      top: 15%;
-      // left: 32%;
+      bottom: 5%;
+      left: 400px;
       transform: translateY(-50%);
     }
   }
