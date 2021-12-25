@@ -58,11 +58,14 @@
         </label>
         <label class="space">
           空間大小:
-          <input type="text" v-model="space" placeholder="請輸入坪數" />
+          <input type="text" v-model="space"
+          placeholder="請輸入坪數" />
         </label>
         <label class="pet_number">
           現有動物隻數:
-          <input type="text" v-model="petCount" />
+          <input type="text" v-model="petCount"
+          placeholder="請輸入動物種類及數量"
+          />
         </label>
         <label>
           認養人名稱:
