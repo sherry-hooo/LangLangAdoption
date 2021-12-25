@@ -9,7 +9,10 @@
       </div>
       <div class="banner_content_area">
         <div class="decoration_house">
-          <img src="@/assets/img/bigArrow.svg" alt="cute dog" />
+          <svg width="577" height="292" viewBox="0 0 577 292" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="path" d="M136 233V162.5H1.5L204 1L576 291" stroke="#DEC39E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <!-- <img src="@/assets/img/bigArrow.svg" alt="cute dog" /> -->
         </div>
         <div class="banner_caption">
           <h1>浪我陪你等家</h1>
@@ -33,7 +36,7 @@
       <p>我們需要你，成為我們最強的後盾</p>
       <div class="volunteer_entry">
         <div class="volunteer_image">
-          <img src="@/assets/img/volunteer4.jpg" alt="" />
+          <img src="@/assets/img/volunteer4.jpg">
         </div>
         <button>我有興趣</button>
       </div>
@@ -272,6 +275,44 @@ main {
     transform: translateY(0);
   }
 }
+// 畫房子的動畫
+@keyframes DrawHouse {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.decoration_house{
+  .path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: DrawHouse 2s linear alternate forwards;
+    }
+  }
+
+@keyframes FadeIn{
+  from { opacity: 0}
+  to { opacity: 1}
+}
+
+.banner_caption h1{
+  opacity: 0;
+  animation: FadeIn 2s linear forwards;}
+
+.banner_caption h2{
+  opacity: 0;
+  animation: FadeIn 1s linear forwards;
+  animation-delay: 1.5s;
+}
+
+.banner_caption p{
+  opacity: 0;
+  animation: FadeIn 1s linear forwards;
+  animation-delay: 2s;
+}
 
 .gallery {
   height: 100vh;
@@ -377,19 +418,10 @@ main {
 
   .hollow_circle {
     display: none;
-    // position: absolute;
-    // right: 5%;
-    // top: 5%;
-    // width: 40px;
   }
 
   .solid_circle {
     display: none;
-  // position: absolute;
-  // right: 15%;
-  // top: 16%;
-  // width: 15px;
-  // height: 15px;
   }
 
   @include breakpoint.tablet {
