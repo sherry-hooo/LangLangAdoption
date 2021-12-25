@@ -5,7 +5,6 @@
         <span></span>
       </div>
       <h4>測試表單</h4>
-
       <Form @submit="onsubmit">
         <Field
           name="email"
@@ -21,7 +20,7 @@
         <button>Sign up</button>
       </Form>
 
-      <Test11 :schema="formSchema" />
+      <ValidationForm :schema="formSchema" />
     </div>
   </section>
 </template>
@@ -29,10 +28,10 @@
 <script>
 import { Field, Form, ErrorMessage } from "vee-validate";
 import * as Yup from "yup";
-import Test11 from "@/components/test11.vue";
+import ValidationForm from "@/components/validationForm.vue";
 
 export default {
-  components: { Field, Form, ErrorMessage, Test11 },
+  components: { Field, Form, ErrorMessage, ValidationForm },
   data() {
     const schema = Yup.object({
       email: Yup.string().required().email(),
@@ -41,23 +40,68 @@ export default {
     const formSchema = {
       fields: [
         {
-          label: "Your Name",
-          name: "name",
+          label: "飼養地點",
+          name: "place",
           as: "input",
+          type: "text",
+          maxlength: "10",
           rules: Yup.string().required(),
         },
         {
-          label: "Your Email",
+          label: "空間大小",
+          name: "spaceSize",
+          as: "input",
+          type: "number",
+          maxlength: "10",
+          rules: Yup.number().required(),
+        },
+        {
+          label: "現有動物隻數",
+          name: "petsCount",
+          as: "input",
+          type: "number",
+          maxlength: "4",
+          rules: Yup.number().positive().integer().required(),
+        },
+        {
+          label: "認養人名稱",
+          name: "applierName",
+          as: "input",
+          type: "text",
+          maxlength: "10",
+          rules: Yup.string().required(),
+        },
+        {
+          label: "認養人出生日期",
+          name: "birth",
+          as: "input",
+          type: "date",
+          rules: Yup.date().required(),
+        },
+        {
+          label: "認養人聯絡電話",
+          name: "contact",
+          as: "input",
+          type: "tel",
+          minlength: "9",
+          maxlength: "15",
+          rules: Yup.number().min(9).positive().integer().required(),
+        },
+        {
+          label: "電子信箱",
           name: "email",
           as: "input",
+          type: "email",
+          maxlength: "20",
           rules: Yup.string().email().required(),
         },
         {
-          label: "Your Password",
-          name: "password",
+          label: "通訊地址",
+          name: "address",
           as: "input",
-          type: "password",
-          rules: Yup.string().min(6).required(),
+          type: "text",
+          maxlength: "30",
+          rules: Yup.string().required(),
         },
       ],
     };
@@ -120,17 +164,51 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-form {
-  display: flex;
-  flex-direction: column;
-  input {
-    height: 30px;
-    border: 1px solid black;
-    margin: 5px;
+// 新增button共用樣式
+%button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+  background: color.$brown_300;
+  font-size: 18px;
+  font-weight: 500;
+
+  &:hover {
+    box-shadow: inset 2px -2px 4px color.$brown_500;
+  }
+
+  @include breakpoint.desktop {
+    padding: 15px 30px;
+    font-size: 22px;
   }
 }
+%title_h3 {
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weight: 500;
+  color: color.$gray_700;
+  @include breakpoint.tablet {
+    font-size: 30px;
+  }
+  @include breakpoint.desktop {
+    margin-bottom: 24px;
+    font-size: 36px;
+  }
+}
+
+%form_content {
+  color: color.$gray_700;
+  font-size: 16px;
+  font-weight: 500;
+
+  @include breakpoint.desktop {
+    font-size: 18px;
+  }
+}
+
+// 統一表單wrapper樣式
 .wrapper {
-  padding: 60px 0 20px 0;
+  padding: 20px 0px 20px;
   background: rgba(190, 188, 188, 0.6);
   backdrop-filter: blur(1px);
   display: flex;
@@ -145,123 +223,178 @@ form {
   height: 100%;
   min-height: fit-content;
 
+  @include breakpoint.tablet {
+    height: 100%;
+  }
+
   @include breakpoint.desktop {
-    padding: 114px 0 20px 0;
+    padding: 20px 0 40px;
     height: fit-content;
   }
 
+  // 統一表單樣式
   .adoption_apply {
     display: flex;
     flex-direction: column;
-    padding: 20px 10px;
+    padding: 20px 10px 20px;
     width: 90%;
     height: fit-content;
     background-color: #fbf8f5;
 
+    @include breakpoint.tablet {
+      padding: 20px 20px 20px;
+    }
+
     @include breakpoint.desktop {
-      padding: 20px;
+      padding: 20px 20px 40px;
     }
     .accept_container {
       text-align: center;
-      margin-top: 60px;
       margin-bottom: 16px;
       input[type="checkbox"] {
-        // width: 25px;
-        // height: 25px;
-        // background-color: #c4c4c4;
         display: none;
+        // 改勾選單
 
         &:checked + span {
-          background: #c4c4c4;
+          // background: #c4c4c4;
+          background: color.$brown_300;
+          transition: all 0.2s ease-in-out;
         }
       }
       .fake_button {
         display: inline-block;
         width: 25px;
         height: 25px;
-        border: 1px solid;
+        background: color.$gray_100;
+        border-radius: 2px;
       }
 
       span {
         vertical-align: bottom;
         margin-left: 5px;
+        @extend %form_content;
       }
-    }
-    li {
-      text-align: start;
     }
 
-    h4 {
-      font-size: 30px;
-      font-weight: 900;
-      margin-bottom: 16px;
-      @include breakpoint.desktop {
-        font-size: 50px;
-        margin-bottom: 30px;
+    ol {
+      @extend %form_content;
+      margin-bottom: 24px;
+    }
+
+    li {
+      display: flex;
+      text-align: start;
+      counter-increment: accept;
+
+      & + li {
+        margin-top: 12px;
+
+        @include breakpoint.desktop {
+          margin-top: 16px;
+        }
+      }
+
+      &::before {
+        content: counter(accept) ". ";
+        list-style-type: none;
+        align-self: flex-start;
+        flex-shrink: 0;
+        padding-top: 5px;
+        width: 26px;
+        font-size: 16px;
+        font-weight: 600;
       }
     }
-    form {
+
+    h3 {
+      @extend %title_h3;
+    }
+
+    ::v-deep form {
       display: flex;
       flex-wrap: wrap;
       background-color: #fbf8f5;
-      margin-bottom: 60px;
+      color: color.$gray_700;
+      margin-bottom: 20px;
       padding: 0 16px;
 
-      h5 {
+      h4 {
         flex: 100%;
         font-size: 20px;
-        margin: 15px 0;
+        margin-bottom: 18px;
+        @include breakpoint.tablet {
+          font-size: 24px;
+        }
         @include breakpoint.desktop {
-          font-size: 25px;
+          font-size: 28px;
         }
       }
-      .space,
+      .spaceSize,
       .birth,
       .email {
-        margin-left: 20px;
+        @include breakpoint.tablet {
+          margin-left: 20px;
+        }
       }
       label {
-        flex: 1 1 45%;
+        // flex: 1 1 100%;
+        flex-grow: 1;
         text-align: start;
+        justify-content: flex-start;
+
+        @include breakpoint.tablet {
+          flex: 1 1 45%;
+        }
 
         input {
           display: block;
+          padding-left: 10px;
+          margin: 5px 0 10px;
           width: 100%;
-          border: 2px solid #dec39e;
           height: 42px;
-          border-radius: 10px;
+          border: 2px solid #dec39e;
+          border-radius: 5px;
+        }
+
+        input[type="text"] {
+          font-size: 16px;
+        }
+
+        input::placeholder {
+          padding: 5px;
+          font-size: 16px;
+        }
+
+        input:focus {
+          box-shadow: 2px 2px color.$brown_500;
         }
       }
       .pet_number {
         flex: 1 1 100%;
         input {
-          width: 49%;
+          @include breakpoint.tablet {
+            width: 49%;
+          }
         }
       }
       .adress {
         flex: 1 1 100%;
         input {
-          width: 49%;
+          @include breakpoint.tablet {
+            width: 49%;
+          }
         }
       }
     }
   }
 }
 
-.notice_buttons {
+::v-deep .notice_buttons {
   button {
-    padding: 10px 20px;
-    border-radius: 5px;
-    color: white;
-    font-weight: 900;
-    font-size: 16px;
-    cursor: pointer;
+    @extend %button;
+
     + button {
-      margin-left: 10px;
-    }
-    @include breakpoint.desktop {
-      font-size: 25px;
-      padding: 20px 90px;
+      margin-left: 20px;
     }
   }
   .cancel_btn {
@@ -286,7 +419,7 @@ form {
   @include breakpoint.desktop {
     height: 40px;
     line-height: 40px;
-    margin-bottom: 36px;
+    margin-bottom: 20px;
   }
   span {
     display: inline-block;
@@ -302,7 +435,7 @@ form {
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: color.$brown_500;
+      background: color.$gray_300;
       position: absolute;
       left: -20px;
       top: calc(50% - 10px);
@@ -313,7 +446,7 @@ form {
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: color.$gray_300;
+      background: color.$brown_500;
       position: absolute;
       right: -20px;
       top: calc(50% - 10px);

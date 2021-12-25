@@ -23,9 +23,7 @@
         <li>
           定期幫牠進行狂犬病預防注射、驅蟲及健康檢查，受傷或罹病時，必請獸醫師給予醫療。
         </li>
-        <li>
-          妥善照顧牠，防止其無故侵害他人之生命，身體、自由、財產或安寧。
-        </li>
+        <li>妥善照顧牠，防止其無故侵害他人之生命，身體、自由、財產或安寧。</li>
         <li>
           不再隨便放縱牠於戶外，牠出入公共場所或公眾出入之場所時，必由7歲以上之人伴同，並採取適當之防衛措施，如繫犬鍊、帶口罩等，始得攜出戶外。
         </li>
@@ -46,115 +44,112 @@
           本認養申請資料送出後，不代表已完成所選動物之認養，亦不代表您已具認養本動物的第一優先權，認養以收容所現場完成程序為準。
         </li>
       </ol>
-      <form>
-        <h4>申請資料</h4>
-        <label>
-          飼養地點:
-          <input
-            type="text"
-            v-model="place"
-            placeholder="請輸入地址及型態(公寓、透天)"
-          />
-        </label>
-        <label class="space">
-          空間大小:
-          <input type="text" v-model="space"
-          placeholder="請輸入坪數" />
-        </label>
-        <label class="pet_number">
-          現有動物隻數:
-          <input type="text" v-model="petCount"
-          placeholder="請輸入動物種類及數量"
-          />
-        </label>
-        <label>
-          認養人名稱:
-          <input type="text" v-model="adopterName" />
-        </label>
-        <label class="birth">
-          認養人出生日期:
-          <input type="text" v-model="adoptorBirth" />
-        </label>
-        <label>
-          認養人聯絡電話:
-          <input type="text" v-model="adoptorContact" />
-        </label>
-        <label class="email">
-          電子信箱:
-          <input type="text" v-model="adoptorEmail" />
-        </label>
-        <label class="adress">
-          通訊地址:
-          <input type="text" v-model="adoptorAddress" />
-        </label>
-      </form>
-      <div class="notice_buttons">
-        <button class="cancel_btn" type="cancel" @click="cancelEdit">
-          取消
-        </button>
-        <button class="submit_btn" @click="submitApplyForm">申請</button>
-      </div>
+      <ValidationForm
+        :schema="formSchema"
+        @applyData="receiveApplyData"
+        @closeForm="closeForm"
+      />
     </div>
   </section>
 </template>
 
 <script>
+import * as Yup from "yup";
+import ValidationForm from "@/components/validationForm.vue";
+
 export default {
+  components: { ValidationForm },
   data() {
+    const formSchema = {
+      fields: [
+        {
+          label: "飼養地點",
+          name: "place",
+          as: "input",
+          type: "text",
+          maxlength: "10",
+          rules: Yup.string().required("required"),
+        },
+        {
+          label: "空間大小",
+          name: "spaceSize",
+          as: "input",
+          type: "number",
+          maxlength: "10",
+          rules: Yup.number().required("required"),
+        },
+        {
+          label: "現有動物隻數",
+          name: "petsCount",
+          as: "input",
+          type: "number",
+          maxlength: "4",
+          rules: Yup.number().positive().integer().required("required"),
+        },
+        {
+          label: "認養人名稱",
+          name: "applierName",
+          as: "input",
+          type: "text",
+          maxlength: "10",
+          rules: Yup.string()
+            .matches(/(hi|bye)/, { message: "請勿輸入標點符號" })
+            .typeError("age must be a number")
+            .required("required"),
+        },
+        {
+          label: "認養人出生日期",
+          name: "birth",
+          as: "input",
+          type: "date",
+          rules: Yup.date().required("required"),
+        },
+        {
+          label: "認養人聯絡電話",
+          name: "contact",
+          as: "input",
+          type: "tel",
+          pattern: "[0-9]{2}-[0-9]{3}-[0-9]{3}-[0-9]{2}",
+          minlength: "9",
+          maxlength: "15",
+          rules: Yup.number().required("required"),
+        },
+        {
+          label: "電子信箱",
+          name: "email",
+          as: "input",
+          type: "email",
+          maxlength: "20",
+          rules: Yup.string().email().required("required"),
+        },
+        {
+          label: "通訊地址",
+          name: "address",
+          as: "input",
+          type: "text",
+          maxlength: "30",
+          rules: Yup.string().required("required"),
+        },
+      ],
+    };
     return {
-      place: "",
-      space: "",
-      petCount: null,
-      adopterName: "",
-      adoptorBirth: "",
-      adoptorContact: "",
-      adoptorEmail: "",
-      adoptorAddress: "",
+      formSchema,
+      ifAgree: false,
     };
   },
   methods: {
-    cancelEdit() {
-      this.$emit("cancelEdit", "AdoptionApply");
+    closeForm(data) {
+      this.$emit("cancelEdit", data);
     },
-    submitApplyForm() {
-      const applyFormContent = {
-        place: this.place,
-        space: this.space,
-        petCount: this.petCount,
-        adoptorName: this.adoptorName,
-        adoptorBirth: this.adoptorBirth,
-        adoptorEmail: this.adoptorEmail,
-        adoptorAddress: this.adoptorAddress,
-      };
-      this.validateData(applyFormContent);
-      this.$emit("submitApplyForm", applyFormContent);
-    },
-    validateData() {
-      console.log("驗證");
+    receiveApplyData(formAnswer) {
+      console.log(formAnswer);
+      this.closeForm();
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-// 新增button共用樣式
-%button {
-  padding: 10px 20px;
-  border-radius: 10px;
-  color: white;
-  background: color.$brown_300;
-  font-size: 18px;
-  font-weight: 500;
-  
-  &:hover {
-    box-shadow: inset 2px -2px 4px color.$brown_500;
-    }
-
-  @include breakpoint.desktop {
-    padding: 15px 30px;
-    font-size: 22px;
-  }
-}
 %title_h3 {
   margin-bottom: 16px;
   font-size: 24px;
@@ -174,7 +169,7 @@ export default {
   font-size: 16px;
   font-weight: 500;
 
-  @include breakpoint.desktop{
+  @include breakpoint.desktop {
     font-size: 18px;
   }
 }
@@ -196,7 +191,7 @@ export default {
   height: 100%;
   min-height: fit-content;
 
-  @include breakpoint.tablet{
+  @include breakpoint.tablet {
     height: 100%;
   }
 
@@ -214,7 +209,7 @@ export default {
     height: fit-content;
     background-color: #fbf8f5;
 
-    @include breakpoint.tablet{
+    @include breakpoint.tablet {
       padding: 20px 20px 20px;
     }
 
@@ -226,12 +221,12 @@ export default {
       margin-bottom: 16px;
       input[type="checkbox"] {
         display: none;
-// 改勾選單
+        // 改勾選單
 
         &:checked + span {
           // background: #c4c4c4;
           background: color.$brown_300;
-          transition: all 0.2s ease-in-out
+          transition: all 0.2s ease-in-out;
         }
       }
       .fake_button {
@@ -249,7 +244,7 @@ export default {
       }
     }
 
-    ol{
+    ol {
       @extend %form_content;
       margin-bottom: 24px;
     }
@@ -259,15 +254,15 @@ export default {
       text-align: start;
       counter-increment: accept;
 
-      &+ li{
+      & + li {
         margin-top: 12px;
 
-        @include breakpoint.desktop{
+        @include breakpoint.desktop {
           margin-top: 16px;
         }
       }
 
-      &::before{
+      &::before {
         content: counter(accept) ". ";
         list-style-type: none;
         align-self: flex-start;
@@ -281,105 +276,6 @@ export default {
 
     h3 {
       @extend %title_h3;
-    }
-
-    form {
-      display: flex;
-      flex-wrap: wrap;
-      background-color: #fbf8f5;
-      color: color.$gray_700;
-      margin-bottom: 20px;
-      padding: 0 16px;
-
-      h4 {
-        flex: 100%;
-        font-size: 20px;
-        margin-bottom: 18px;
-        @include breakpoint.tablet{
-          font-size: 24px;
-        }
-        @include breakpoint.desktop {
-          font-size: 28px;
-        }
-      }
-      .space,
-      .birth,
-      .email {
-        @include breakpoint.tablet{
-          margin-left: 20px;
-        }
-      }
-      label {
-        // flex: 1 1 100%;
-        flex-grow: 1;
-        text-align: start;
-        justify-content: flex-start;
-
-        @include breakpoint.tablet{
-          flex: 1 1 45%;
-        }
-
-        input {
-          display: block;
-          padding-left: 10px;
-          margin: 5px 0 10px;
-          width: 100%;
-          height: 42px;
-          border: 2px solid #dec39e;
-          border-radius: 5px;
-        }
-
-        input[type='text']{
-          font-size: 16px;
-        }
-
-        input::placeholder{
-          padding: 5px;
-          font-size: 16px;
-        }
-
-        input:focus{
-          box-shadow: 2px 2px color.$brown_500;
-        }
-      }
-      .pet_number {
-        flex: 1 1 100%;
-        input {
-          @include breakpoint.tablet{
-            width: 49%;
-          }
-        }
-      }
-      .adress {
-        flex: 1 1 100%;
-        input {
-          @include breakpoint.tablet{
-            width: 49%;
-          }
-        }
-      }
-    }
-  }
-}
-
-.notice_buttons {
-  button {
-    @extend %button;
-
-    + button {
-      margin-left: 20px;
-    }
-  }
-  .cancel_btn {
-    background: color.$gray_100;
-    &:hover {
-      box-shadow: inset 2px -2px 4px color.$gray_300;
-    }
-  }
-  .submit_btn {
-    background: color.$brown_300;
-    &:hover {
-      box-shadow: inset 2px -2px 4px color.$brown_500;
     }
   }
 }

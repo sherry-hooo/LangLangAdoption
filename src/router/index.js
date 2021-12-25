@@ -45,7 +45,7 @@ const routes = [
     name: "testForm",
     props: true,
     component: () =>
-      import(/* webpackChunkName: "about" */ "../components/testForm.vue"),
+      import(/* webpackChunkName: "about" */ "../components/AdoptionApply.vue"),
   },
 ];
 
