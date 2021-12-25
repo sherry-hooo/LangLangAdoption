@@ -29,7 +29,28 @@
       </div>
     </section>
 
-    <section class="gallery"></section>
+    <section class="gallery">
+      <div class="parallax_group">
+        <div class="parallax_layer scroll_three">
+          <img src="@/assets/img/dog1.jpg">
+        </div>
+        <div class="parallax_layer scroll_lowest">
+          <p>希望能夠有一個家， <br/>
+            一個會好好愛我的主人</p>
+          <img src="@/assets/img/cat1.jpg">
+        </div>
+        <div class="parallax_layer scroll_four">
+          <img src="@/assets/img/cat2.jpg">
+        </div>
+        <div class="parallax_layer scroll_one">
+          <p>你能夠帶我回家嗎？</p>
+          <img src="@/assets/img/dog2.jpg">
+        </div>
+        <div class="parallax_layer scroll_two">
+          <img src="@/assets/img/dog3.jpg">
+        </div>
+      </div>
+    </section>
 
     <section class="volunteer_ad">
       <h2>志工招募</h2>
@@ -475,6 +496,98 @@ main {
   button {
     @extend %button;
     margin-top: 30px;
+  }
+}
+
+// 桌機板使用滾動視差
+@include breakpoint.desktop{
+.gallery{
+  perspective: 10px;
+  // height: 100vh;
+  height: 1200px;  
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  .parallax_group{
+    transform-style: preserve-3d;
+    position: relative;
+    height: 100%;
+  }
+  .parallax_layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    padding: 30px 30px;
+    background: transparent;
+  }
+  .scroll_one {
+    transform: translateZ(5px) scale(0.5);
+    p{
+      position: absolute;
+      color: color.$gray_500;
+    }
+    img {
+      width: 500px;
+      position: absolute;
+      bottom: 0;
+      // bottom: 5%;
+      // left: 100px;
+    }
+  }
+  .scroll_two {
+    transform: translateZ(0) scale(1);
+    img {
+      width: 480px;
+      position: absolute;
+      bottom: 0;
+      // bottom: 8%;
+      // right: 70px;
+    }
+  }
+  .scroll_three {
+    transform: translateZ(-5px) scale(1.5);
+    img {
+      width: 370px;
+      position: absolute;
+      bottom: 0;
+      left: 20%;
+      // top: 100%;
+      // left: 520px;
+    }
+  }
+  .scroll_four {
+    transform: translateZ(-20px) scale(3);
+    img {
+      width: 400px;
+      position: absolute;
+      bottom: 0;
+      // top: 15%;
+      // right: 100px;
+    }
+  }
+  .scroll_lowest {
+    transform: translateZ(-30px) scale(4);
+    p{
+      position: absolute;
+      
+      // bottom: 200px;
+      // left: 45%;
+      // top: 40%;
+      font-size: 5px;
+      color: color.$gray_500;
+    }
+    img {
+      width: 460px;
+      position: absolute;
+      top: 15%;
+      // left: 32%;
+      transform: translateY(-50%);
+    }
+  }
   }
 }
 </style>
