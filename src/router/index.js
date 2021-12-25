@@ -41,11 +41,11 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/Description.vue"),
   },
   {
-    path: "/test",
-    name: "testForm",
+    path: "/custom",
+    name: "Custom",
     props: true,
     component: () =>
-      import(/* webpackChunkName: "about" */ "../components/AdoptionApply.vue"),
+      import(/* webpackChunkName: "about" */ "../components/Custom.vue"),
   },
 ];
 

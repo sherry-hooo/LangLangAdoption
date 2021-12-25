@@ -1,50 +1,5 @@
 <template>
   <section class="wrapper">
-    <form>
-      <div class="col">
-        <label>
-          <p class="form_subtitle">姓名</p>
-          <input
-            class="form_text"
-            type="text"
-            v-model="userData.name"
-            maxlength="10"
-          />
-        </label>
-        <label>
-          <p class="form_subtitle">聯絡電話</p>
-          <input class="form_text" type="text" v-model="userData.phone" />
-        </label>
-      </div>
-      <div class="col">
-        <label>
-          <p class="form_subtitle">電子信箱</p>
-          <input class="form_text" type="text" v-model="userData.email" />
-        </label>
-        <label>
-          <p class="form_subtitle">通訊地址</p>
-          <input class="form_text" type="text" v-model="userData.adress" />
-        </label>
-      </div>
-      <div class="col">
-        <label class="full_width">
-          <p class="form_subtitle">為什麼您想要來當志工呢？</p>
-          <textarea
-            class="form_textArea"
-            cols="30"
-            rows="10"
-            v-model="userData.joinReason"
-          ></textarea>
-        </label>
-      </div>
-      <p class="notice_message">
-        單位收到資料後，三日內會有專人與您聯絡，感謝您的參與。
-      </p>
-      <div class="button_groups">
-        <button class="cancel_btn" @click="formAction('cancel')">取消</button>
-        <button class="submit_btn" @click="formAction('submit')">送出</button>
-      </div>
-    </form>
     <Form @submit="onSubmit">
       <h3 class="form_title">志工報名</h3>
       <div class="col">
@@ -138,6 +93,7 @@
           } in formSchema.fields3"
           :key="name"
           :class="name"
+          class="full_width"
         >
           <p class="form_subtitle">
             {{ label }} <ErrorMessage :name="name" class="validity" />
@@ -149,7 +105,6 @@
             v-bind="attrs"
             :type="type"
             :rules="rules"
-            class="form_text"
           >
             <template v-if="children && children.length">
               <component
@@ -168,8 +123,13 @@
         單位收到資料後，三日內會有專人與您聯絡，感謝您的參與。
       </p>
       <div class="button_groups">
-        <button class="cancel_btn" @click="formAction('cancel')">取消</button>
-        <button class="submit_btn" @click="formAction('submit')">送出</button>
+        <input
+          class="cancel_btn"
+          type="reset"
+          @click="formAction('cancel')"
+          value="取消"
+        />
+        <input class="submit_btn" type="submit" value="送出" />
       </div>
     </Form>
   </section>
@@ -226,7 +186,6 @@ export default {
           label: "為什麼您想要來當志工呢？",
           name: "reason",
           as: "textarea",
-          type: "text",
           cols: "30",
           rows: "10",
           rules: Yup.string().required("required"),
@@ -246,10 +205,10 @@ export default {
   },
   methods: {
     formAction(status) {
-      if (status === "submit") {
-        this.$emit("applyFormAction", status);
-        this.getUserData();
-      }
+      // if (status === "submit") {
+      //   this.$emit("applyFormAction", status);
+      //   this.getUserData();
+      // }
       this.$emit("applyFormAction", status);
     },
     getUserData() {
@@ -347,7 +306,7 @@ export default {
 }
 
 .wrapper {
-  flex-direction: column;
+  // flex-direction: column;
   @extend %form_wrapper;
 }
 
@@ -370,9 +329,9 @@ form {
     margin: 16px 0 30px;
   }
   .button_groups {
-    button {
+    input {
       @extend %button;
-      & + button {
+      & + input {
         margin-left: 20px;
       }
     }
@@ -405,12 +364,16 @@ form {
     .form_subtitle {
       @extend %form_content;
       text-align: left;
+      span {
+        margin-left: 10px;
+        color: #8b0000;
+      }
     }
     .form_text {
       @include input_style;
     }
 
-    .form_textArea {
+    textarea {
       resize: none;
       width: 100%;
       margin: 5px 0 10px;
@@ -439,99 +402,4 @@ form {
     }
   }
 }
-
-////////
-// form {
-//   display: flex;
-//   flex-direction: column;
-//   width: 90%;
-//   height: fit-content;
-//   padding: 20px 10px 20px;
-//   background: color.$brown_100;
-//   color: color.$gray_700;
-
-//   @include breakpoint.tablet {
-//     flex-direction: row;
-//     flex-wrap: wrap;
-//     justify-content: space-between;
-//   }
-
-//   .form_title {
-//     @extend %title_h3;
-//   }
-//   @include breakpoint.tablet {
-//     padding: 20px 20px 20px;
-//   }
-//   @include breakpoint.desktop {
-//     padding: 40px 40px 40px;
-//   }
-//   .notice_message {
-//     flex: 0 1 100%;
-//     margin: 16px 0 30px;
-//   }
-//   .button_groups {
-//     flex: 0 1 100%;
-//     button {
-//       @extend %button;
-//       & + button {
-//         margin-left: 20px;
-//       }
-//     }
-//     .cancel_btn {
-//       background: color.$gray_300;
-//     }
-//   }
-// }
-// label {
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-
-//   @include breakpoint.tablet {
-//     justify-content: space-between;
-//     & + label {
-//       margin: 0 0 0 16px;
-//     }
-//   }
-//   @include breakpoint.desktop {
-//     & + label {
-//       margin: 0 0 0 30px;
-//     }
-//   }
-
-//   & + label {
-//     margin-top: 16px;
-//   }
-
-//   .form_subtitle {
-//     @extend %form_content;
-//     text-align: left;
-//   }
-//   .form_text {
-//     @include input_style;
-//   }
-
-//   textArea {
-//     resize: none;
-//     width: 100%;
-//     margin: 5px 0 10px;
-//     padding: 10px;
-//     border: 2px solid color.$brown_300;
-//     border-radius: 5px;
-//     font-size: 16px;
-//     &:focus {
-//       box-shadow: 2px 2px color.$brown_500;
-//     }
-//   }
-// }
-
-// .volunteerName,
-// .contact,
-// .email,
-// .address {
-//   width: 100%;
-//   @include breakpoint.tablet {
-//     width: 45%;
-//   }
-// }
 </style>
