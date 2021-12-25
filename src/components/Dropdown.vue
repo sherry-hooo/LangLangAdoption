@@ -1,7 +1,7 @@
 <template>
   <div class="dropdown_container">
     <div class="categroy_container">
-      <h3 class="serach_title">動物品種</h3>
+      <h3 class="search_title">動物品種</h3>
       <div class="dropdown">
         <div class="dropdown_items dropdown_click" @click="showMenu">
           <div>{{ animalKind === "" ? "請選擇" : animalKind }}</div>
@@ -15,7 +15,7 @@
       </div>
     </div>
     <section class="shelter_container">
-      <h3 class="serach_title">收容所</h3>
+      <h3 class="search_title">收容所</h3>
       <div class="shelter">
         <div class="shelter_items shelter_click" @click="openShelterMenu">
           <div>{{ shelterPlace === "" ? "請選擇" : shelterPlace }}</div>
@@ -32,6 +32,7 @@
       </div>
       <div></div>
     </section>
+    <button class="sumbit_button">搜尋</button>
   </div>
 </template>
 <script>
@@ -76,7 +77,7 @@ export default {
   }
   @include breakpoint.desktop {
     flex-direction: row;
-    margin-left: 40px;
+    // margin-left: 40px;
   }
 }
 %dropdown_cotainer {
@@ -84,16 +85,30 @@ export default {
   border: 2px solid #dec39e;
   position: relative;
   @include breakpoint.tablet {
-    margin-left: 25px;
+    margin-left: 15px;
   }
   @include breakpoint.desktop {
-    margin-left: 25px;
+    margin-left: 15px;
   }
   .show_dropdown {
     display: block;
   }
 }
+
+// 統一dropdown元件內的字體大小
+%dropdown_font{
+  font-size: 16px;
+  font-weight: 500;
+  @include breakpoint.tablet{
+    font-size: 18px;
+  }
+  @include breakpoint.desktop{
+    font-size: 24px;
+  }
+}
+
 %dropdown_items {
+  @extend %dropdown_font;
   width: 100px;
   background-color: white;
   @include breakpoint.tablet {
@@ -107,6 +122,7 @@ export default {
     background-color: #dec39e;
   }
 }
+
 %dropdown_menu {
   display: none;
 
@@ -131,26 +147,50 @@ export default {
 }
 
 %dropdown_title {
-  display: inline-block;
-  font-size: 15px;
-  @include breakpoint.tablet {
-  }
-  @include breakpoint.desktop {
-    font-size: 30px;
+  @extend %dropdown_font;
+  
+  margin-bottom: 5px;
+
+  @include breakpoint.tablet{
+    margin-bottom: 0;
   }
 }
 
 .dropdown_container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between; //平板以下統一左右切齊navbar，所以改成space-between
+  align-items: center;
+  margin-bottom: 10px;
 
-  @include breakpoint.tablet {
-    justify-content: space-around;
+  @include breakpoint.tablet{
+    margin-bottom: 28px;
   }
 
-  .serach_title {
+  @include breakpoint.desktop{
+    margin-bottom: 32px;
+  }
+
+  @include breakpoint.bgScreen {
+    justify-content: space-evenly; //桌機視窗比較寬，所以改成space-around
+  }
+
+  .search_title {
     @extend %dropdown_title;
   }
+  .sumbit_button {
+    @extend %dropdown_font;
+    padding: 5px 10px;
+    align-self: flex-end;
+    height: max-content;
+    border-radius: 0;
+    color: white;
+    background: color.$brown_300;
+
+    @include breakpoint.desktop{
+      align-self: center
+    }
+  }
+
   .categroy_container {
     @extend %container;
     .dropdown {
@@ -184,6 +224,7 @@ export default {
   }
   .shelter_container {
     @extend %container;
+
     .shelter {
       @extend %dropdown_cotainer;
 

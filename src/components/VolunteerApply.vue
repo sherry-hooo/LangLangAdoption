@@ -73,63 +73,122 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  width: 100vw;
-  height: 100%;
-  min-height: 100vh;
-  padding: 5% 0;
+%button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+  background: color.$brown_300;
+  font-size: 18px;
+  font-weight: 500;
+  
+  &:hover {
+    box-shadow: inset 2px -2px 4px color.$brown_500;
+    }
+
+  @include breakpoint.desktop {
+    padding: 15px 30px;
+    font-size: 22px;
+  }
+}
+
+%title_h3 {
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weight: 500;
+  color: color.$gray_700;
+  @include breakpoint.tablet {
+    font-size: 30px;
+  }
+  @include breakpoint.desktop {
+    margin-bottom: 24px;
+    font-size: 36px;
+  }
+}
+
+%form_content {
+  color: color.$gray_700;
+  font-size: 16px;
+  font-weight: 500;
+
+  @include breakpoint.desktop{
+    font-size: 18px;
+  }
+}
+
+%form_wrapper{
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
   z-index: 999;
-  background: rgba(190, 188, 188, 0.6);
-  backdrop-filter: blur(1px);
   display: flex;
   justify-content: center;
-  @include breakpoint.desktop {
-    padding: 110px 0;
+  width: 100vw;
+  height: 100%;
+  min-height: 100vh;
+  padding: 20px 0 20px;
+  background: rgba(190, 188, 188, 0.6);
+  backdrop-filter: blur(1px);
+
+@include breakpoint.desktop {
+    padding: 20px 0 40px;
   }
+}
+
+@mixin input_style{
+  display: block;
+  padding-left: 10px;
+  margin: 5px 0 10px;
+  width: 100%;
+  height: 42px;
+  border: 2px solid #dec39e;
+  border-radius: 5px;
+  
+  &[type='text']{
+    font-size: 16px;
+    }
+
+  &::placeholder{
+    padding: 5px;
+    font-size: 16px;
+    }
+
+  &:focus{
+    box-shadow: 2px 2px color.$brown_500;
+    }
+}
+
+.wrapper {
+  @extend %form_wrapper;
 }
 
 form {
   width: 90%;
   height: fit-content;
-  padding: 30px 10px;
+  padding: 20px 10px 20px;
   background: color.$brown_100;
   color: color.$gray_700;
   .form_title {
-    font-size: 30px;
-    margin-bottom: 30px;
+    @extend %title_h3;
   }
-  @include breakpoint.desktop {
-    padding: 60px 16px;
-    .form_title {
-      font-size: 50px;
-    }
+  @include breakpoint.tablet {
+    padding: 20px 20px 20px;
+  }
+  @include breakpoint.desktop{
+    padding: 40px 40px 40px;
   }
   .notice_message {
-    margin: 36px 0 60px;
+    margin: 16px 0 30px;
   }
   .button_groups {
     button {
-      padding: 10px 30px;
-      border-radius: 10px;
-      color: white;
-      font-size: 25px;
-      font-weight: 900;
+      @extend %button;
       & + button {
-        margin-left: 36px;
-      }
-
-      @include breakpoint.desktop {
-        padding: 26px 90px;
+        margin-left: 20px;
       }
     }
     .cancel_btn {
       background: color.$gray_300;
-    }
-    .submit_btn {
-      background: color.$brown_300;
     }
   }
 }
@@ -155,22 +214,26 @@ form {
       margin-top: 16px;
     }
     .form_subtitle {
-      font-weight: 900;
-      font-size: 16px;
+      @extend %form_content;
       text-align: left;
     }
     .form_text {
-      display: block;
-      width: 100%;
-      height: 32px;
-      border: 1px solid color.$brown_300;
+      @include input_style;
     }
+
     .form_textArea {
       resize: none;
       width: 100%;
-      margin-top: 16px;
-      border: 1px solid color.$brown_300;
+      margin: 5px 0 10px;
+      padding: 10px;
+      border: 2px solid color.$brown_300;
+      border-radius: 5px;
+      font-size: 16px;
+      &:focus{
+        box-shadow: 2px 2px color.$brown_500;
+        }
     }
+      
     @include breakpoint.tablet {
       width: 50%;
       flex-direction: row;
@@ -178,11 +241,11 @@ form {
       & + label {
         margin: 0 0 0 16px;
       }
-      .form_text {
-        height: 52px;
-      }
-      .form_subtitle {
-        font-size: 20px;
+    }
+
+    @include breakpoint.desktop{
+      & + label {
+        margin: 0 0 0 30px;
       }
     }
   }
