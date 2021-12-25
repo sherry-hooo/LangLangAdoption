@@ -59,11 +59,11 @@ export default {
 
       this.getShelterAPI(this.selectedAnimanlKind, shelterPkid);
     },
-    // receiveSelection(data) {
-    //   this.selectedAnimanlKind = data.animalKind;
-    //   this.selectedShelter = data.shelterPlace;
-    //   this.getShelterAPI(data.animalKind, data.shelterPlace);
-    // },
+    receiveSelection(data) {
+      this.selectedAnimanlKind = data.animalKind;
+      this.selectedShelter = data.shelterPlace;
+      this.getShelterAPI(data.animalKind, data.shelterPlace);
+    },
     receiveCurrentPage(page) {
       this.currentPage = page;
       this.scrollToTop();
@@ -77,7 +77,6 @@ export default {
   },
   computed: {
     petData() {
-      console.log(this.startIndex, this.endIndex);
       return this.petsDataInArray.slice(this.startIndex, this.endIndex);
     },
     startIndex() {
@@ -90,12 +89,26 @@ export default {
       return parseInt(this.petsDataInArray.length / this.cardAmount);
     },
     filteredShelter() {
-      return this.petsDataInArray[0];
+      let getShelterData = this.petsDataInArray.map((data) => ({
+        shelter_name: data.shelter_name,
+        animal_shelter_pkid: data.animal_shelter_pkid,
+      }));
+
+      let sortedShelter = getShelterData.sort((front, back) => {
+        return front.animal_shelter_pkid - back.animal_shelter_pkid;
+      });
+      return sortedShelter.reduce((accumulator, current) => {
+        if (
+          accumulator.length === 0 ||
+          accumulator[accumulator.length - 1].animal_shelter_pkid !==
+            current.animal_shelter_pkid
+        ) {
+          accumulator.push(current);
+        }
+        return accumulator;
+      }, []);
     },
   },
-  // created() {
-  //   this.getAPI();
-  // },
 };
 </script>
 

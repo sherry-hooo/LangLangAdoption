@@ -22,11 +22,13 @@
           <i class="fas fa-caret-down shelter_click_icon"></i>
         </div>
         <ul :class="{ show_dropdown: showShelterList }">
-          <li class="shelter_items" @click="clickShelterMenu(49)">
-            臺北市動物之家
-          </li>
-          <li class="shelter_items" @click="clickShelterMenu('高雄收容所')">
-            高雄收容所
+          <li
+            v-for="shelter in filteredShelter"
+            :key="shelter.animal_shelter_pkid"
+            class="shelter_items"
+            @click="clickShelterMenu(shelter)"
+          >
+            {{ shelter.shelter_name }}
           </li>
         </ul>
       </div>
@@ -59,16 +61,16 @@ export default {
       this.$emit("selectedAnimalKind", animal);
     },
     clickShelterMenu(place) {
-      this.shelterPlace = place;
+      this.shelterPlace = place.shelter_name;
       this.showShelterList = false;
-      this.$emit("selectedShelter", place);
+      this.$emit("selectedShelter", place.animal_shelter_pkid);
     },
-    // emitSelection() {
-    //   this.$emit("selection", {
-    //     animalKind: this.animalKind,
-    //     shelterPlace: this.shelterPlace,
-    //   });
-    // },
+    emitSelection() {
+      this.$emit("selection", {
+        animalKind: this.animalKind,
+        shelterPlace: this.shelterPlace,
+      });
+    },
   },
 };
 </script>
