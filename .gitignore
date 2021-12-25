@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 /dist
+.test11
+.testForm
 
 
 # local env files
