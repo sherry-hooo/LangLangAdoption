@@ -1,8 +1,11 @@
 <template>
   <main>
-    <h2>領養前的那些事</h2>
-    <!-- <div class="container"> -->
-      <div class="FAQ">
+    <div class="custom">
+      <h2>
+        領養前的那些事
+        <img class="track1" src="@/assets/img/logo.svg">
+        </h2>
+      <div class="FAQ_group1">
         <div class="question wrap_why">
           <div class="trigger">
             <span>Why</span>
@@ -13,7 +16,6 @@
             為什麼想要毛孩加入原本的生活？
           </div>
         </div>
-
         <div class="question wrap_who">
           <div class="trigger">
             <span>Who</span>
@@ -24,7 +26,7 @@
             未來家庭組成改變怎麼辦？
           </div>
         </div>
-        
+      
         <div class="question wrap_when">
           <div class="trigger">
             <span>When</span>
@@ -34,7 +36,6 @@
             目前的時間真的足夠能照顧好牠嗎？
           </div>
         </div>
-
         <div class="question wrap_much">
           <div class="trigger">
             <span>How much</span>
@@ -44,7 +45,8 @@
             能付出的金錢、時間、耐心有多少？
           </div>
         </div>
-
+      </div>
+      <div class="FAQ_group2">
         <div class="question wrap_how">
           <div class="trigger">
             <span>How</span>
@@ -54,7 +56,6 @@
             毛孩的食、衣、住、行、育、樂該如何規劃？
           </div>
         </div>
-
         <div class="question wrap_where">
           <div class="trigger">
             <span>Where</span>
@@ -75,7 +76,8 @@
           </div>
         </div>
       </div>
-    <!-- </div> -->
+      <img class="track2" src="@/assets/img/logo.svg">
+    </div>
   </main>
 </template>
 
@@ -93,19 +95,23 @@
   }
 }
 
-main{
+.custom{
+  position: relative;
   margin-top: 60px;
   padding: 10px 20px;
   background: color.$brown_100;
+  // height: calc(100vh - 120px);
   min-height: 100vh;
 
   @include breakpoint.tablet{
+    // height: calc(100vh - 163px);
     margin-top: 103px;
   }
 
   h2{
     @extend %title_h2;
     color: color.$gray_700;
+    position: relative;
   }
 }
 
@@ -114,14 +120,23 @@ main{
   width: 100%;
 }
 
-.FAQ {
-  justify-content: center;
+.FAQ_group1 {
+  justify-content: space-between;
   display: flex;
   flex-wrap: wrap;
+  row-gap: 10px;
   margin-top: 20px;
-  height: 90%;
+  height: 45%;
 }
 
+.FAQ_group2 {
+  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  margin-top: 20px;
+  height: 45%;
+}
 
 .question{
 
@@ -150,12 +165,14 @@ main{
     justify-content: center;
   }
 
+  &.wrap_why{
+    flex-direction: column-reverse;
+  }
+
   &.wrap_much{
-    flex-basis: 100%;
-    padding: 20px 10px;
+    flex-basis: 85%;
 
     @include breakpoint.desktop{
-      padding: 25px;
     }
     
     &> div{
@@ -165,11 +182,18 @@ main{
   }
 
   &.wrap_when{
-    padding: 10px 10px;
-    flex-basis: 70%;
-    flex-direction: row;
+    flex-basis: 90%;
+    flex-direction: row-reverse;
     justify-content: center;
+  }
+
+  &.wrap_where{
+    flex-basis: 45%;
+    flex-direction: column-reverse;}
   
+  
+  &.wrap_what{
+    flex-basis: 65%;
   }
 }
 
@@ -189,7 +213,7 @@ main{
     font-weight: 600;
 
     @include breakpoint.tablet{
-      font-size: 26px;
+      font-size: 30px;
     }
 
     @include breakpoint.desktop{
@@ -207,6 +231,7 @@ main{
 .toggler{
   visibility: hidden;
   padding: 10px;
+  text-align: left;
   color: color.$gray_700;
 
   @include breakpoint.tablet{
@@ -225,10 +250,47 @@ main{
   visibility: visible;
   }
 
-@include breakpoint.desktop{
-  .trigger:hover .toggler{
-    // visibility: visible;
+
+// 腳印動畫
+
+.track1 {
+  width: 40px;
+  position: absolute; //相對於h2
+  bottom: 0;
+  left: 20%;
+  transform: rotate(45deg);
+  // animation: footprintR 2s steps(3, end) forwards;
+  // animation-delay: 0.5s;
+}
+
+.track2{
+  width: 40px;
+  position: absolute;
+  bottom: 40%;
+  right: 20px;
+  transform: rotate(-15deg);
+  // animation: footprintR 0.5s step(1, end) forwards;
+  // animation: footprintL 2s steps(2, end) forwards;
+}
+
+@keyframes footprintL {
+  to {
+    left: 15px;
+    transform: translateY(5px);
+    // transform: translateY(-20px) translateX(50px);
   }
 }
 
+@keyframes footprintR {
+  to {
+    right: 10px;
+    transform: translateY(5px);
+    // transform: translateY(-20px) translateX(50px);
+  }
+}
+
+@keyframes fadeIn{
+  from  { opacity: 0 };
+  to  { opacity: 1 }
+}
 </style>
