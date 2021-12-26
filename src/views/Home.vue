@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="banner">
+    <section class="banner">
       <div class="decoration_dot">
         <img src="@/assets/img/circles.svg" alt="" />
       </div>
@@ -9,7 +9,10 @@
       </div>
       <div class="banner_content_area">
         <div class="decoration_house">
-          <img src="@/assets/img/bigArrow.svg" alt="cute dog" />
+          <svg width="577" height="292" viewBox="0 0 577 292" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="path" d="M136 233V162.5H1.5L204 1L576 291" stroke="#DEC39E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <!-- <img src="@/assets/img/bigArrow.svg" alt="cute dog" /> -->
         </div>
         <div class="banner_caption">
           <h1>浪我陪你等家</h1>
@@ -24,20 +27,20 @@
           <img src="@/assets/img/buttonArrow.svg" alt="" />
         </button>
       </div>
-    </div>
+    </section>
 
-    <div class="gallery"></div>
+    <section class="gallery"></section>
 
-    <div class="volunteer_ad">
+    <section class="volunteer_ad">
       <h2>志工招募</h2>
       <p>我們需要你，成為我們最強的後盾</p>
       <div class="volunteer_entry">
         <div class="volunteer_image">
-          <img src="@/assets/img/volunteer4.jpg" alt="" />
+          <img src="@/assets/img/volunteer4.jpg">
         </div>
         <button>我有興趣</button>
       </div>
-    </div>
+    </section>
 
     <section class="topic">
       <div class="topic_img">
@@ -59,22 +62,65 @@
 </template>
 
 <style lang="scss" scoped>
+
+// section共用h2樣式
+%title_h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: color.$gray_700;
+  @include breakpoint.tablet {
+    font-size: 36px;
+  }
+  @include breakpoint.desktop {
+    font-size: 50px;
+  }
+}
+
+// section共用副標p樣式
+%content_p {
+  margin-top: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  @include breakpoint.tablet {
+    font-size: 20px;
+  }
+
+  @include breakpoint.desktop {
+    font-size: 30px;
+  }
+}
+
+// 通用button樣式，除了banner的滑動按鈕，其他都用此樣式
+%button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+  background: color.$brown_300;
+  font-size: 18px;
+  font-weight: 500;
+
+  @include breakpoint.desktop {
+    padding: 15px 30px;
+    font-size: 22px;
+  }
+}
+
 main {
-  padding-top: 60px; //扣除navbar高度
+  margin-top: 60px; //扣除navbar高度
 
   @include breakpoint.tablet {
-    padding-top: 103px;
+    margin-top: 103px; //扣除navbar高度
   }
 }
 
 .banner {
+  height: calc(100vh - 60px);
   position: relative;
   z-index: -2;
-  height: calc(100vh - 60px);
   overflow: hidden;
   background: color.$brown_100;
 
-  @include breakpoint.tablet {
+  @include breakpoint.tablet{
     height: calc(100vh - 103px);
   }
 
@@ -123,11 +169,18 @@ main {
     text-align: left;
 
     @include breakpoint.tablet {
+      padding: 20px 30px;
       width: 50%;
     }
 
     @include breakpoint.desktop {
-      padding: 30px 100px;
+      padding: 0 100px;
+    }
+
+    .decoration_house{
+      @include breakpoint.desktop{
+        transform: scaleY(0.8);
+      }
     }
   }
 
@@ -142,17 +195,21 @@ main {
     text-align: left;
 
     @include breakpoint.tablet {
-      top: 30%;
+      top: 35%;
       bottom: auto;
       width: fit-content;
       background: none;
+    }
+
+    @include breakpoint.desktop{
+      top: 30%;
     }
   }
 
   &_caption h1 {
     color: color.$gray_700;
     font-size: 40px;
-    font-weight: 500;
+    font-weight: 600;
 
     @include breakpoint.tablet {
       font-size: 54px;
@@ -164,11 +221,11 @@ main {
   }
 
   &_caption h2 {
-    margin-top: 10px;
+    margin-top: 5px;
 
     color: color.$brown_500;
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 24px;
+    font-weight: 600;
 
     @include breakpoint.tablet {
       font-size: 30px;
@@ -185,22 +242,76 @@ main {
     }
   }
   button {
-    // relative to content_area
+    background: color.$brown_300;
     position: absolute;
+    padding: 10px 20px;
     right: 0;
     bottom: 15%;
-
-    padding: 20px;
-    background: color.$brown_300;
-
     transform: scale(0.8);
 
     @include breakpoint.tablet {
       right: unset;
-      bottom: 0;
+      bottom: -2%;
       padding: 30px 55px;
     }
+
+    img {
+      animation-name: MoveUpDown;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+    }
   }
+}
+@keyframes MoveUpDown {
+  0% {
+    transform: translateY(0);
+  }
+
+  50%{
+    transform: translateY(10px);
+  }
+
+  100%{
+    transform: translateY(0);
+  }
+}
+// 畫房子的動畫
+@keyframes DrawHouse {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.decoration_house{
+  .path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: DrawHouse 2s linear alternate forwards;
+    }
+  }
+
+@keyframes FadeIn{
+  from { opacity: 0}
+  to { opacity: 1}
+}
+
+.banner_caption h1{
+  opacity: 0;
+  animation: FadeIn 2s linear forwards;}
+
+.banner_caption h2{
+  opacity: 0;
+  animation: FadeIn 1s linear forwards;
+  animation-delay: 1.5s;
+}
+
+.banner_caption p{
+  opacity: 0;
+  animation: FadeIn 1s linear forwards;
+  animation-delay: 2s;
 }
 
 .gallery {
@@ -209,35 +320,20 @@ main {
 }
 
 .volunteer_ad {
-  padding: 20px 0;
   background: color.$brown_100;
+  padding: 10px ;
 
   @include breakpoint.tablet {
     padding: 20px 0;
   }
 
   h2 {
-    font-size: 24px;
-    color: color.$brown_500;
-    @include breakpoint.tablet {
-      font-size: 30px;
-    }
-    @include breakpoint.desktop {
-      font-size: 50px;
-    }
+    @extend %title_h2;
   }
 
   p {
+    @extend %content_p;
     margin-top: 5px;
-    font-size: 16px;
-    font-weight: 600;
-    @include breakpoint.tablet {
-      font-size: 20px;
-    }
-
-    @include breakpoint.desktop {
-      font-size: 30px;
-    }
   }
 }
 
@@ -265,25 +361,14 @@ main {
 
   // button的樣式與位置
   button {
+    @extend %button;
     position: static;
-    padding: 10px 20px;
-    border-radius: 10px;
-    color: white;
-    background: color.$brown_300;
-    font-size: 18px;
-    font-weight: 600;
-    @include breakpoint.tablet {
-      padding: 15px 25px;
-      font-size: 20px;
-    }
 
     @include breakpoint.desktop {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      padding: 25px 65px;
-      font-size: 24px;
     }
   }
 }
@@ -304,121 +389,76 @@ main {
   }
 }
 
-// 你在Topic分支
-// 上面的東西不要改
-%title_h2 {
-  font-size: 24px;
-  color: color.$brown_500;
-  @include breakpoint.tablet {
-    font-size: 30px;
-  }
-  @include breakpoint.desktop {
-    font-size: 50px;
-  }
-}
-
-%content_p {
-  margin-top: 5px;
-  font-size: 16px;
-  font-weight: 600;
-  @include breakpoint.tablet {
-    font-size: 20px;
-  }
-
-  @include breakpoint.desktop {
-    font-size: 30px;
-  }
-}
-%button_toPagination {
-  padding: 10px 20px;
-  border-radius: 10px;
-  color: white;
-  background: color.$brown_300;
-  font-size: 18px;
-  font-weight: 600;
-
-  @include breakpoint.tablet {
-    padding: 15px 25px;
-    font-size: 20px;
-  }
-
-  @include breakpoint.desktop {
-    padding: 25px 65px;
-    font-size: 24px;
-  }
-}
-
-@mixin imgbox_fill {
-  width: 100%;
-  height: 100%;
-}
-
 .topic {
   display: flex;
   align-items: center;
-  position: relative;
   padding: 20px 0;
-  height: calc(100vh - 60px);
+  position: relative;
   background: color.$brown_100;
 
-  @include breakpoint.tablet {
-    height: calc(100vh - 103px);
+  @include breakpoint.tablet{
+    background: color.$brown_100;
   }
 
   &_img {
-    width: 50%;
+    width: 40%;
     height: 100%;
+
+    @include breakpoint.tablet{
+      width: 50%;
+      height: calc(100vh - 103px);
+    }
   }
 
   img {
-    @include imgbox_fill;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 
   .hollow_circle {
-    position: absolute;
-    right: 5%;
-    top: 5%;
-    width: 60px;
-
-    @include breakpoint.tablet {
-      right: 5%;
-      width: 90px;
-    }
-
-    @include breakpoint.desktop {
-      width: 120px;
-    }
-
-    @include breakpoint.bgScreen {
-      // width: 150px;
-    }
+    display: none;
   }
 
   .solid_circle {
-    position: absolute;
-    right: 20%;
-    top: 12%;
-    width: 20px;
-    height: 20px;
+    display: none;
+  }
 
-    @include breakpoint.tablet {
-      top: 18%;
-      right: 15%;
+  @include breakpoint.tablet {
+    .hollow_circle{
+      display: block;
+      position: absolute;
+      top: 10%;
+      right: 3%;
+      width: 90px;
+    }
+
+    .solid_circle{
+      display: block;
+      position: absolute;
+      top: 20%;
+      right: 13%;
       width: 30px;
       height: 30px;
     }
+  }
 
-    @include breakpoint.desktop {
+  @include breakpoint.desktop {
+    .hollow_circle{
+      width: 120px;
+    }
+
+    .solid_circle{
+      top: 22%;
+      right: 10%;
       width: 40px;
       height: 40px;
     }
-
-    @include breakpoint.bgScreen {
-      // width: 50px;
-      // height: 50px;
-    }
   }
+
+  @include breakpoint.bgScreen {
+  }
+
 }
 
 .topic_content_area {
@@ -433,7 +473,7 @@ main {
   }
 
   button {
-    @extend %button_toPagination;
+    @extend %button;
     margin-top: 30px;
   }
 }
