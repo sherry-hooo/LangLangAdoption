@@ -3,16 +3,37 @@
     <div class="description">
       <div class="des_container">
         <h2>浪浪資料</h2>
-        <div class="case">
+        <div class="line_box">
+          <div class="line2_box">
+            <img src="@/assets/img/Line2.svg" alt="" />
+          </div>
+          <div class="line3_box">
+            <img src="@/assets/img/Line3.svg" alt="" />
+          </div>
+        </div>
+        <div v-if="petData" class="case">
+          <div class="circle_box">
+            <img src="@/assets/img/circles.svg" alt="" />
+          </div>
           <div class="case_img_box">
             <div class="img_box">
-              <img :src="petData.album_file" alt="浪浪圖片" />
+              <img
+                v-if="petData.album_file"
+                :src="petData.album_file"
+                alt="浪浪圖片"
+              />
+              <img
+                v-else-if="petKind === '狗'"
+                src="@/assets/img/dog1.jpg"
+                alt="狗狗替代圖片"
+              />
+              <img v-else src="@/assets/img/cat1.jpg" alt="貓貓替代圖片" />
             </div>
             <div class="follow_box">
               <div class="follow">
                 <label class="heart_icon">
-                  <input type="checkbox" @click="setToTrack" />
-                  <i class="far fa-heart"></i>
+                  <input type="checkbox" @click="setTrack" />
+                  <i class="far fa-heart" :class="{ onTrack: tracking }"></i>
                 </label>
                 <span>{{ tracking ? "已追蹤" : "追蹤" }}</span>
               </div>
@@ -22,43 +43,46 @@
             </div>
           </div>
           <div class="case_des_box">
-            <div v-if="petData.animal_status" class="case_wrapper">
+            <div v-if="petData.animal_status" class="case_wrapper wrapper_2">
               <p class="case_title">狀態 &colon;</p>
               <p class="case_content">
                 {{ petData.animal_status === "OPEN" ? "待領養" : "已領養" }}
               </p>
             </div>
-            <div v-if="petData.animal_kind" class="case_wrapper">
+            <div v-if="petData.animal_kind" class="case_wrapper wrapper_2">
               <p class="case_title">類型 &colon;</p>
               <p class="case_content">{{ petData.animal_kind }}</p>
             </div>
-            <div v-if="petData.animal_colour" class="case_wrapper">
+            <div v-if="petData.animal_colour" class="case_wrapper wrapper_2">
               <p class="case_title">顏色 &colon;</p>
               <p class="case_content">{{ petData.animal_colour }}</p>
             </div>
-            <div v-if="petData.animal_sex" class="case_wrapper">
+            <div v-if="petData.animal_sex" class="case_wrapper wrapper_2">
               <p class="case_title">性別 &colon;</p>
-              <p class="case_content">{{ petData.animal_sex === "F" }}</p>
+              <p class="case_content">{{ petSex }}</p>
             </div>
-            <div v-if="petData.animal_bodytype" class="case_wrapper">
+            <div v-if="petData.animal_bodytype" class="case_wrapper wrapper_2">
               <p class="case_title">體型 &colon;</p>
-              <p class="case_content">{{ petData.animal_bodytype }}</p>
+              <p class="case_content">{{ petBodyType }}</p>
             </div>
-            <div v-if="petData.animal_place" class="case_wrapper">
+            <div
+              v-if="petData.animal_createtime"
+              class="case_wrapper wrapper_2"
+            >
+              <p class="case_title">入所日期 &colon;</p>
+              <p class="case_content">{{ petData.animal_createtime }}</p>
+            </div>
+            <div v-if="petData.animal_place" class="case_wrapper wrapper_1">
               <p class="case_title">收容地點 &colon;</p>
               <p class="case_content">{{ petData.animal_place }}</p>
             </div>
-            <div v-if="petData.shelter_address" class="case_wrapper">
+            <div v-if="petData.shelter_address" class="case_wrapper wrapper_1">
               <p class="case_title">收容地址 &colon;</p>
               <p class="case_content">{{ petData.shelter_address }}</p>
             </div>
-            <div v-if="petData.shelter_tel" class="case_wrapper">
+            <div v-if="petData.shelter_tel" class="case_wrapper wrapper_2">
               <p class="case_title">聯絡電話 &colon;</p>
               <p class="case_content">{{ petData.shelter_tel }}</p>
-            </div>
-            <div v-if="petData.animal_createtime" class="case_wrapper">
-              <p class="case_title">入所日期 &colon;</p>
-              <p class="case_content">{{ petData.animal_createtime }}</p>
             </div>
             <div v-if="petData.animal_remark" class="case_wrapper">
               <p class="case_title">備註 &colon;</p>
@@ -81,13 +105,11 @@
     <AdoptionNotice
       v-if="showAdoptionNotice"
       @goNextPage="goNextPage"
-      @submitNoticeForm="receiveNoticeForm"
-      @cancelEdit="cancelEdit"
+      @closeFormSignal="showAdoptionNotice = false"
     ></AdoptionNotice>
     <AdoptionApply
       v-if="showAdoptionApply"
-      @cancelEdit="cancelEdit"
-      @submitApplyForm="receiveApplForm"
+      @closeFormSignal="showAdoptionApply = false"
     ></AdoptionApply>
   </main>
 </template>
@@ -105,48 +127,69 @@ export default {
     return {
       showAdoptionNotice: false,
       showAdoptionApply: false,
-      noticeForm: {},
       applyForm: {},
       tracking: false,
       petData: {},
     };
   },
   computed: {
-    // tracking() {
-    //   let ifTracking = this.getLocalStorage().find({
-    //     petID: this.petID,
-    //     petKind: this.petKind,
-    //   })
-    //     ? true
-    //     : false;
-    //   console.log(ifTracking);
-    //   return false;
-    // },
+    petBodyType() {
+      let bodyType = this.petData.animal_bodytype;
+      switch (bodyType) {
+        case "MEDIUM":
+          bodyType = "中型";
+          break;
+        case "BIG":
+          bodyType = "大型";
+          break;
+        case "SMALL":
+          bodyType = "小型";
+          break;
+      }
+      return bodyType;
+    },
+    petSex() {
+      let gender = this.petData.animal_sex;
+      switch (gender) {
+        case "F":
+          gender = "女孩";
+          break;
+        case "M":
+          gender = "男孩";
+          break;
+        case "N":
+          gender = "中性";
+          break;
+      }
+      return gender;
+    },
   },
   methods: {
     goNextPage(data) {
       this.showAdoptionNotice = false;
       this.showAdoptionApply = data;
     },
-    receiveNoticeForm(answer) {
-      console.log(answer);
-      this.noticeForm = answer;
-    },
-    cancelEdit(componentName) {
-      componentName === "AdoptionApply"
-        ? (this.showAdoptionApply = false)
-        : (this.showAdoptionNotice = false);
-    },
-    receiveApplForm(form) {
-      console.log("收到驗證後的資料了", form);
-      this.showAdoptionApply = false;
-    },
-    setToTrack() {
+    setTrack() {
       this.tracking = !this.tracking;
       let trackingList = this.getLocalStorage();
-      const trackingPet = { petID: this.petID, petKind: this.petKind };
-      trackingList.push(trackingPet);
-      this.setLocalStorage(trackingList);
+      const trackingPet = {
+        animal_id: parseInt(this.petID),
+        animal_kind: this.petKind,
+        album_file: this.petData.album_file,
+        animal_colour: this.petData.animal_colour,
+        animal_sex: this.petData.animal_sex,
+        animal_place: this.petData.animal_place,
+      };
+      if (this.tracking) {
+        trackingList.push(trackingPet);
+        this.setLocalStorage(trackingList);
+      } else {
+        const removeTrackingIndex = trackingList.findIndex(
+          (trackedPet) => trackedPet.petID === trackingPet.animal_id
+        );
+        trackingList.splice(removeTrackingIndex, 1);
+        this.setLocalStorage(trackingList);
+      }
     },
     getLocalStorage() {
       return JSON.parse(localStorage.getItem("trackList")) || [];
@@ -161,12 +204,12 @@ export default {
     },
     checkTrackingStatus() {
       let inTrackingList = this.getLocalStorage()
-        .map((pet) => pet.id)
-        .includes(this.petID);
+        .map((pet) => pet.animal_id)
+        .includes(parseInt(this.petID));
       if (inTrackingList) {
         this.tracking = true;
       } else {
-        return false;
+        this.tracking = false;
       }
     },
   },
@@ -185,14 +228,18 @@ export default {
   cursor: pointer;
 }
 main {
-  padding: 60px 0px 0px 0px;
+  padding-top: 60px;
   background-color: color.$brown-100;
   position: relative;
+  // overflow: hidden; //會卡到表單
   height: fit-content;
   min-height: 100vh;
+  @include breakpoint.tablet {
+    padding-top: 103px;
+  }
 }
 .description {
-  padding: 0px 30px 30px 30px;
+  padding: 10px 30px 30px 30px;
   @include breakpoint.tablet {
     padding: 0px 50px 50px 50px;
   }
@@ -200,23 +247,38 @@ main {
     padding: 0px 100px 60px 100px;
   }
 }
+@mixin h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: color.$gray_700;
+  width: fit-content;
+  @include breakpoint.tablet {
+    font-size: 36px;
+  }
+  @include breakpoint.bgScreen {
+    font-size: 50px;
+  }
+}
 .des_container {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   & h2 {
-    width: fit-content;
+    @include h2;
   }
 }
 .case {
-  margin-top: 30px;
+  margin-top: 10px;
+  @include breakpoint.tablet {
+    margin-top: 30px;
+  }
   @include breakpoint.desktop {
-    margin-top: 60px;
+    margin-top: 30px;
     display: flex;
     justify-content: space-between;
-    gap: 30px;
+    gap: 80px;
   }
-
   &_img_box {
     display: flex;
     flex-direction: column;
@@ -228,59 +290,151 @@ main {
     @include breakpoint.tablet {
     }
     @include breakpoint.desktop {
-      flex-direction: column;
-      flex: 50%;
+      display: block;
     }
   }
   &_wrapper {
-    margin-top: 24px;
+    // margin-top: 24px;
     @include breakpoint.desktop {
       &:first-child {
         margin-top: 0;
       }
     }
   }
-  &_des_box {
-    text-align: left;
+  & .wrapper_2 {
+    flex: 40%;
+  }
+  & .wrapper_1 {
+    flex: 60%;
     @include breakpoint.desktop {
+      flex: 40%;
+    }
+  }
+  &_des_box {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    text-align: left;
+    gap: 10px 50px;
+    @include breakpoint.mobile {
+      // max-width: 576px;
+      margin: 0 auto;
+      margin-top: 40px;
+    }
+    @include breakpoint.tablet {
+      gap: 15px;
+    }
+    @include breakpoint.desktop {
+      margin-top: 0;
+      flex-direction: column;
+      flex-wrap: nowrap;
       flex: 50%;
     }
   }
   &_title {
-    font-size: 24px;
-    font-weight: 900;
+    font-size: 22px;
+    font-weight: 500;
     color: color.$gray_700;
+    @include breakpoint.desktop {
+      font-size: 25px;
+    }
   }
   &_content {
+    margin-top: 5px;
     font-size: 18px;
-    font-weight: 900;
+    font-weight: 400;
     color: color.$gray_500;
+    @include breakpoint.desktop {
+      font-size: 21px;
+    }
+  }
+}
+.circle_box {
+  display: none;
+  @include breakpoint.mobile {
+    display: block;
+    position: absolute;
+    width: 10%;
+    left: 35vw;
+    top: 31vh;
+  }
+  @include breakpoint.tablet {
+    left: 35vw;
+    top: 44vh;
+  }
+  @include breakpoint.desktop {
+    left: 30vw;
+    top: 48vh;
+  }
+  @include breakpoint.bgScreen {
+    left: 30vw;
+    top: 48vh;
+  }
+  & img {
+    width: 100%;
+    height: 100%;
+  }
+}
+.line_box {
+  display: none;
+  @include breakpoint.mobile {
+    display: block;
+  }
+}
+
+.line2_box {
+  position: absolute;
+  right: 0;
+  top: 3px;
+  width: 170px;
+  & img {
+    width: 100%;
+    height: 100%;
+  }
+}
+.line3_box {
+  position: absolute;
+  right: 15px;
+  top: 0;
+  height: 170px;
+  & img {
+    height: 100%;
   }
 }
 .img_box {
-  flex: 50%;
+  flex: 40%;
   border: solid 8px;
   border-color: color.$white;
   background-color: color.$brown_100;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4);
   overflow: hidden;
   max-width: 500px;
-  max-height: 400px;
+  // max-height: 400px;
   & img {
     width: 100%;
+    height: 100%;
+  }
+  @include breakpoint.desktop {
+    flex: unset;
   }
 }
 .follow_box {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 5px;
   flex: 40%;
-  @include breakpoint.tablet {
-    flex: unset;
+  @include breakpoint.mobile {
+    margin-top: 0;
+    gap: 30px;
+    justify-content: flex-end;
   }
   @include breakpoint.desktop {
-    flex: 40%;
+    margin-top: 50px;
+    justify-content: flex-start;
   }
 }
 .follow {
-  margin-top: 40px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -293,8 +447,9 @@ main {
       font-size: 30px;
       color: red;
     }
-    input[type="checkbox"]:checked + i {
+    .onTrack {
       font-weight: 900;
+      transition: all 0.3s ease-in-out;
     }
   }
   span {
@@ -304,38 +459,52 @@ main {
 }
 .button_adopt {
   display: block;
-  margin-top: 30px;
-  padding: 21px 42px;
+  padding: 10px 20px;
+  margin-left: auto;
+  width: fit-content;
   background-color: color.$brown_300;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: 500;
   color: color.$white;
   cursor: pointer;
-  @include breakpoint.tablet {
-    font-size: 25px;
+  @include breakpoint.mobile {
+    margin-left: unset;
+  }
+  // @include breakpoint.tablet {
+  // }
+  @include breakpoint.bgScreen {
+    font-size: 22px;
+    padding: 15px 30px;
   }
 }
 .look_more {
   margin-top: 30px;
+  text-align: end;
   a {
     display: block;
     &::before {
       content: "";
-      height: 2px;
+      height: 1px;
       display: inline-block;
       background-color: color.$brown_300;
-      margin: 13px auto;
+      @include breakpoint.mobile {
+        width: 200px;
+      }
       @include breakpoint.tablet {
-        width: 300px;
+        width: 250px;
+      }
+      @include breakpoint.desktop {
+        width: 350px;
       }
     }
   }
   & span {
-    font-size: 30px;
-    font-weight: 900;
+    font-size: 24px;
+    font-weight: 500;
     color: color.$brown_500;
     @include breakpoint.tablet {
-      font-size: 40px;
+      font-size: 30px;
     }
   }
   .arrow_box {
@@ -343,10 +512,18 @@ main {
     max-width: 75px;
     & img {
       width: 100%;
+      height: 100%;
     }
     @include breakpoint.tablet {
-      max-width: 175px;
+      max-width: 120px;
     }
+  }
+}
+.line4_box {
+  display: inline-block;
+  width: 36%;
+  & img {
+    width: 100%;
   }
 }
 </style>

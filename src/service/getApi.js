@@ -11,18 +11,18 @@ export default {
         animal_kind: kind,
         animal_id: id,
         Page: 1,
-        api_key: "PLFET0ETCEA6U8T0TI0R0NCEUJDLHE",
+        // api_key: "PLFET0ETCEA6U8T0TI0R0NCEUJDLHE",
       },
     });
   },
-  getShelterData(kind, areaPkid, pkid) {
+  getShelterData(kind, pkid) {
+    console.log(kind, pkid);
     return apiClient.get(`/`, {
       params: {
         animal_kind: kind,
-        animal_area_pkid: areaPkid,
         animal_shelter_pkid: pkid,
         Page: 1,
-        api_key: "PLFET0ETCEA6U8T0TI0R0NCEUJDLHE",
+        // api_key: "PLFET0ETCEA6U8T0TI0R0NCEUJDLHE",
       },
     });
   },
@@ -32,7 +32,7 @@ export default {
         animal_kind: kind,
         animal_area_pkid: areaPkid,
         Page: 1,
-        api_key: "PLFET0ETCEA6U8T0TI0R0NCEUJDLHE",
+        // api_key: "PLFET0ETCEA6U8T0TI0R0NCEUJDLHE",
       },
     });
   },

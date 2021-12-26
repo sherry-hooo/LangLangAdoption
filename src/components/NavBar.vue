@@ -7,8 +7,9 @@
         </router-link>
       </div>
       <label for="burger">&#9776;</label>
-      <input type="checkbox" id="burger" />
-      <ul class="navbar">
+      <input type="checkbox" id="burger" @click="openNav = true" />
+      <ul class="navbar" v-if="openNav" @click="openNav = false">
+        <li><router-link :to="{ name: 'Home' }">回首頁</router-link></li>
         <li><router-link :to="{ name: 'Search' }">尋找浪浪</router-link></li>
         <li><router-link :to="{ name: 'Track' }">追蹤浪浪 </router-link></li>
         <li>
@@ -19,6 +20,16 @@
     </div>
   </header>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      openNav: false,
+    };
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 header {
@@ -32,6 +43,7 @@ header {
   right: 0;
   left: 0;
   top: 0;
+  box-shadow: 0 1px 3px rgba(5, 5, 5, 0.2);
   @include breakpoint.tablet {
     height: 103px;
   }
@@ -44,11 +56,17 @@ header {
   margin: auto 30px;
   width: 1400px;
   align-items: center;
+  & label {
+    color: color.$gray_500;
+  }
   & input {
     display: none;
   }
   @include breakpoint.tablet {
     position: unset;
+    margin: auto 50px;
+  }
+  @include breakpoint.bgScreen {
     margin: auto 100px;
   }
 }
@@ -57,7 +75,11 @@ header {
   font-size: 0;
   & a {
     display: inline-block;
+    width: 80%;
     & img {
+      width: 100%;
+    }
+    @include breakpoint.tablet {
       width: 100%;
     }
   }
@@ -66,17 +88,17 @@ header {
 .navbar {
   display: none;
   position: absolute;
-  right: 0;
-  top: 32px;
-  width: 100px;
+  right: -30px;
+  top: 42px;
+  width: 100vw;
   text-align: right;
   background-color: color.$brown_100;
-  // padding: 0;
-  padding: 10px;
   margin: 0;
   gap: 60px;
   list-style-type: none;
-  color: color.$gray_500;
+  color: color.$gray_700;
+  box-shadow: 0 2px 2px rgb(5 5 5 / 20%);
+
   @include breakpoint.tablet {
     display: flex;
     position: unset;
@@ -84,11 +106,30 @@ header {
     top: unset;
     width: unset;
     background-color: unset;
+    box-shadow: unset;
   }
   & li {
     padding: 7px;
+    text-align: center;
     @include breakpoint.tablet {
+      background-color: unset;
       padding: 10px 0px;
+    }
+    &:hover {
+      background-color: color.$brown_300;
+      @include breakpoint.tablet {
+        background-color: unset;
+        & a:hover {
+          text-decoration: underline color.$gray_500 2px;
+          text-underline-offset: 5px;
+        }
+      }
+    }
+    @include breakpoint.tablet {
+      & a:focus {
+        text-decoration: underline color.$gray_500 2px;
+        text-underline-offset: 5px;
+      }
     }
   }
 }
@@ -100,13 +141,25 @@ label {
 }
 #burger:checked + ul {
   display: block;
+  @include breakpoint.tablet {
+    display: flex;
+  }
 }
 @include breakpoint.tablet {
   label {
     display: none;
   }
-  #burger:checked + ul {
-    display: block;
-  }
+  // #burger:checked + ul {
+  //   display: block;
+  // }
+}
+
+.toggle {
+  display: none !important;
+}
+
+.targeting {
+  text-decoration: underline color.$gray_500 2px;
+  text-underline-offset: 5px;
 }
 </style>
