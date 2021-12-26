@@ -624,12 +624,11 @@ main {
   }
 }
 
-
-// 桌機板使用滾動視差
 .gallery_desktop {
   display: none;
 }
-@include breakpoint.desktop{
+// 桌機板使用滾動視差
+@include breakpoint.tablet{
   .gallery_mobile{
     display: none;
   }
@@ -642,7 +641,7 @@ main {
   display: block;
   height: 100vh;
   z-index: 1;
-  margin-bottom: -200px;
+  margin-bottom: -250px;
 
   background: white;
   position: relative;
@@ -672,52 +671,24 @@ main {
     // padding: 30px 30px;
     background: transparent;
   }
-  .scroll_slow {
-    transform: translateZ(-15px) scale(2.5);
-    p{
-      font-size: 20px;
-      position: absolute;
-      left: 100px;
-      bottom: 400px;
-      font-weight: 600;
-      color: color.$gray_500;
-    }
-    img {
-      width: 500px;
-      position: absolute;
-      bottom: 0;
-      left: 100px;
-    }
-  }
-  .scroll_last {
-    transform: translateZ(-10px) scale(2);
-    display: block; //因為在手機上不顯示
-    img {
-      width: 480px;
-      position: absolute;
-      bottom: 0;
-      right: 100px;
-    }
-  }
+
   .scroll_first {
     transform: translateZ(2px) scale(0.8);
     img {
-      width: 370px;
+      position: absolute;
+      bottom: 20%;
+      left: 30px;
+      width: 250px;
+
+      @include breakpoint.desktop{
       position: absolute;
       bottom: 5%;
       left: 100px;
+      width: 370px;
+      }
     }
   }
-  .scroll_second {
-    transform: translateZ(0) scale(1);
-    display: block; //因為在手機上不顯示
-    img {
-      width: 360px;
-      position: absolute;
-      bottom: 5%;
-      right: 5%;
-    }
-  }
+
   .scroll_mid {
     transform: translateZ(-5px) scale(1.5);
     p{
@@ -727,15 +698,94 @@ main {
       font-size: 20px;
       font-weight: 600;
       color: color.$gray_500;
+
+      @include breakpoint.bgScreen{
+        font-size: 24px;
+      }
     }
+
     img {
-      width: 460px;
       position: absolute;
       top: 45%;
       left: 50%;
       transform: translateX(-50%);
+      width: 350px;
+
+
+      @include breakpoint.desktop{
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 460px;
+      }
     }
   }
+
+  .scroll_second {
+    transform: translateZ(0) scale(1);
+
+    img {
+      position: absolute;
+      bottom: 15%;
+      right: 30px;
+      width: 250px;
+
+      @include breakpoint.desktop{
+      width: 360px;
+      position: absolute;
+      bottom: 5%;
+      right: 5%;
+      }
+    }
+  }
+
+  .scroll_slow {
+    transform: translateZ(-15px) scale(2.5);
+    p{
+      font-size: 20px;
+      position: absolute;
+      left: 100px;
+      bottom: 400px;
+      font-weight: 600;
+      color: color.$gray_500;
+
+      @include breakpoint.bgScreen{
+        font-size: 24px;
+      }
+    }
+    img {
+      position: absolute;
+      bottom: 5%;
+      left: 100px;
+      width: 300px;
+
+      @include breakpoint.desktop{
+        position: absolute;
+        bottom: 0;
+        left: 100px;
+        width: 500px;
+      }
+    }
+  }
+  .scroll_last {
+    transform: translateZ(-10px) scale(2);
+    display: block; //因為在手機上不顯示
+    img {
+        position: absolute;
+        bottom: 5%;
+        right: 100px;
+        width: 320px;
+
+      @include breakpoint.desktop{
+        position: absolute;
+        bottom: 0;
+        right: 100px;
+        width: 480px;
+      }
+    }
+  }
+
   .scroll_slogan{
     transform: translateZ(-30px) scale(4);
     .slogan{
