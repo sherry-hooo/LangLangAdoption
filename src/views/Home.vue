@@ -45,18 +45,22 @@
     <section class="gallery_mobile">
       <div class="gallery_wrap">
         <div class="mb_first">
-          <img src="@/assets/img/dog1.jpg" />
+          <img src="@/assets/img/dog6.jpg" />
+          <p class="text_1">
+            希望能夠有一個家， <br/>
+            一個會好好愛我的主人
+          </p>
         </div>
-        <p class="text_1">
-          希望能夠有一個家， <br />
-          一個會好好愛我的主人
-        </p>
-        <div class="parallax_layer scroll_mid mb_mid">
-          <img src="@/assets/img/cat1.jpg" />
+
+        <div class="mb_mid">
+          <img src="@/assets/img/cat7.jpg"/>
+          <p class="text_2">
+            你能夠
+            帶我回家嗎？</p>
         </div>
-        <p class="text_2">你能夠帶我回家嗎？</p>
-        <div class="parallax_layer scroll_slow mb_last">
-          <img src="@/assets/img/dog2.jpg" />
+        
+        <div class="mb_last">
+          <img src="@/assets/img/dog9.jpg"/>
           <img class="print1" src="@/assets/img/logo.svg" />
           <img class="print2" src="@/assets/img/logo.svg" />
         </div>
@@ -620,26 +624,43 @@ main {
     flex-wrap: wrap;
   }
 
+  div + div{
+    margin-top: 5px;
+  }
+
   .mb_first {
-    width: fit-content;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
     height: fit-content;
-    flex-basis: 100%;
-    text-align: left;
 
     img {
       width: 200px;
-      text-align: left;
+    }
+
+    p{
+      padding: 10px;
+      font-size: 16px;
+      font-weight: 500;
     }
   }
 
   .mb_mid {
-    width: fit-content;
-    height: fit-content;
+    display: flex;
+    flex-direction: row-reverse;
     flex-basis: 100%;
-    text-align: right;
+    justify-content: space-around;
+    align-items: center;
 
     img {
       width: 250px;
+    }
+
+    p{
+      padding: 10px;
+      font-size: 16px;
+      font-weight: 500;
     }
   }
 
@@ -673,24 +694,6 @@ main {
     right: 10%;
     bottom: 20%;
     transform: rotate(-30deg);
-  }
-
-  p {
-    color: color.$gray_500;
-    background: rgba(255, 255, 255, 0.7);
-  }
-
-  .text_1 {
-    position: absolute;
-    right: 5%;
-    top: 150px;
-  }
-
-  .text_2 {
-    position: absolute;
-    left: 5%;
-    top: 50%;
-    transform: translateY(-50%);
   }
 
   .slogan {
