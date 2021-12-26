@@ -9,8 +9,21 @@
       </div>
       <div class="banner_content_area">
         <div class="decoration_house">
-          <svg width="577" height="292" viewBox="0 0 577 292" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path class="path" d="M136 233V162.5H1.5L204 1L576 291" stroke="#DEC39E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg
+            width="577"
+            height="292"
+            viewBox="0 0 577 292"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              class="path"
+              d="M136 233V162.5H1.5L204 1L576 291"
+              stroke="#DEC39E"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
           <!-- <img src="@/assets/img/bigArrow.svg" alt="cute dog" /> -->
         </div>
@@ -86,7 +99,7 @@
       <p>我們需要你，成為我們最強的後盾</p>
       <div class="volunteer_entry">
         <div class="volunteer_image">
-          <img src="@/assets/img/volunteer4.jpg">
+          <img src="@/assets/img/volunteer4.jpg" />
         </div>
         <button>我有興趣</button>
       </div>
@@ -94,7 +107,12 @@
 
     <section class="topic">
       <div class="topic_img">
-        <img src="@/assets/img/cat3.jpg" alt="lovely cat" />
+        <img
+          class="init_place"
+          :class="{ correct_place: isShowImage }"
+          src="@/assets/img/cat3.jpg"
+          alt="lovely cat"
+        />
       </div>
       <div class="topic_content_area">
         <h2>領養前的那些事</h2>
@@ -110,9 +128,33 @@
     </section>
   </main>
 </template>
+<script>
+export default {
+  methods: {
+    scrollEvent() {
+      let slideInAt = window.scrollY + window.innerHeight;
+      console.log("slideInAt", slideInAt);
+
+      //展開圖片的條件
+      let showImage = slideInAt > 3300;
+      console.log(slideInAt, showImage);
+      console.log(this.isShowImage);
+      if (showImage) {
+        console.log("enter", this.isShowImage);
+        this.isShowImage = true;
+      }
+    },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.scrollEvent);
+  },
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.scrollEvent);
+  },
+}
+</script>
 
 <style lang="scss" scoped>
-
 // section共用h2樣式
 %title_h2 {
   font-size: 24px;
@@ -170,7 +212,7 @@ main {
   overflow: hidden;
   background: color.$brown_100;
 
-  @include breakpoint.tablet{
+  @include breakpoint.tablet {
     height: calc(100vh - 103px);
   }
 
@@ -227,8 +269,8 @@ main {
       padding: 0 100px;
     }
 
-    .decoration_house{
-      @include breakpoint.desktop{
+    .decoration_house {
+      @include breakpoint.desktop {
         transform: scaleY(0.8);
       }
     }
@@ -251,7 +293,7 @@ main {
       background: none;
     }
 
-    @include breakpoint.desktop{
+    @include breakpoint.desktop {
       top: 30%;
     }
   }
@@ -317,11 +359,11 @@ main {
     transform: translateY(0);
   }
 
-  50%{
+  50% {
     transform: translateY(10px);
   }
 
-  100%{
+  100% {
     transform: translateY(0);
   }
 }
@@ -335,30 +377,35 @@ main {
   }
 }
 
-.decoration_house{
+.decoration_house {
   .path {
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
     animation: DrawHouse 2s linear alternate forwards;
-    }
   }
-
-@keyframes FadeIn{
-  from { opacity: 0}
-  to { opacity: 1}
 }
 
-.banner_caption h1{
-  opacity: 0;
-  animation: FadeIn 2s linear forwards;}
+@keyframes FadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
-.banner_caption h2{
+.banner_caption h1 {
+  opacity: 0;
+  animation: FadeIn 2s linear forwards;
+}
+
+.banner_caption h2 {
   opacity: 0;
   animation: FadeIn 1s linear forwards;
   animation-delay: 1.5s;
 }
 
-.banner_caption p{
+.banner_caption p {
   opacity: 0;
   animation: FadeIn 1s linear forwards;
   animation-delay: 2s;
@@ -366,7 +413,7 @@ main {
 
 .volunteer_ad {
   background: color.$brown_100;
-  padding: 10px ;
+  padding: 10px;
 
   @include breakpoint.tablet {
     padding: 20px 0;
@@ -441,7 +488,7 @@ main {
   position: relative;
   background: color.$brown_100;
 
-  @include breakpoint.tablet{
+  @include breakpoint.tablet {
     background: color.$brown_100;
   }
 
@@ -449,7 +496,30 @@ main {
     width: 40%;
     height: 100%;
 
-    @include breakpoint.tablet{
+    .init_place {
+      @include breakpoint.desktop {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+    }
+    .correct_place {
+      @include breakpoint.desktop {
+        opacity: 1;
+        animation-name: slide-in;
+        animation-duration: 0.5s;
+        transform: translateX(0px);
+      }
+      @keyframes slide-in {
+        0% {
+          transform: translateX(-30px);
+        }
+        100% {
+          transform: translateX(0px);
+        }
+      }
+    }
+
+    @include breakpoint.tablet {
       width: 50%;
       height: calc(100vh - 103px);
     }
@@ -470,7 +540,7 @@ main {
   }
 
   @include breakpoint.tablet {
-    .hollow_circle{
+    .hollow_circle {
       display: block;
       position: absolute;
       top: 10%;
@@ -478,7 +548,7 @@ main {
       width: 90px;
     }
 
-    .solid_circle{
+    .solid_circle {
       display: block;
       position: absolute;
       top: 20%;
@@ -489,11 +559,11 @@ main {
   }
 
   @include breakpoint.desktop {
-    .hollow_circle{
+    .hollow_circle {
       width: 120px;
     }
 
-    .solid_circle{
+    .solid_circle {
       top: 22%;
       right: 10%;
       width: 40px;
@@ -503,7 +573,6 @@ main {
 
   @include breakpoint.bgScreen {
   }
-
 }
 
 .topic_content_area {
@@ -671,7 +740,6 @@ main {
     // padding: 30px 30px;
     background: transparent;
   }
-
   .scroll_first {
     transform: translateZ(2px) scale(0.8);
     img {
