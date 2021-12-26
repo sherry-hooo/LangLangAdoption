@@ -106,7 +106,7 @@
 import AdoptionApply from "@/components/AdoptionApply.vue";
 import AdoptionNotice from "@/components/AdoptionNotice.vue";
 import getApi from "@/service/getApi.js";
-import db from "@/firebase/firebase.config.js";
+import { db } from "@/firebase/firebase.config.js";
 import { collection, addDoc } from "firebase/firestore";
 
 export default {
