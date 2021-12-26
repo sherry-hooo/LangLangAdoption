@@ -6,7 +6,6 @@
       @selection="receiveSelection"
       :shelterList="shelterList"
     ></Dropdown>
-    <!-- @selecztedShelter="receiveSelectedShelter" -->
     <section>
       <Card v-for="petData in petData" :key="petData" :petData="petData"></Card>
     </section>
@@ -58,11 +57,6 @@ export default {
       this.selectedAnimanlKind = data;
       this.filteredShelterByKind(this.singleKindData);
     },
-    // 接收選的 filter
-    // receiveSelectedShelter(shelterPkid) {
-    //   this.selectedShelter = shelterPkid;
-    //   this.getShelterAPI(this.selectedAnimanlKind, shelterPkid);
-    // },
     receiveSelection(data) {
       this.selectedAnimanlKind = data.animalKind;
       this.selectedShelterPkid = data.shelterPkid;
@@ -111,7 +105,7 @@ export default {
       return this.pageNumber * this.cardAmount;
     },
     totalPage() {
-      return parseInt(this.singleShelterData.length / this.cardAmount);
+      return Math.ceil(this.singleShelterData.length / this.cardAmount);
     },
     // shelterList() {
     //   let getShelterData = this.singleKindData.map((data) => ({
