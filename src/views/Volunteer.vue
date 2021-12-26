@@ -418,7 +418,7 @@ h2 {
   width: 70px;
   height: 70px;
   // filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.3));
-  animation: living 3s infinite ease-in-out;
+  animation: living 3s infinite ease-out;
   // animation: 2s infinite alternate living;
 }
 
@@ -454,11 +454,11 @@ h2 {
 @keyframes living {
   from {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(0.9);
   }
   to {
     opacity: 0;
-    transform: scale(2);
+    transform: scale(1.7);
   }
 }
 

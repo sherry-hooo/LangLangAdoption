@@ -6,23 +6,27 @@ const routes = [
   {
     path: "/",
     name: "Home",
+    props: true,
     component: Home,
   },
   {
     path: "/Search",
     name: "Search",
+    props: true,
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Search.vue"),
   },
   {
     path: "/Track",
     name: "Track",
+    props: true,
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Track.vue"),
   },
   {
     path: "/Volunteer",
     name: "Volunteer",
+    props: true,
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Volunteer.vue"),
   },

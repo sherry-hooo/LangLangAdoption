@@ -69,7 +69,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 200px;
-  margin: 0 auto;
+  margin: auto auto 0;
   &_button {
     background: #dec39e;
     border-radius: 1px;
