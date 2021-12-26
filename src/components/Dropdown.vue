@@ -127,11 +127,13 @@ export default {
 %dropdown_items {
   @extend %dropdown_font;
   width: 100px;
+  height: 30px;
   background-color: white;
   @include breakpoint.tablet {
   }
   @include breakpoint.desktop {
     width: 250px;
+    height: 40px;
     padding: 10px 0;
   }
   &:hover {

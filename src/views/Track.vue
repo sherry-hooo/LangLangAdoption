@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="wrapper">
-      <h3>追蹤浪浪</h3>
+      <h2>追蹤浪浪</h2>
       <section>
         <Card
           v-for="petData in TrackingList"
@@ -18,6 +18,7 @@
 import Card from "@/components/Card.vue";
 import Pagination from "@/components/Pagination.vue";
 export default {
+  props: ["petData", "petKind"],
   name: "Track",
   components: {
     Card,
@@ -40,6 +41,19 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+%title_h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: color.$gray_700;
+
+  @include breakpoint.tablet {
+    font-size: 30px;
+  }
+  @include breakpoint.desktop {
+    font-size: 50px;
+  }
+}
+
 main {
   background: color.$brown_100;
   min-height: calc(100vh - 60px);
@@ -52,17 +66,21 @@ main {
     padding: 10px 100px;
   }
 
-  h3 {
-    font-size: 30px;
-    color: color.$gray_700;
-    text-align: middle;
-    margin-bottom: 16px;
-    @include breakpoint.desktop {
-      font-size: 50px;
-      text-align: left;
-      margin-bottom: 60px;
-    }
+  h2 {
+    @extend %title_h2;
   }
+
+  // h3 {
+  //   font-size: 30px;
+  //   color: color.$gray_700;
+  //   text-align: middle;
+  //   margin-bottom: 16px;
+  //   @include breakpoint.desktop {
+  //     font-size: 50px;
+  //     text-align: left;
+  //     margin-bottom: 60px;
+  //   }
+  // }
 }
 section {
   min-height: 500px;

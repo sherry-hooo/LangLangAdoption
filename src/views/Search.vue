@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h3>尋找浪浪</h3>
+    <h2>尋找浪浪</h2>
     <Dropdown
       @selectedAnimalKind="receiveAnimalKind"
       @selection="receiveSelection"
@@ -152,20 +152,24 @@ export default {
   }
 }
 
+h2 {
+  @extend %title_h2;
+}
+
 main {
+  display: flex;
+  flex-direction: column;
   background: color.$brown_100;
   min-height: calc(100vh - 60px);
   height: fit-content;
-  margin-top: 60px;
   padding: 10px 30px 20px;
 
   @include breakpoint.tablet {
     min-height: calc(100vh - 103px);
-    margin-top: 103px;
     padding: 10px 50px 30px;
   }
 
-  @include breakpoint.desktop{
+  @include breakpoint.desktop {
     padding: 10px 100px 60px;
   }
 
@@ -182,12 +186,10 @@ main {
   }
 }
 section {
-  // 暫時設定高度 500px
-  min-height: 500px;
+  min-height: 50%;
   height: fit-content;
-
+  padding: 10px 0 20px;
   text-align: center;
-
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   @include breakpoint.tablet {

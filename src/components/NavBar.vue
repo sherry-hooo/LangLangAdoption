@@ -7,9 +7,18 @@
         </router-link>
       </div>
       <label for="burger">&#9776;</label>
-      <input type="checkbox" id="burger" @click="openNav = true" />
-      <ul class="navbar" v-if="openNav" @click="openNav = false">
-        <li><router-link :to="{ name: 'Home' }">回首頁</router-link></li>
+      <input type="checkbox" id="burger" @click="openNav = !openNav" />
+      <ul v-if="openNav" class="navbar sm_nav" @click="openNav = false">
+        <li><router-link :to="{ name: 'Home' }">首頁</router-link></li>
+        <li><router-link :to="{ name: 'Search' }">尋找浪浪</router-link></li>
+        <li><router-link :to="{ name: 'Track' }">追蹤浪浪 </router-link></li>
+        <li>
+          <router-link :to="{ name: 'Volunteer' }">志工招募 </router-link>
+        </li>
+        <li><router-link :to="{ name: 'Custom' }">愛心項圈 </router-link></li>
+      </ul>
+      <ul class="lg_nav navbar" @click="openNav = false">
+        <li><router-link :to="{ name: 'Home' }">首頁</router-link></li>
         <li><router-link :to="{ name: 'Search' }">尋找浪浪</router-link></li>
         <li><router-link :to="{ name: 'Track' }">追蹤浪浪 </router-link></li>
         <li>
@@ -38,12 +47,6 @@ header {
   margin: 0 auto;
   height: 60px;
   background-color: color.$brown_100;
-  position: fixed;
-  z-index: 999;
-  right: 0;
-  left: 0;
-  top: 0;
-  box-shadow: 0 1px 3px rgba(5, 5, 5, 0.2);
   @include breakpoint.tablet {
     height: 103px;
   }
@@ -86,7 +89,7 @@ header {
 }
 
 .navbar {
-  display: none;
+  display: block;
   position: absolute;
   right: -30px;
   top: 42px;
@@ -139,12 +142,12 @@ label {
   font-size: 2rem;
   line-height: 20px;
 }
-#burger:checked + ul {
-  display: block;
-  @include breakpoint.tablet {
-    display: flex;
-  }
-}
+// #burger:checked + ul {
+//   display: block;
+//   @include breakpoint.tablet {
+//     display: flex;
+//   }
+// }
 @include breakpoint.tablet {
   label {
     display: none;
@@ -154,8 +157,25 @@ label {
   // }
 }
 
-.toggle {
-  display: none !important;
+header {
+  .sm_nav {
+    z-index: 10;
+    .navbar {
+      li > a {
+        display: block;
+        width: 100%;
+      }
+    }
+    @include breakpoint.tablet {
+      display: none;
+    }
+  }
+  .lg_nav {
+    display: none;
+    @include breakpoint.tablet {
+      display: flex;
+    }
+  }
 }
 
 .targeting {

@@ -12,11 +12,6 @@
           </div>
           <div class="frame_circle"></div>
         </div>
-
-        <!-- <div class="layout_line_1">
-          <div class="solid_circle"></div>
-          <div class="frame_circle"></div>
-        </div> -->
         <div class="img_box">
           <img src="@/assets/img/volunteer1.jpg" alt="" />
         </div>
@@ -286,52 +281,19 @@ h2 {
     }
   }
 }
-// .layout_line_1 {
-//   position: absolute;
-//   top: 32%;
-//   left: 20%;
-//   @include breakpoint.mobile {
-//     top: 59%;
-//   }
-//   @include breakpoint.tablet {
-//     top: 42%;
-//   }
-//   @include breakpoint.desktop {
-//     top: 50%;
-//   }
-// }
-// .solid_circle {
-//   border-radius: 999em;
-//   background-color: #af9380;
-//   width: 25px;
-//   height: 25px;
-//   transform: translate(60px, 90px);
-// }
-// .frame_circle {
-//   border: solid 2px;
-//   border-radius: 999em;
-//   border-color: #dec39e;
-//   width: 70px;
-//   height: 70px;
-// }
 .layout_line_2 {
   display: none;
   position: absolute;
-  // top: -50px;
   right: 0;
 
   @include breakpoint.mobile {
-    // top: 59%;
   }
   @include breakpoint.tablet {
     display: block;
     top: -90px;
-    // top: 42%;
   }
   @include breakpoint.desktop {
     top: -140px;
-    // animation: rotate 5s running linear forwards;
-    // top: 50%;
   }
   @include breakpoint.bgScreen {
     top: -20px;
@@ -343,11 +305,9 @@ h2 {
     border-color: #dec39e;
     width: 170px;
     animation: 2s slidein 2s infinite alternate;
-    // transform: translate(370px, -356px);
   }
   @include breakpoint.desktop {
     width: 223px;
-    // transform: translate(580px, -580px);
   }
 }
 .apply {
@@ -370,9 +330,6 @@ h2 {
     cursor: pointer;
   }
 }
-/* * {
-  outline: solid 1px;
-} */
 .layout_line_1 {
   position: absolute;
   top: 32%;
@@ -404,12 +361,9 @@ h2 {
   background-color: #af9380;
   width: 25px;
   height: 25px;
-  // filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.1));
-  animation: living 3s infinite ease-in-out;
+  animation: living 3s infinite ease-out;
   border-radius: 50%;
   padding: 0;
-
-  // color:#fff;
 }
 .frame_circle {
   border: solid 2px;
@@ -417,9 +371,7 @@ h2 {
   border-color: #dec39e;
   width: 70px;
   height: 70px;
-  // filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.3));
-  animation: living 3s infinite ease-in-out;
-  // animation: 2s infinite alternate living;
+  animation: living 3s infinite ease-out;
 }
 
 // 波動效果
@@ -428,56 +380,23 @@ h2 {
   width: 25px;
   height: 25px;
   text-align: center;
-  // filter: drop-shadow(0 0 0.75rem crimson);
-}
-/* .wave .circle {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0;
-  background: #af9380;
-} 
-.wave .circle:first-child { 
-  animation: circle-opacity 2s infinite;
-} */
-@keyframes circle-opacity {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(2);
-  }
 }
 @keyframes living {
   from {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(0.5);
   }
   to {
     opacity: 0;
-    transform: scale(2);
+    transform: scale(1.7);
   }
 }
-
 @keyframes slidein {
   from {
     transform: translateX(0%);
   }
-
   to {
     transform: translateX(-20%);
-  }
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
   }
 }
 </style>
