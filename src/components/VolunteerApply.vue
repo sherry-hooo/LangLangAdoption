@@ -126,7 +126,7 @@
         <input
           class="cancel_btn"
           type="reset"
-          @click="formAction('cancel')"
+          @click="sentCloseFormSignal"
           value="取消"
         />
         <input class="submit_btn" type="submit" value="送出" />
@@ -136,7 +136,7 @@
 </template>
 
 <script>
-import db from "@/firebase/firebase.config.js";
+import { db } from "@/firebase/firebase.config.js";
 import { collection, addDoc } from "firebase/firestore";
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as Yup from "yup";
@@ -206,21 +206,11 @@ export default {
     };
   },
   methods: {
-    formAction(status) {
-      this.$emit("applyFormAction", status);
-    },
-    getUserData() {
-      const VolunteerData = {
-        name: this.name,
-        contact: this.contact,
-        email: this.email,
-        address: this.address,
-        joinReason: this.joinReason,
-      };
-      return VolunteerData;
+    sentCloseFormSignal() {
+      this.$emit("closeFormSignal", true);
     },
     async storeFirebase(applyFormData) {
-      console.log({ ...applyFormData });
+      console.log(applyFormData);
       try {
         const docRef = await addDoc(collection(db, "volunteerApply"), {
           ...applyFormData,
@@ -231,7 +221,8 @@ export default {
       }
     },
     onSubmit(data) {
-      console.log(data);
+      this.storeFirebase(data);
+      this.sentCloseFormSignal();
     },
   },
 };

@@ -133,7 +133,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 %title_h2 {
   font-size: 24px;
   font-weight: 500;
@@ -162,7 +161,7 @@ main {
 
   h2 {
     @extend %title_h2;
-    
+
     text-align: left;
     margin-bottom: 16px;
 
@@ -194,5 +193,4 @@ section {
     }
   }
 }
-
 </style>

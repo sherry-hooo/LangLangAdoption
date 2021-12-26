@@ -32,10 +32,8 @@
           </li>
         </ul>
       </div>
-
-      <div><button @click="emitSelection">search</button></div>
     </section>
-    <button class="sumbit_button">搜尋</button>
+    <button class="sumbit_button" @click="emitSelection">搜尋</button>
   </div>
 </template>
 <script>
@@ -111,13 +109,13 @@ export default {
 }
 
 // 統一dropdown元件內的字體大小
-%dropdown_font{
+%dropdown_font {
   font-size: 16px;
   font-weight: 500;
-  @include breakpoint.tablet{
+  @include breakpoint.tablet {
     font-size: 18px;
   }
-  @include breakpoint.desktop{
+  @include breakpoint.desktop {
     font-size: 24px;
   }
 }
@@ -163,10 +161,10 @@ export default {
 
 %dropdown_title {
   @extend %dropdown_font;
-  
+
   margin-bottom: 5px;
 
-  @include breakpoint.tablet{
+  @include breakpoint.tablet {
     margin-bottom: 0;
   }
 }
@@ -177,11 +175,11 @@ export default {
   align-items: center;
   margin-bottom: 10px;
 
-  @include breakpoint.tablet{
+  @include breakpoint.tablet {
     margin-bottom: 28px;
   }
 
-  @include breakpoint.desktop{
+  @include breakpoint.desktop {
     margin-bottom: 32px;
   }
 
@@ -201,8 +199,8 @@ export default {
     color: white;
     background: color.$brown_300;
 
-    @include breakpoint.desktop{
-      align-self: center
+    @include breakpoint.desktop {
+      align-self: center;
     }
   }
 

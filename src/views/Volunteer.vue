@@ -50,7 +50,7 @@
     </div>
     <VolunteerApply
       v-if="volunteerApply"
-      @applyFormAction="applyFormAction"
+      @closeFormSignal="volunteerApply = false"
     ></VolunteerApply>
   </main>
 </template>
@@ -66,19 +66,6 @@ export default {
     };
   },
   methods: {
-    applyFormAction(status) {
-      console.log("check");
-      this.volunteerApply = false;
-      switch (status) {
-        case "cancel": {
-          break;
-        }
-        case "submit": {
-          console.log("送出資料到後端");
-          break;
-        }
-      }
-    },
     applyVolunteer() {
       this.volunteerApply = true;
       this.scrollToTop();

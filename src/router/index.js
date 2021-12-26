@@ -45,7 +45,7 @@ const routes = [
     name: "Custom",
     props: true,
     component: () =>
-      import(/* webpackChunkName: "about" */ "../components/Custom.vue"),
+      import(/* webpackChunkName: "about" */ "../views/Custom.vue"),
   },
 ];
 
