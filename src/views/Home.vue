@@ -74,24 +74,24 @@
     <section class="gallery_desktop">
       <div class="parallax_group handheld_base">
         <div class="parallax_layer scroll_first">
-          <img src="@/assets/img/dog1.jpg" />
+          <img src="@/assets/img/dog6.jpg" />
         </div>
         <div class="parallax_layer scroll_mid">
           <p>
             希望能夠有一個家， <br />
             一個會好好愛我的主人
           </p>
-          <img src="@/assets/img/cat1.jpg" />
+          <img src="@/assets/img/cat7.jpg" />
         </div>
         <div class="parallax_layer scroll_second">
           <img src="@/assets/img/cat2.jpg" />
         </div>
         <div class="parallax_layer scroll_last">
-          <img src="@/assets/img/dog3.jpg" />
+          <img src="@/assets/img/dog5.jpg" />
         </div>
         <div class="parallax_layer scroll_slow">
           <p>你能夠帶我回家嗎？</p>
-          <img src="@/assets/img/dog2.jpg" />
+          <img src="@/assets/img/dog9.jpg" />
         </div>
         <div class="parallax_layer scroll_slogan">
           <div class="slogan">
@@ -734,8 +734,16 @@ main {
     z-index: 1;
     // margin-bottom: -250px;
 
-    background: white;
+    background-image: url(../assets/img/wishahome375.svg);
+    background-repeat: no-repeat;
+    background-position-y: 50px;
     position: relative;
+    @include breakpoint.tablet{
+      background-image: url(../assets/img/wishahome768.svg);
+    }
+    @include breakpoint.desktop{
+      background-image: url(../assets/img/wishahome1440.svg);
+    }
 
     perspective: 10px;
     height: 100vh;
@@ -758,7 +766,6 @@ main {
       left: 0;
       width: 100vw;
       height: 100%;
-      // padding: 30px 30px;
       background: transparent;
     }
     .scroll_first {
@@ -769,7 +776,14 @@ main {
         left: 30px;
         width: 250px;
 
-        @include breakpoint.desktop {
+        @include breakpoint.desktop{
+          position: absolute;
+          bottom: 5%;
+          left: 100px;
+          width: 300px;
+        }
+
+        @include breakpoint.bgScreen {
           position: absolute;
           bottom: 5%;
           left: 100px;
@@ -781,15 +795,16 @@ main {
     .scroll_mid {
       transform: translateZ(-5px) scale(1.5);
       p {
-        position: absolute;
-        top: 35%;
-        left: 40%;
-        font-size: 20px;
-        font-weight: 600;
-        color: color.$gray_500;
+        display: none;
+        // position: absolute;
+        // top: 35%;
+        // left: 40%;
+        // font-size: 20px;
+        // font-weight: 600;
+        // color: color.$gray_500;
 
         @include breakpoint.bgScreen {
-          font-size: 24px;
+          // font-size: 24px;
         }
       }
 
@@ -800,7 +815,7 @@ main {
         transform: translateX(-50%);
         width: 350px;
 
-        @include breakpoint.desktop {
+        @include breakpoint.bgScreen {
           position: absolute;
           top: 45%;
           left: 50%;
@@ -819,7 +834,14 @@ main {
         right: 30px;
         width: 250px;
 
-        @include breakpoint.desktop {
+        @include breakpoint.desktop{
+          width: 300px;
+          position: absolute;
+          bottom: 5%;
+          right: 5%;
+        }
+
+        @include breakpoint.bgScreen {
           width: 360px;
           position: absolute;
           bottom: 5%;
@@ -831,12 +853,13 @@ main {
     .scroll_slow {
       transform: translateZ(-15px) scale(2.5);
       p {
-        font-size: 20px;
         position: absolute;
-        left: 100px;
-        bottom: 400px;
+        left: 80px;
+        bottom: 300px;
         font-weight: 600;
+        font-size: 20px;
         color: color.$gray_500;
+        background: rgba($color: #FFF, $alpha: 0.8);
 
         @include breakpoint.bgScreen {
           font-size: 24px;
@@ -845,10 +868,17 @@ main {
       img {
         position: absolute;
         bottom: 5%;
-        left: 100px;
+        left: 80px;
         width: 300px;
 
-        @include breakpoint.desktop {
+        @include breakpoint.desktop{
+          position: absolute;
+          bottom: 0;
+          left: 100px;
+          width: 400px;
+        }
+
+        @include breakpoint.bgScreen {
           position: absolute;
           bottom: 0;
           left: 100px;
@@ -865,7 +895,15 @@ main {
         right: 100px;
         width: 320px;
 
-        @include breakpoint.desktop {
+        @include breakpoint.desktop{
+          position: absolute;
+          bottom: 0;
+          right: 100px;
+          width: 380px;
+
+        }
+
+        @include breakpoint.bgScreen {
           position: absolute;
           bottom: 0;
           right: 100px;
