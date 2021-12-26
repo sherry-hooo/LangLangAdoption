@@ -6,7 +6,6 @@
       @selection="receiveSelection"
       :shelterList="shelterList"
     ></Dropdown>
-    <!-- @selecztedShelter="receiveSelectedShelter" -->
     <section>
       <Card v-for="petData in petData" :key="petData" :petData="petData"></Card>
     </section>
@@ -32,10 +31,9 @@ export default {
   },
   data() {
     return {
-      singleKindData: [],
-      singleShelterData: [],
-      selectedAnimanlKind: "",
-      currentPage: 1,
+      petsDataInArray: [],
+      animalKind: "",
+      pageNumber: 1,
       cardAmount: 9,
       selectedShelterPkid: "",
       shelterList: [],
@@ -59,18 +57,13 @@ export default {
       console.log("test");
       this.filteredShelterByKind(this.petsDataInArray);
     },
-    // 接收選的 filter
-    // receiveSelectedShelter(shelterPkid) {
-    //   this.selectedShelter = shelterPkid;
-    //   this.getShelterAPI(this.selectedAnimanlKind, shelterPkid);
-    // },
     receiveSelection(data) {
       this.selectedAnimanlKind = data.animalKind;
       this.selectedShelterPkid = data.shelterPkid;
       this.getShelterAPI(data.animalKind, data.shelterPkid);
     },
     receiveCurrentPage(page) {
-      this.currentPage = page;
+      this.pageNumber = page;
       this.scrollToTop();
     },
     scrollToTop() {
@@ -107,13 +100,13 @@ export default {
       return this.singleShelterData.slice(this.startIndex, this.endIndex);
     },
     startIndex() {
-      return (this.currentPage - 1) * this.cardAmount;
+      return (this.pageNumber - 1) * this.cardAmount;
     },
     endIndex() {
-      return this.currentPage * this.cardAmount;
+      return this.pageNumber * this.cardAmount;
     },
     totalPage() {
-      return parseInt(this.singleShelterData.length / this.cardAmount);
+      return Math.ceil(this.petsDataInArray.length / this.cardAmount);
     },
     // shelterList() {
     //   let getShelterData = this.singleKindData.map((data) => ({
