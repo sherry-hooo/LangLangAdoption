@@ -29,8 +29,31 @@
       </div>
     </section>
 
-    <section class="gallery">
-      <div class="parallax_group">
+    <section class="gallery_mobile">
+      <div class="gallery_wrap">
+        <div class="mb_first">
+          <img src="@/assets/img/dog1.jpg">
+        </div>
+        <p class="text_1">希望能夠有一個家， <br/>
+          一個會好好愛我的主人</p>
+        <div class="parallax_layer scroll_mid mb_mid">
+          <img src="@/assets/img/cat1.jpg">
+        </div>
+        <p class="text_2">你能夠帶我回家嗎？</p>
+        <div class="parallax_layer scroll_slow mb_last">
+          <img src="@/assets/img/dog2.jpg">
+          <img class="print1" src="@/assets/img/logo.svg">
+          <img class="print2" src="@/assets/img/logo.svg">
+        </div>
+        <div class="slogan">
+          <p>為牠駐足，尋找你們之間的命中註定</p>
+          <img src="@/assets/img/arrow.svg">
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery_desktop">
+      <div class="parallax_group handheld_base">
         <div class="parallax_layer scroll_first">
           <img src="@/assets/img/dog1.jpg">
         </div>
@@ -341,11 +364,6 @@ main {
   animation-delay: 2s;
 }
 
-.gallery {
-  height: 100vh;
-  background: white;
-}
-
 .volunteer_ad {
   background: color.$brown_100;
   padding: 10px ;
@@ -504,16 +522,140 @@ main {
     margin-top: 30px;
   }
 }
+// gallery區塊
+// 手機版
+.gallery_mobile{
+  position: relative;
+  overflow: hidden;
+  padding: 20px 20px;
+
+  .gallery_wrap{
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .mb_first{
+    width: fit-content;
+    height: fit-content;
+    flex-basis: 100%;
+    text-align: left;
+    
+    img{
+    width: 200px;
+    text-align: left;
+  }
+  }
+
+  .mb_mid {
+    width: fit-content;
+    height: fit-content;
+    flex-basis: 100%;
+    text-align: right;
+
+    img{
+    width: 250px;
+    }
+  }
+
+  .mb_last {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    flex-basis: 100%;
+    text-align: left;
+
+    img{
+    width: 280px;
+    }
+    
+    .print1, .print2{
+    width: 30px;
+    height: 30px;
+    }
+  }
+
+  .print1{
+    position: absolute;
+    right: 0;
+    bottom: 5%;
+    transform: rotate(45deg);
+  }
+
+  .print2{
+    position: absolute;
+    right: 10%;
+    bottom: 20%;
+    transform: rotate(-30deg);
+  }
+
+  p{
+    color: color.$gray_500;
+    background: rgba(255, 255, 255, 0.7);
+    }
+  
+  .text_1{
+    position: absolute;
+    right: 5%;
+    top: 150px;
+  }
+
+  .text_2{
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .slogan{
+    flex-basis: 100%;
+    margin-top: 16px;
+    
+    p{
+      font-size: 18px;
+      color: color.$brown_500;
+      font-weight: 600;
+    }
+
+    img{
+      margin-top: 10px;
+      width: 80px;
+      animation: MoveLR 2s ease-in-out alternate infinite;
+    }
+  }
+}
+
 
 // 桌機板使用滾動視差
+.gallery_desktop {
+  display: none;
+}
 @include breakpoint.desktop{
-.gallery{
+  .gallery_mobile{
+    display: none;
+  }
+
+.volunteer_ad{
+  position: relative;
+  z-index: 99;
+}
+.gallery_desktop{
+  display: block;
+  height: 100vh;
+  z-index: 1;
+  margin-bottom: -200px;
+
+  background: white;
+  position: relative;
+
   perspective: 10px;
   // height: 100vh;
   height: 1000px;  
   overflow-x: hidden;
   overflow-y: auto;
 
+  @include breakpoint.bgScreen{
+    margin-bottom: -300px;
+  }
   .parallax_group{
     transform-style: preserve-3d;
     position: relative;
@@ -549,6 +691,7 @@ main {
   }
   .scroll_last {
     transform: translateZ(-10px) scale(2);
+    display: block; //因為在手機上不顯示
     img {
       width: 480px;
       position: absolute;
@@ -567,6 +710,7 @@ main {
   }
   .scroll_second {
     transform: translateZ(0) scale(1);
+    display: block; //因為在手機上不顯示
     img {
       width: 360px;
       position: absolute;
@@ -604,12 +748,21 @@ main {
       display: inline-block;
       margin-right: 20px;
       color: color.$brown_500;
-      font-size: 40px;
+      font-size: 32px;
       font-weight: 600;
+
+      @include breakpoint.bgScreen{
+        font-size: 40px;
+      }
     }
     img{
       display: inline-block;
       animation: MoveLR 2s ease-in-out alternate infinite;
+      width: 100px;
+
+      @include breakpoint.bgScreen{
+        width: 200px;
+      }
     }
   }
   }
