@@ -8,9 +8,9 @@
           <i class="fas fa-caret-down dropdown_click_icon"></i>
         </div>
         <ul :class="{ show_dropdown: openMenu }">
-          <li class="dropdown_items" @click="clickAnimalMenu('狗')">狗</li>
-          <li class="dropdown_items" @click="clickAnimalMenu('貓')">貓</li>
-          <li class="dropdown_items" @click="clickAnimalMenu('其他')">其他</li>
+          <li class="dropdown_items" @click="selectAnimalKind('狗')">狗</li>
+          <li class="dropdown_items" @click="selectAnimalKind('貓')">貓</li>
+          <li class="dropdown_items" @click="selectAnimalKind('其他')">其他</li>
         </ul>
       </div>
     </div>
@@ -18,15 +18,15 @@
       <h3 class="serach_title">收容所</h3>
       <div class="shelter">
         <div class="shelter_items shelter_click" @click="openShelterMenu">
-          <div>{{ shelterPlace === "" ? "請選擇" : shelterPlace }}</div>
+          <div>{{ shelterName === "" ? "請選擇" : shelterName }}</div>
           <i class="fas fa-caret-down shelter_click_icon"></i>
         </div>
         <ul :class="{ show_dropdown: showShelterList }">
           <li
-            v-for="shelter in filteredShelter"
+            v-for="shelter in shelterList"
             :key="shelter.animal_shelter_pkid"
             class="shelter_items"
-            @click="clickShelterMenu(shelter)"
+            @click="selectShelter(shelter)"
           >
             {{ shelter.shelter_name }}
           </li>
@@ -39,13 +39,14 @@
 </template>
 <script>
 export default {
-  props: ["filteredShelter"],
+  props: ["shelterList"],
   data() {
     return {
       openMenu: false,
       showShelterList: false,
       animalKind: "",
-      shelterPlace: "",
+      shelterName: "",
+      shelterPkid: "",
     };
   },
   methods: {
@@ -55,20 +56,24 @@ export default {
     openShelterMenu() {
       this.showShelterList = !this.showShelterList;
     },
-    clickAnimalMenu(animal) {
+    // 接收選取的動物類別
+    selectAnimalKind(animal) {
       this.animalKind = animal;
       this.openMenu = false;
       this.$emit("selectedAnimalKind", animal);
     },
-    clickShelterMenu(place) {
-      this.shelterPlace = place.shelter_name;
+    // 接收選取的收容所
+    selectShelter(place) {
+      this.shelterName = place.shelter_name;
+      this.shelterPkid = place.animal_shelter_pkid;
       this.showShelterList = false;
-      this.$emit("selectedShelter", place.animal_shelter_pkid);
+      // this.$emit("selectedShelter", place.animal_shelter_pkid);
     },
+    // 點選送出按鈕
     emitSelection() {
       this.$emit("selection", {
         animalKind: this.animalKind,
-        shelterPlace: this.shelterPlace,
+        shelterPkid: this.shelterPkid,
       });
     },
   },
