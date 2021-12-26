@@ -108,7 +108,9 @@ export default {
     margin-left: 15px;
   }
   .show_dropdown {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
@@ -127,7 +129,7 @@ export default {
 %dropdown_items {
   @extend %dropdown_font;
   width: 100px;
-  height: 30px;
+  height: 35px;
   background-color: white;
   @include breakpoint.tablet {
   }
@@ -217,11 +219,30 @@ export default {
 
       &_items {
         @extend %dropdown_items;
+        width: 80px;
+        @include breakpoint.tablet {
+          width: 100px;
+        }
+        @include breakpoint.desktop {
+          width: 200px;
+        }
+        div {
+          font-size: 5px;
+          margin: 0 auto;
+          @include breakpoint.tablet {
+            font-size: 15px;
+            // margin-right: 10px;
+          }
+          @include breakpoint.desktop {
+            font-size: 22px;
+            // margin-right: 10px;
+          }
+        }
       }
       &_click {
         @extend %dropdown_button;
         div {
-          padding-left: 16px;
+          // padding-left: 16px;
         }
         &_icon {
           font-size: 27px;
@@ -231,11 +252,27 @@ export default {
 
       ul {
         @extend %dropdown_menu;
-        li {
-          border-top: 2px solid #dec39c;
 
+        overflow: scroll;
+        height: 100px;
+        border-bottom: 2px solid #dec39e;
+
+        li {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          vertical-align: center;
+          font-size: 5px;
+          border-top: 2px solid #dec39c;
+          @include breakpoint.tablet {
+            font-size: 15px;
+          }
+          @include breakpoint.desktop {
+            font-size: 22px;
+            padding: 1px 0;
+          }
           &:last-child {
-            border-bottom: 2px solid #dec39c;
+            // border-bottom: 2px solid #dec39c;
           }
         }
       }
@@ -249,12 +286,33 @@ export default {
 
       &_items {
         @extend %dropdown_items;
+        width: 150px;
+        justify-content: center;
+        @include breakpoint.tablet {
+          width: 250px;
+          justify-content: center;
+        }
+        @include breakpoint.desktop {
+          width: 500px;
+        }
+        div {
+          font-size: 5px;
+          margin: 0 13px;
+          @include breakpoint.tablet {
+            font-size: 15px;
+            margin-right: 10px;
+          }
+          @include breakpoint.desktop {
+            font-size: 22px;
+            margin-right: 10px;
+          }
+        }
       }
       &_click {
         @extend %dropdown_button;
 
         div {
-          padding-left: 16px;
+          // padding-left: 16px;
         }
         &_icon {
           font-size: 27px;
@@ -263,11 +321,28 @@ export default {
       }
       ul {
         @extend %dropdown_menu;
-        li {
-          border-top: 2px solid #dec39c;
 
-          &:last-child {
-            border-bottom: 2px solid #dec39c;
+        overflow: scroll;
+        height: 300px;
+        border-bottom: 2px solid #dec39e;
+        @include breakpoint.desktop {
+          height: 800px;
+        }
+        li {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          vertical-align: center;
+          padding: 3px 0;
+
+          font-size: 5px;
+          border-top: 2px solid #dec39c;
+          @include breakpoint.tablet {
+            font-size: 15px;
+          }
+          @include breakpoint.desktop {
+            font-size: 22px;
+            padding: 5px 0;
           }
         }
       }
