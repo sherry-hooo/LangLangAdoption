@@ -34,9 +34,9 @@ export default {
     return {
       singleKindData: [],
       singleShelterData: [],
-      selectedAnimanlKind: "",
       pageNumber: 1,
       cardAmount: 9,
+      selectedAnimanlKind: "",
       selectedShelterPkid: "",
       shelterList: [],
     };
@@ -56,8 +56,7 @@ export default {
     async receiveAnimalKind(data) {
       await this.getAnimalAPI(data);
       this.selectedAnimanlKind = data;
-      console.log("test");
-      this.filteredShelterByKind(this.petsDataInArray);
+      this.filteredShelterByKind(this.singleKindData);
     },
     // 接收選的 filter
     // receiveSelectedShelter(shelterPkid) {
@@ -80,9 +79,8 @@ export default {
       });
     },
     // 依照動物類別篩選出收容所
-    filteredShelterByKind() {
-      console.log(this.singleKindData);
-      let getShelterData = this.singleKindData.map((data) => ({
+    filteredShelterByKind(allList) {
+      let getShelterData = allList.map((data) => ({
         shelter_name: data.shelter_name,
         animal_shelter_pkid: data.animal_shelter_pkid,
       }));
