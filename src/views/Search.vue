@@ -133,27 +133,42 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+%title_h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: color.$gray_700;
+
+  @include breakpoint.tablet {
+    font-size: 30px;
+  }
+  @include breakpoint.desktop {
+    font-size: 50px;
+  }
+}
+
 main {
   background: color.$brown_100;
   min-height: calc(100vh - 60px);
   height: fit-content;
   margin-top: 60px;
-  padding: 5px 10px;
+  padding: 10px 30px 20px;
 
   @include breakpoint.tablet {
     min-height: calc(100vh - 103px);
     margin-top: 103px;
     padding: 10px 100px;
   }
-  h3 {
-    font-size: 30px;
-    color: color.$gray_700;
-    text-align: middle;
+
+  h2 {
+    @extend %title_h2;
+    
+    text-align: left;
     margin-bottom: 16px;
+
     @include breakpoint.desktop {
-      font-size: 50px;
       text-align: left;
-      margin-bottom: 60px;
+      margin-bottom: 24px;
     }
   }
 }
@@ -161,6 +176,9 @@ section {
   // 暫時設定高度 500px
   min-height: 500px;
   height: fit-content;
+
+  text-align: center;
+
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   @include breakpoint.tablet {
@@ -176,4 +194,5 @@ section {
     }
   }
 }
+
 </style>

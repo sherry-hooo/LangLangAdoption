@@ -3,7 +3,7 @@
     <div class="description">
       <div class="des_container">
         <h2>浪浪資料</h2>
-        <div class="case">
+        <div v-if="petData" class="case">
           <div class="case_img_box">
             <div class="img_box">
               <img
@@ -91,13 +91,11 @@
     <AdoptionNotice
       v-if="showAdoptionNotice"
       @goNextPage="goNextPage"
-      @submitNoticeForm="receiveNoticeForm"
-      @cancelEdit="cancelEdit"
+      @cancelEdit="showAdoptionNotice = false"
     ></AdoptionNotice>
     <AdoptionApply
       v-if="showAdoptionApply"
-      @cancelEdit="cancelEdit"
-      @submitApplyForm="receiveApplyForm"
+      @cancelEdit="showAdoptionApply = false"
     ></AdoptionApply>
   </main>
 </template>
@@ -117,7 +115,6 @@ export default {
     return {
       showAdoptionNotice: false,
       showAdoptionApply: false,
-      noticeForm: {},
       applyForm: {},
       tracking: false,
       petData: {},
@@ -159,25 +156,6 @@ export default {
     goNextPage(data) {
       this.showAdoptionNotice = false;
       this.showAdoptionApply = data;
-    },
-    receiveNoticeForm(answer) {
-      this.noticeForm = answer;
-    },
-    cancelEdit(componentName) {
-      componentName === "AdoptionApply"
-        ? (this.showAdoptionApply = false)
-        : (this.showAdoptionNotice = false);
-    },
-    receiveApplyForm(form) {
-      console.log("收到驗證後的資料了", form);
-      // 存取選單
-      this.applyForm = form;
-
-      // 傳到 firebase db
-      this.storeFirebase(form);
-
-      // 選單消失
-      this.showAdoptionApply = false;
     },
     setTrack() {
       this.tracking = !this.tracking;

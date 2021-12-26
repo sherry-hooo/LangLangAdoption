@@ -1,70 +1,212 @@
 <template>
   <section class="wrapper">
-    <form>
+    <Form @submit="onSubmit">
       <h3 class="form_title">志工報名</h3>
       <div class="col">
-        <label>
-          <p class="form_subtitle">姓名</p>
-          <input class="form_text" type="text" v-model="name" />
-        </label>
-        <label>
-          <p class="form_subtitle">聯絡電話</p>
-          <input class="form_text" type="text" v-model.number="contact" />
+        <label
+          v-for="{
+            as,
+            name,
+            label,
+            children,
+            type,
+            rules,
+            ...attrs
+          } in formSchema.fields1"
+          :key="name"
+          :class="name"
+        >
+          <p class="form_subtitle">
+            {{ label }} <ErrorMessage :name="name" class="validity" />
+          </p>
+          <Field
+            :as="as"
+            :id="name"
+            :name="name"
+            v-bind="attrs"
+            :type="type"
+            :rules="rules"
+            class="form_text"
+          >
+            <template v-if="children && children.length">
+              <component
+                v-for="({ tag, text, ...childAttrs }, idx) in children"
+                :key="idx"
+                :is="tag"
+                v-bind="childAttrs"
+              >
+                {{ text }}
+              </component>
+            </template>
+          </Field>
         </label>
       </div>
       <div class="col">
-        <label>
-          <p class="form_subtitle">電子信箱</p>
-          <input class="form_text" type="text" v-model="email" />
-        </label>
-        <label>
-          <p class="form_subtitle">通訊地址</p>
-          <input class="form_text" type="text" v-model="address" />
+        <label
+          v-for="{
+            as,
+            name,
+            label,
+            children,
+            type,
+            rules,
+            ...attrs
+          } in formSchema.fields2"
+          :key="name"
+          :class="name"
+        >
+          <p class="form_subtitle">
+            {{ label }} <ErrorMessage :name="name" class="validity" />
+          </p>
+          <Field
+            :as="as"
+            :id="name"
+            :name="name"
+            v-bind="attrs"
+            :type="type"
+            :rules="rules"
+            class="form_text"
+          >
+            <template v-if="children && children.length">
+              <component
+                v-for="({ tag, text, ...childAttrs }, idx) in children"
+                :key="idx"
+                :is="tag"
+                v-bind="childAttrs"
+              >
+                {{ text }}
+              </component>
+            </template>
+          </Field>
         </label>
       </div>
       <div class="col">
-        <label class="full_width">
-          <p class="form_subtitle">為什麼您想要來當志工呢？</p>
-          <textarea
-            class="form_textArea"
-            cols="30"
-            rows="10"
-            v-model="joinReason"
-          ></textarea>
+        <label
+          v-for="{
+            as,
+            name,
+            label,
+            children,
+            type,
+            rules,
+            ...attrs
+          } in formSchema.fields3"
+          :key="name"
+          :class="name"
+          class="full_width"
+        >
+          <p class="form_subtitle">
+            {{ label }} <ErrorMessage :name="name" class="validity" />
+          </p>
+          <Field
+            :as="as"
+            :id="name"
+            :name="name"
+            v-bind="attrs"
+            :type="type"
+            :rules="rules"
+          >
+            <template v-if="children && children.length">
+              <component
+                v-for="({ tag, text, ...childAttrs }, idx) in children"
+                :key="idx"
+                :is="tag"
+                v-bind="childAttrs"
+              >
+                {{ text }}
+              </component>
+            </template>
+          </Field>
         </label>
       </div>
       <p class="notice_message">
         單位收到資料後，三日內會有專人與您聯絡，感謝您的參與。
       </p>
       <div class="button_groups">
-        <button class="cancel_btn" @click="formAction('cancel')">取消</button>
-        <button class="submit_btn" @click="formAction('submit')">送出</button>
+        <input
+          class="cancel_btn"
+          type="reset"
+          @click="formAction('cancel')"
+          value="取消"
+        />
+        <input class="submit_btn" type="submit" value="送出" />
       </div>
-    </form>
+    </Form>
   </section>
 </template>
 
 <script>
 import db from "@/firebase/firebase.config.js";
 import { collection, addDoc } from "firebase/firestore";
+import { Form, Field, ErrorMessage } from "vee-validate";
+import * as Yup from "yup";
 
 export default {
+  components: { Form, Field, ErrorMessage },
   data() {
+    const formSchema = {
+      fields1: [
+        {
+          label: "姓名",
+          name: "volunteerName",
+          as: "input",
+          type: "text",
+          maxlength: "10",
+          rules: Yup.string().required("required"),
+        },
+        {
+          label: "聯絡電話",
+          name: "contact",
+          as: "input",
+          type: "tel",
+          pattern: "[0-9]{2}-[0-9]{3}-[0-9]{3}-[0-9]{2}",
+          minlength: "9",
+          maxlength: "15",
+          rules: Yup.number().required("required"),
+        },
+      ],
+      fields2: [
+        {
+          label: "電子信箱",
+          name: "email",
+          as: "input",
+          type: "email",
+          maxlength: "20",
+          rules: Yup.string().email().required("required"),
+        },
+        {
+          label: "通訊地址",
+          name: "address",
+          as: "input",
+          type: "text",
+          maxlength: "30",
+          rules: Yup.string().required("required"),
+        },
+      ],
+      fields3: [
+        {
+          label: "為什麼您想要來當志工呢？",
+          name: "reason",
+          as: "textarea",
+          cols: "30",
+          rows: "10",
+          rules: Yup.string().required("required"),
+        },
+      ],
+    };
     return {
-      name: "",
-      contact: "",
-      email: "",
-      address: "",
-      joinReason: "",
+      formSchema,
+      userData: {
+        name: "",
+        phone: "",
+        email: "",
+        adress: "",
+        joinReason: "",
+      },
     };
   },
   methods: {
     formAction(status) {
-      if (status === "submit") {
-        this.$emit("applyFormAction", status);
-        const VolunteerData = this.getUserData();
-        this.storeFirebase(VolunteerData);
-      }
       this.$emit("applyFormAction", status);
     },
     getUserData() {
@@ -88,68 +230,129 @@ export default {
         console.error("Error adding document: ", e);
       }
     },
+    onSubmit(data) {
+      console.log(data);
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  width: 100vw;
-  height: 100%;
-  min-height: 100vh;
-  padding: 5% 0;
+%button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+  background: color.$brown_300;
+  font-size: 18px;
+  font-weight: 500;
+
+  &:hover {
+    box-shadow: inset 2px -2px 4px color.$brown_500;
+  }
+
+  @include breakpoint.desktop {
+    padding: 15px 30px;
+    font-size: 22px;
+  }
+}
+
+%title_h3 {
+  flex: 0 1 100%;
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weight: 500;
+  color: color.$gray_700;
+  @include breakpoint.tablet {
+    font-size: 30px;
+  }
+  @include breakpoint.desktop {
+    margin-bottom: 24px;
+    font-size: 36px;
+  }
+}
+
+%form_content {
+  color: color.$gray_700;
+  font-size: 16px;
+  font-weight: 500;
+
+  @include breakpoint.desktop {
+    font-size: 18px;
+  }
+}
+
+%form_wrapper {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
   z-index: 999;
-  background: rgba(190, 188, 188, 0.6);
-  backdrop-filter: blur(1px);
   display: flex;
   justify-content: center;
+  width: 100vw;
+  height: 100%;
+  min-height: 100vh;
+  padding: 20px 0 20px;
+  background: rgba(190, 188, 188, 0.6);
+  backdrop-filter: blur(1px);
+
   @include breakpoint.desktop {
-    padding: 110px 0;
+    padding: 20px 0 40px;
   }
+}
+
+@mixin input_style {
+  display: block;
+  padding-left: 10px;
+  margin: 5px 0 10px;
+  width: 100%;
+  height: 42px;
+  border: 2px solid #dec39e;
+  border-radius: 5px;
+  font-size: 16px;
+
+  &::placeholder {
+    padding: 5px;
+    font-size: 16px;
+  }
+
+  &:focus {
+    box-shadow: 2px 2px color.$brown_500;
+  }
+}
+
+.wrapper {
+  // flex-direction: column;
+  @extend %form_wrapper;
 }
 
 form {
   width: 90%;
   height: fit-content;
-  padding: 30px 10px;
+  padding: 20px 10px 20px;
   background: color.$brown_100;
   color: color.$gray_700;
   .form_title {
-    font-size: 30px;
-    margin-bottom: 30px;
+    @extend %title_h3;
+  }
+  @include breakpoint.tablet {
+    padding: 20px 20px 20px;
   }
   @include breakpoint.desktop {
-    padding: 60px 16px;
-    .form_title {
-      font-size: 50px;
-    }
+    padding: 40px 40px 40px;
   }
   .notice_message {
-    margin: 36px 0 60px;
+    margin: 16px 0 30px;
   }
   .button_groups {
-    button {
-      padding: 10px 30px;
-      border-radius: 10px;
-      color: white;
-      font-size: 25px;
-      font-weight: 900;
-      & + button {
-        margin-left: 36px;
-      }
-
-      @include breakpoint.desktop {
-        padding: 26px 90px;
+    input {
+      @extend %button;
+      & + input {
+        margin-left: 20px;
       }
     }
     .cancel_btn {
       background: color.$gray_300;
-    }
-    .submit_btn {
-      background: color.$brown_300;
     }
   }
 }
@@ -175,22 +378,30 @@ form {
       margin-top: 16px;
     }
     .form_subtitle {
-      font-weight: 900;
-      font-size: 16px;
+      @extend %form_content;
       text-align: left;
+      span {
+        margin-left: 10px;
+        color: #8b0000;
+      }
     }
     .form_text {
-      display: block;
-      width: 100%;
-      height: 32px;
-      border: 1px solid color.$brown_300;
+      @include input_style;
     }
-    .form_textArea {
+
+    textarea {
       resize: none;
       width: 100%;
-      margin-top: 16px;
-      border: 1px solid color.$brown_300;
+      margin: 5px 0 10px;
+      padding: 10px;
+      border: 2px solid color.$brown_300;
+      border-radius: 5px;
+      font-size: 16px;
+      &:focus {
+        box-shadow: 2px 2px color.$brown_500;
+      }
     }
+
     @include breakpoint.tablet {
       width: 50%;
       flex-direction: row;
@@ -198,11 +409,11 @@ form {
       & + label {
         margin: 0 0 0 16px;
       }
-      .form_text {
-        height: 52px;
-      }
-      .form_subtitle {
-        font-size: 20px;
+    }
+
+    @include breakpoint.desktop {
+      & + label {
+        margin: 0 0 0 30px;
       }
     }
   }
