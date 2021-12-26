@@ -158,6 +158,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss" scoped>
 // section共用h2樣式
 %title_h2 {
@@ -701,7 +702,6 @@ main {
   display: none;
 }
 // 桌機板使用滾動視差
-<<<<<<< HEAD
 @include breakpoint.tablet{
   .gallery_mobile{
     display: none;
@@ -710,7 +710,9 @@ main {
 .volunteer_ad{
   position: relative;
   z-index: 99;
-}
+  }
+
+
 .gallery_desktop{
   display: block;
   height: 100vh;
@@ -745,7 +747,6 @@ main {
     // padding: 30px 30px;
     background: transparent;
   }
-
   .scroll_first {
     transform: translateZ(2px) scale(0.8);
     img {
@@ -886,95 +887,10 @@ main {
 
       @include breakpoint.bgScreen{
         width: 200px;
-=======
-@include breakpoint.desktop {
-  .gallery {
-    perspective: 10px;
-    // height: 100vh;
-    height: 1200px;
-    overflow-x: hidden;
-    overflow-y: auto;
-
-    .parallax_group {
-      transform-style: preserve-3d;
-      position: relative;
-      height: 100%;
-    }
-    .parallax_layer {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      width: 100vw;
-      height: 100%;
-      padding: 30px 30px;
-      background: transparent;
-    }
-    .scroll_one {
-      transform: translateZ(-15px) scale(2.5);
-      p {
-        font-size: 20px;
-        position: absolute;
-        left: 100px;
-        bottom: 400px;
-        font-weight: 600;
-        color: color.$gray_500;
-      }
-      img {
-        width: 500px;
-        position: absolute;
-        bottom: 0;
-        left: 100px;
-      }
-    }
-    .scroll_two {
-      transform: translateZ(-10px) scale(2);
-      img {
-        width: 480px;
-        position: absolute;
-        bottom: 0;
-        right: 100px;
-      }
-    }
-    .scroll_three {
-      transform: translateZ(2px) scale(0.8);
-      img {
-        width: 370px;
-        position: absolute;
-        bottom: 5%;
-        left: 100px;
-      }
-    }
-    .scroll_four {
-      transform: translateZ(0) scale(1);
-      img {
-        width: 400px;
-        position: absolute;
-        bottom: 5%;
-        right: 150px;
-      }
-    }
-    .scroll_lowest {
-      transform: translateZ(-5px) scale(1.5);
-      p {
-        position: absolute;
-        top: 40%;
-        left: 40%;
-        font-size: 20px;
-        font-weight: 600;
-        color: color.$gray_500;
-      }
-      img {
-        width: 460px;
-        position: absolute;
-        bottom: 5%;
-        left: 400px;
-        transform: translateY(-50%);
->>>>>>> 19cbd47ad42aa23863d49e4630491bab54180063
       }
     }
   }
+}
 }
 
 @keyframes MoveLR {
