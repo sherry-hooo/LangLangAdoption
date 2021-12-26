@@ -1,8 +1,12 @@
 <template>
   <main>
     <div class="container">
-      <p class="page_title">志工招募</p>
+      <h2>志工招募</h2>
       <div class="flex_1">
+        <div class="layout_line_1">
+          <div class="solid_circle"></div>
+          <div class="frame_circle"></div>
+        </div>
         <div class="img_box">
           <img src="@/assets/img/volunteer1.jpg" alt="" />
         </div>
@@ -34,12 +38,10 @@
           <button class="apply" @click="applyVolunteer">報名加入</button>
         </div>
       </div>
-      <div class="layout_line">
-        <div class="solid_circle"></div>
-        <div class="frame_circle"></div>
-        <div class="frame_line"></div>
-      </div>
       <div class="flex_2">
+        <div class="layout_line_2">
+          <div class="frame_line"></div>
+        </div>
         <div class="img_box">
           <img src="@/assets/img/volunteer3.jpg" alt="" />
         </div>
@@ -105,48 +107,57 @@ main {
   }
 }
 .container {
+  padding: 10px 30px 20px 30px;
   @include breakpoint.tablet {
+    padding: 10px 50px 20px 50px;
     display: flex;
     flex-direction: column;
     position: relative;
     max-width: 1440px;
     margin: 0 auto;
   }
+  @include breakpoint.bgScreen {
+    padding: 10px 100px 30px 100px;
+  }
 }
-.page_title {
-  padding: 0px 10px;
-  font-size: 20px;
-  font-weight: 900;
+h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: color.$gray_700;
   text-align: start;
   @include breakpoint.mobile {
-    font-size: 50px;
   }
   @include breakpoint.tablet {
-    padding: 0 50px;
+    font-size: 36px;
   }
   @include breakpoint.desktop {
-    padding: 0 100px;
+  }
+  @include breakpoint.bgScreen {
+    font-size: 50px;
   }
 }
 .flex_1 {
   display: flex;
   gap: 10px;
-  padding: 0px 10px;
+  & .img_box {
+    height: 50%;
+    font-size: 0;
+  }
   @include breakpoint.tablet {
     flex-direction: column;
-    padding: 0 50px;
     gap: 70px;
     & .img_box {
-      max-width: 55%;
-      height: 35%;
+      max-width: 50%;
+      // height: 35%;
       & img {
-        // width: 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
         object-position: 0 -60px;
       }
     }
   }
   @include breakpoint.desktop {
-    padding: 0 100px;
   }
 }
 .img_box {
@@ -154,6 +165,8 @@ main {
   flex: 1;
   & img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   @include breakpoint.tablet {
     flex: unset;
@@ -166,11 +179,18 @@ main {
   // &_content {
   // }
   @include breakpoint.tablet {
+    width: fit-content;
+    margin-left: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    // justify-content: flex-end;
     max-width: 55%;
+  }
+  @include breakpoint.desktop {
+    margin-left: 50px;
+  }
+  @include breakpoint.bgScreen {
+    margin-left: 80px;
   }
 }
 .item {
@@ -180,32 +200,53 @@ main {
     margin-top: 0;
   }
   &_title {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 500;
     color: color.$gray_700;
   }
   &_text {
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 400;
     color: color.$gray_500;
   }
-}
-.item {
-  @include breakpoint.bgScreen {
-    margin-top: 16px;
-    &_title {
-      font-size: 24px;
-      font-weight: 900;
+
+  .item {
+    @include breakpoint.mobile {
+      margin-top: 16px;
+      &_title {
+        font-size: 18px;
+      }
+      &_text {
+        font-size: 14px;
+      }
     }
-    &_text {
-      font-size: 20px;
-      font-weight: 700;
+  }
+  .item {
+    @include breakpoint.tablet {
+      margin-top: 16px;
+      &_title {
+        font-size: 21px;
+      }
+      &_text {
+        font-size: 17px;
+      }
+    }
+  }
+  .item {
+    @include breakpoint.bgScreen {
+      margin-top: 16px;
+      &_title {
+        font-size: 25px;
+      }
+      &_text {
+        font-size: 21px;
+      }
     }
   }
 }
 .flex_2 {
   margin-top: 20px;
-  padding: 0 10px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   line-height: 0;
@@ -217,24 +258,45 @@ main {
     flex-direction: column;
     justify-content: flex-end;
     margin-top: 0;
-    padding: 0;
     position: absolute;
     right: 50px;
-    bottom: 120px;
+    bottom: 20px;
     max-width: 50%;
     gap: 60px;
   }
   @include breakpoint.desktop {
+    gap: 40px;
+  }
+  @include breakpoint.bgScreen {
+    gap: 60px;
     right: 100px;
+    top: 210px;
+  }
+  & .img_box {
+    width: 100%;
+    @include breakpoint.tablet {
+      width: 360px;
+      height: 360px;
+    }
+    @include breakpoint.desktop {
+      width: 500px;
+      height: 400px;
+    }
+    @include breakpoint.bgScreen {
+      width: 700px;
+      height: 550px;
+    }
   }
 }
-.layout_line {
+.layout_line_1 {
   position: absolute;
-  left: 15%;
-  top: 35%;
+  top: 32%;
+  left: 20%;
   @include breakpoint.mobile {
-    // left: 15%;
-    top: 47%;
+    top: 59%;
+  }
+  @include breakpoint.tablet {
+    top: 42%;
   }
   @include breakpoint.desktop {
     top: 50%;
@@ -254,15 +316,29 @@ main {
   width: 70px;
   height: 70px;
 }
+.layout_line_2 {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  @include breakpoint.mobile {
+    // top: 59%;
+  }
+  @include breakpoint.tablet {
+    // top: 42%;
+  }
+  @include breakpoint.desktop {
+    // top: 50%;
+  }
+}
 .frame_line {
   @include breakpoint.tablet {
     border: solid 1px;
     border-color: #dec39e;
     width: 223px;
-    transform: translate(370px, -356px);
+    // transform: translate(370px, -356px);
   }
   @include breakpoint.desktop {
-    transform: translate(580px, -580px);
+    // transform: translate(580px, -580px);
   }
 }
 .apply {
@@ -283,17 +359,6 @@ main {
     border-radius: 10px;
     padding: 15px 30px;
     cursor: pointer;
-  }
-}
-h2 {
-  font-size: 24px;
-  font-weight: 500;
-  color: color.$gray_700;
-  @include breakpoint.tablet {
-    font-size: 36px;
-  }
-  @include breakpoint.bgScreen {
-    font-size: 50px;
   }
 }
 </style>
