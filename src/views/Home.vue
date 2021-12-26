@@ -130,18 +130,13 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      isShowImage: false,
-    };
-  },
   methods: {
     scrollEvent() {
       let slideInAt = window.scrollY + window.innerHeight;
       console.log("slideInAt", slideInAt);
 
       //展開圖片的條件
-      let showImage = slideInAt > 3600;
+      let showImage = slideInAt > 3300;
       console.log(slideInAt, showImage);
       console.log(this.isShowImage);
       if (showImage) {
@@ -156,7 +151,7 @@ export default {
   beforeUnmount() {
     window.removeEventListener("scroll", this.scrollEvent);
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
