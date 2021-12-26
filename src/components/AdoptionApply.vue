@@ -189,7 +189,7 @@ export default {
   z-index: 999;
   width: 100vw;
   height: 100%;
-  min-height: 100vh;
+  min-height: fit-content;
   overflow: scroll;
 
   @include breakpoint.tablet {
@@ -198,7 +198,6 @@ export default {
 
   @include breakpoint.desktop {
     padding: 20px 0 40px;
-    height: fit-content;
   }
 
   // 統一表單樣式
