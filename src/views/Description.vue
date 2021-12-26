@@ -91,11 +91,11 @@
     <AdoptionNotice
       v-if="showAdoptionNotice"
       @goNextPage="goNextPage"
-      @cancelEdit="showAdoptionNotice = false"
+      @closeFormSignal="showAdoptionNotice = false"
     ></AdoptionNotice>
     <AdoptionApply
       v-if="showAdoptionApply"
-      @cancelEdit="showAdoptionApply = false"
+      @closeFormSignal="showAdoptionApply = false"
     ></AdoptionApply>
   </main>
 </template>
@@ -104,8 +104,6 @@
 import AdoptionApply from "@/components/AdoptionApply.vue";
 import AdoptionNotice from "@/components/AdoptionNotice.vue";
 import getApi from "@/service/getApi.js";
-import { db } from "@/firebase/firebase.config.js";
-import { collection, addDoc } from "firebase/firestore";
 
 export default {
   name: "Description",
@@ -198,16 +196,6 @@ export default {
         this.tracking = true;
       } else {
         this.tracking = false;
-      }
-    },
-    async storeFirebase(applyFormData) {
-      try {
-        const docRef = await addDoc(collection(db, "adoptionApply"), {
-          applyFormData,
-        });
-        console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
-        console.error("Error adding document: ", e);
       }
     },
   },

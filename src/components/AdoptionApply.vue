@@ -6,7 +6,7 @@
       </div>
       <h3>步驟二 認養申請</h3>
       <label class="accept_container">
-        <input type="checkbox" />
+        <input type="checkbox" v-model="ifAgree" />
         <span class="fake_button"></span>
         <span>本人願遵守以下規定，並提出申請</span>
       </label>
@@ -44,11 +44,7 @@
           本認養申請資料送出後，不代表已完成所選動物之認養，亦不代表您已具認養本動物的第一優先權，認養以收容所現場完成程序為準。
         </li>
       </ol>
-      <ValidationForm
-        :schema="formSchema"
-        @applyData="receiveApplyData"
-        @closeForm="closeForm"
-      />
+      <ValidationForm :schema="formSchema" @closeFormSignal="closeFormSignal" />
     </div>
   </section>
 </template>
@@ -138,8 +134,12 @@ export default {
     };
   },
   methods: {
-    closeForm(data) {
-      this.$emit("cancelEdit", data);
+    closeFormSignal(status) {
+      if (this.ifAgree || status === "cancel") {
+        this.$emit("closeFormSignal", true);
+      } else {
+        window.alert("請勾選同意書");
+      }
     },
     receiveApplyData(formAnswer) {
       console.log(formAnswer);

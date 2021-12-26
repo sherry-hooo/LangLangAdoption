@@ -211,7 +211,7 @@
         </li>
       </ul>
       <div class="notice_buttons">
-        <button class="cancel_btn" type="cancel" @click="cancelEdit">
+        <button class="cancel_btn" type="cancel" @click="closeFormSignal">
           <!-- 中間加入一個全形空格，讓取消＆提交按鈕等寬 -->
           取&emsp;消
         </button>
@@ -255,26 +255,11 @@ export default {
         }
       }
     },
-    cancelEdit() {
-      this.$emit("cancelEdit", "AdoptionNotice");
+    closeFormSignal() {
+      this.$emit("closeFormSignal", true);
     },
   },
-  computed: {
-    // applierAnswer() {
-    //   return {
-    //     q1: this.q1,
-    //     q2: this.q2,
-    //     q3: this.q3,
-    //     q4: this.q4,
-    //     q5: this.q5,
-    //     q6: this.q6,
-    //     q7: this.q7,
-    //     q8: this.q8,
-    //     q9: this.q9,
-    //     q10: this.q10,
-    //   };
-    // },
-  },
+  computed: {},
 };
 </script>
 <style lang="scss" scoped>

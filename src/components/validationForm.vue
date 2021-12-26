@@ -43,7 +43,7 @@
         class="cancel_btn"
         type="reset"
         value="取消"
-        @click="onCancel('cancel')"
+        @click="sentCloseFormSignal('cancel')"
       />
       <input class="submit_btn" type="submit" value="申請" />
     </div>
@@ -51,6 +51,8 @@
 </template>
 <script>
 import { Form, Field, ErrorMessage } from "vee-validate";
+import { db } from "@/firebase/firebase.config.js";
+import { collection, addDoc } from "firebase/firestore";
 
 export default {
   name: "Test11",
@@ -67,11 +69,21 @@ export default {
   },
   methods: {
     onSubmit(data) {
-      console.log(data);
-      this.$emit("applyData", data);
+      this.storeFirebase(data);
+      this.sentCloseFormSignal();
     },
-    onCancel(data) {
-      this.$emit("closeForm", data);
+    sentCloseFormSignal(status = "continue") {
+      this.$emit("closeFormSignal", status);
+    },
+    async storeFirebase(applyFormData) {
+      try {
+        const docRef = await addDoc(collection(db, "adoptionApply"), {
+          applyFormData,
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
     },
   },
 };
