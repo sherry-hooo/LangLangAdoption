@@ -24,32 +24,37 @@
           </p>
         </div>
         <button>
-          <img src="@/assets/img/buttonArrow.svg" alt="" />
+          <img src="@/assets/img/buttonArrow.svg"/>
         </button>
       </div>
     </section>
 
     <section class="gallery">
       <div class="parallax_group">
-        <div class="parallax_layer scroll_lowest">
+        <div class="parallax_layer scroll_first">
+          <img src="@/assets/img/dog1.jpg">
+        </div>
+        <div class="parallax_layer scroll_mid">
           <p>希望能夠有一個家， <br/>
             一個會好好愛我的主人</p>
           <img src="@/assets/img/cat1.jpg">
         </div>
-        <div class="parallax_layer scroll_three">
-          <img src="@/assets/img/dog1.jpg">
-        </div>
-
-        <div class="parallax_layer scroll_four">
+        <div class="parallax_layer scroll_second">
           <img src="@/assets/img/cat2.jpg">
         </div>
-        <div class="parallax_layer scroll_one">
+        <div class="parallax_layer scroll_last">
+          <img src="@/assets/img/dog3.jpg">
+        </div>
+        <div class="parallax_layer scroll_slow">
           <p>你能夠帶我回家嗎？</p>
           <img src="@/assets/img/dog2.jpg">
         </div>
-        <div class="parallax_layer scroll_two">
-          <img src="@/assets/img/dog3.jpg">
-        </div>
+        <div class="parallax_layer scroll_slogan">
+          <div class="slogan">
+            <p>為牠駐足，尋找你們之間的命中註定</p>
+            <img src="@/assets/img/arrow.svg">
+          </div>
+      </div>
       </div>
     </section>
 
@@ -505,7 +510,7 @@ main {
 .gallery{
   perspective: 10px;
   // height: 100vh;
-  height: 1200px;  
+  height: 1000px;  
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -522,10 +527,10 @@ main {
     left: 0;
     width: 100vw;
     height: 100%;
-    padding: 30px 30px;
+    // padding: 30px 30px;
     background: transparent;
   }
-  .scroll_one {
+  .scroll_slow {
     transform: translateZ(-15px) scale(2.5);
     p{
       font-size: 20px;
@@ -542,7 +547,7 @@ main {
       left: 100px;
     }
   }
-  .scroll_two {
+  .scroll_last {
     transform: translateZ(-10px) scale(2);
     img {
       width: 480px;
@@ -551,7 +556,7 @@ main {
       right: 100px;
     }
   }
-  .scroll_three {
+  .scroll_first {
     transform: translateZ(2px) scale(0.8);
     img {
       width: 370px;
@@ -560,7 +565,7 @@ main {
       left: 100px;
     }
   }
-  .scroll_four {
+  .scroll_second {
     transform: translateZ(0) scale(1);
     img {
       width: 400px;
@@ -569,7 +574,7 @@ main {
       right: 150px;
     }
   }
-  .scroll_lowest {
+  .scroll_mid {
     transform: translateZ(-5px) scale(1.5);
     p{
       position: absolute;
@@ -587,6 +592,41 @@ main {
       transform: translateY(-50%);
     }
   }
+  .scroll_slogan{
+    transform: translateZ(-30px) scale(4);
+    .slogan{
+      position: absolute;
+      // height: 70px;
+      bottom: 0;
+      width: 100%;
+    }
+    p{
+      display: inline-block;
+      margin-right: 20px;
+      color: color.$brown_500;
+      font-size: 40px;
+      font-weight: 600;
+    }
+    img{
+      display: inline-block;
+      animation: MoveLR 2s ease-in-out alternate infinite;
+    }
+  }
   }
 }
+
+@keyframes MoveLR {
+  0% {
+    transform: translateX(0);
+  }
+
+  50%{
+    transform: translateX(20px);
+  }
+
+  100%{
+    transform: translateX(0);
+  }
+}
+
 </style>
