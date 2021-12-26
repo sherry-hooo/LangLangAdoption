@@ -117,9 +117,9 @@ main {
   }
 }
 .container {
-  padding: 10px 30px 20px 30px;
+  padding: 10px 30px 40px 30px;
   @include breakpoint.tablet {
-    padding: 10px 50px 20px 50px;
+    padding: 10px 50px 40px 50px;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -127,7 +127,7 @@ main {
     margin: 0 auto;
   }
   @include breakpoint.bgScreen {
-    padding: 10px 100px 30px 100px;
+    padding: 10px 100px 40px 100px;
   }
 }
 h2 {
@@ -270,7 +270,7 @@ h2 {
     margin-top: 0;
     position: absolute;
     right: 50px;
-    bottom: 20px;
+    bottom: 40px;
     max-width: 50%;
     gap: 60px;
   }
@@ -330,6 +330,7 @@ h2 {
   position: absolute;
   top: -50px;
   right: 0;
+
   @include breakpoint.mobile {
     // top: 59%;
   }
@@ -337,6 +338,7 @@ h2 {
     // top: 42%;
   }
   @include breakpoint.desktop {
+    // animation: rotate 5s running linear forwards;
     // top: 50%;
   }
 }
@@ -344,10 +346,12 @@ h2 {
   @include breakpoint.tablet {
     border: solid 1px;
     border-color: #dec39e;
-    width: 223px;
+    width: 170px;
+    animation: 2s slidein 2s infinite alternate;
     // transform: translate(370px, -356px);
   }
   @include breakpoint.desktop {
+    width: 223px;
     // transform: translate(580px, -580px);
   }
 }
@@ -405,12 +409,12 @@ h2 {
   background-color: #af9380;
   width: 25px;
   height: 25px;
-  /*   filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.1)); */
+  // filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.1));
   animation: living 3s infinite ease-in-out;
   border-radius: 50%;
   padding: 0;
 
-  /*  color:#fff; */
+  // color:#fff;
 }
 .frame_circle {
   border: solid 2px;
@@ -418,19 +422,18 @@ h2 {
   border-color: #dec39e;
   width: 70px;
   height: 70px;
-  /*   filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.3)); */
+  // filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.3));
   animation: living 3s infinite ease-in-out;
-  /*   animation: 2s infinite alternate living; */
+  // animation: 2s infinite alternate living;
 }
 
-/* 波動效果 */
+// 波動效果
 .wave {
   position: relative;
   width: 25px;
   height: 25px;
   text-align: center;
-
-  /*   filter: drop-shadow(0 0 0.75rem crimson); */
+  // filter: drop-shadow(0 0 0.75rem crimson);
 }
 /* .wave .circle {
   width: 100%;
@@ -441,7 +444,7 @@ h2 {
   background: #af9380;
 } 
 .wave .circle:first-child { 
-   animation: circle-opacity 2s infinite;
+  animation: circle-opacity 2s infinite;
 } */
 @keyframes circle-opacity {
   from {
@@ -461,6 +464,25 @@ h2 {
   to {
     opacity: 0;
     transform: scale(2);
+  }
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(-20%);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>
