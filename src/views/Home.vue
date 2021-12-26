@@ -568,17 +568,17 @@ main {
   .scroll_second {
     transform: translateZ(0) scale(1);
     img {
-      width: 400px;
+      width: 360px;
       position: absolute;
       bottom: 5%;
-      right: 150px;
+      right: 5%;
     }
   }
   .scroll_mid {
     transform: translateZ(-5px) scale(1.5);
     p{
       position: absolute;
-      top: 40%;
+      top: 35%;
       left: 40%;
       font-size: 20px;
       font-weight: 600;
@@ -587,9 +587,9 @@ main {
     img {
       width: 460px;
       position: absolute;
-      bottom: 5%;
-      left: 400px;
-      transform: translateY(-50%);
+      top: 45%;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
   .scroll_slogan{
