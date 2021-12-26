@@ -12,11 +12,11 @@
           </div>
         </div>
         <div v-if="petData" class="case">
-          <div class="circle_box">
-            <img src="@/assets/img/circles.svg" alt="" />
-          </div>
           <div class="case_img_box">
             <div class="img_box">
+              <div class="circle_box">
+                <img src="@/assets/img/circles.svg" alt="" />
+              </div>
               <img
                 v-if="petData.album_file"
                 :src="petData.album_file"
@@ -72,11 +72,11 @@
               <p class="case_title">入所日期 &colon;</p>
               <p class="case_content">{{ petData.animal_createtime }}</p>
             </div>
-            <div v-if="petData.animal_place" class="case_wrapper wrapper_1">
+            <div v-if="petData.animal_place" class="case_wrapper">
               <p class="case_title">收容地點 &colon;</p>
               <p class="case_content">{{ petData.animal_place }}</p>
             </div>
-            <div v-if="petData.shelter_address" class="case_wrapper wrapper_1">
+            <div v-if="petData.shelter_address" class="case_wrapper">
               <p class="case_title">收容地址 &colon;</p>
               <p class="case_content">{{ petData.shelter_address }}</p>
             </div>
@@ -294,8 +294,9 @@ main {
     }
   }
   &_wrapper {
-    // margin-top: 24px;
+    flex: 60%;
     @include breakpoint.desktop {
+      flex: 40%;
       &:first-child {
         margin-top: 0;
       }
@@ -303,12 +304,6 @@ main {
   }
   & .wrapper_2 {
     flex: 40%;
-  }
-  & .wrapper_1 {
-    flex: 60%;
-    @include breakpoint.desktop {
-      flex: 40%;
-    }
   }
   &_des_box {
     display: flex;
@@ -322,7 +317,7 @@ main {
       margin-top: 40px;
     }
     @include breakpoint.tablet {
-      gap: 15px;
+      gap: 15px 50px;
     }
     @include breakpoint.desktop {
       margin-top: 0;
@@ -354,21 +349,22 @@ main {
   @include breakpoint.mobile {
     display: block;
     position: absolute;
-    width: 10%;
-    left: 35vw;
-    top: 31vh;
+    width: 20%;
+    right: -28px;
+    bottom: -35px;
   }
   @include breakpoint.tablet {
-    left: 35vw;
-    top: 44vh;
+    width: 25%;
+    right: -35px;
+    bottom: -40px;
   }
   @include breakpoint.desktop {
-    left: 30vw;
-    top: 48vh;
+    // left: 30vw;
+    // top: 48vh;
   }
   @include breakpoint.bgScreen {
-    left: 30vw;
-    top: 48vh;
+    // left: 30vw;
+    // top: 48vh;
   }
   & img {
     width: 100%;
@@ -381,12 +377,12 @@ main {
     display: block;
   }
 }
-
 .line2_box {
   position: absolute;
   right: 0;
   top: 3px;
   width: 170px;
+  animation: MoveLR 2s ease-in-out alternate infinite;
   & img {
     width: 100%;
     height: 100%;
@@ -397,19 +393,20 @@ main {
   right: 15px;
   top: 0;
   height: 170px;
+  animation: MoveTB 2s ease-in-out alternate infinite;
   & img {
     height: 100%;
   }
 }
 .img_box {
+  position: relative;
   flex: 40%;
+  line-height: 0;
   border: solid 8px;
   border-color: color.$white;
   background-color: color.$brown_100;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4);
-  overflow: hidden;
   max-width: 500px;
-  // max-height: 400px;
   & img {
     width: 100%;
     height: 100%;
@@ -420,11 +417,11 @@ main {
 }
 .follow_box {
   display: flex;
-  flex-direction: column;
   margin-top: 20px;
   gap: 5px;
   flex: 40%;
   @include breakpoint.mobile {
+    flex-direction: column;
     margin-top: 0;
     gap: 30px;
     justify-content: flex-end;
@@ -471,8 +468,6 @@ main {
   @include breakpoint.mobile {
     margin-left: unset;
   }
-  // @include breakpoint.tablet {
-  // }
   @include breakpoint.bgScreen {
     font-size: 22px;
     padding: 15px 30px;
@@ -509,12 +504,16 @@ main {
   }
   .arrow_box {
     display: inline-block;
-    max-width: 75px;
+    max-width: 60px;
+    animation: MoveLR 2s ease-in-out alternate infinite;
     & img {
       width: 100%;
       height: 100%;
     }
     @include breakpoint.tablet {
+      max-width: 90px;
+    }
+    @include breakpoint.desktop {
       max-width: 120px;
     }
   }
@@ -524,6 +523,28 @@ main {
   width: 36%;
   & img {
     width: 100%;
+  }
+}
+@keyframes MoveLR {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes MoveTB {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 </style>
