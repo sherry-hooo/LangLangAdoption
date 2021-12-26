@@ -1,16 +1,14 @@
 <template>
   <main>
-    <div class="wrapper">
-      <h2>追蹤浪浪</h2>
-      <section>
-        <Card
-          v-for="petData in TrackingList"
-          :key="petData"
-          :petData="petData"
-        ></Card>
-      </section>
-      <div class="pagination"><Pagination /></div>
-    </div>
+    <h2>追蹤浪浪</h2>
+    <section>
+      <Card
+        v-for="petData in trackingList"
+        :key="petData"
+        :petData="petData"
+      ></Card>
+    </section>
+    <Pagination :totalPage="totalPage" :pageNumber="pageNumber"></Pagination>
   </main>
 </template>
 
@@ -26,17 +24,23 @@ export default {
   },
   data() {
     return {
-      TrackingList: [],
+      trackingList: JSON.parse(localStorage.getItem("trackList")) || [],
+      pageNumber: 1,
     };
   },
   methods: {
-    getTrackingList() {
-      this.TrackingList = JSON.parse(localStorage.getItem("trackList"));
-      console.log(JSON.parse(localStorage.getItem("trackList")));
+    // async getTrackingList() {
+    //   await this.trackingList = JSON.parse(localStorage.getItem("trackList"));
+    //   this.totalPage = this.trackingList.length
+    // },
+  },
+  computed: {
+    totalPage() {
+      return this.trackingList.length;
     },
   },
   created() {
-    this.getTrackingList();
+    // this.getTrackingList();
   },
 };
 </script>
@@ -45,9 +49,13 @@ export default {
   font-size: 24px;
   font-weight: 500;
   color: color.$gray_700;
+  text-align: center;
+  margin-bottom: 16px;
 
   @include breakpoint.tablet {
+    text-align: left;
     font-size: 30px;
+    margin-bottom: 50px;
   }
   @include breakpoint.desktop {
     font-size: 50px;
@@ -55,39 +63,33 @@ export default {
 }
 
 main {
+  display: flex;
+  flex-direction: column;
   background: color.$brown_100;
   min-height: calc(100vh - 60px);
-  margin-top: 60px;
-  padding: 5px 10px;
+  height: fit-content;
+  padding: 10px 10px 20px;
 
   @include breakpoint.tablet {
     min-height: calc(100vh - 103px);
-    margin-top: 103px;
-    padding: 10px 100px;
+    padding: 10px 50px 30px;
+  }
+  @include breakpoint.desktop {
+    padding: 10px 100px 60px;
   }
 
   h2 {
     @extend %title_h2;
   }
-
-  // h3 {
-  //   font-size: 30px;
-  //   color: color.$gray_700;
-  //   text-align: middle;
-  //   margin-bottom: 16px;
-  //   @include breakpoint.desktop {
-  //     font-size: 50px;
-  //     text-align: left;
-  //     margin-bottom: 60px;
-  //   }
-  // }
 }
 section {
   min-height: 500px;
   height: fit-content;
   display: grid;
+  margin-bottom: 16px;
   grid-template-columns: repeat(1, 1fr);
   @include breakpoint.tablet {
+    margin-bottom: 20px;
     grid-template-columns: repeat(2, 1fr);
   }
   @include breakpoint.bgScreen {

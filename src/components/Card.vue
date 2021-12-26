@@ -39,7 +39,7 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    margin: 0 auto;  //新增margin-auto, 讓卡片能在grid layout中置中
+    margin: 0 auto; //新增margin-auto, 讓卡片能在grid layout中置中
     padding: 16px;
     width: 270px;
     height: 170px;

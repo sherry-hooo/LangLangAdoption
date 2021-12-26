@@ -9,13 +9,15 @@
     </button>
     <div class="pagination_pages">
       <input
-        type="text"
+        type="number"
+        :max="totalPage"
         @change="keyPageNumber"
         :value="currentPage"
+        placeholder="1"
         required
       />
-      <div>/</div>
-      <div>{{ totalPage }}</div>
+      <div class="divider">/</div>
+      <p>{{ totalPage }}</p>
     </div>
     <button
       class="pagination_button last"
@@ -48,12 +50,15 @@ export default {
       this.currentPage--;
       this.$emit("currentPage", this.currentPage);
     },
-    keyPageNumber(e) {
-      // if (e.target.value > this.totalPage || e.target.value == "") {
-      //   console.log("沒有此頁面");
-      //   return;
-      // }
-      this.currentPage = parseInt(e.target.value);
+    keyPageNumber(event) {
+      console.log(event);
+      console.log(typeof event.target.value);
+      this.currentPage = parseInt(
+        Number(event.target.value) > this.totalPage ||
+          Number(event.target.value) <= 0
+          ? this.totalPage
+          : Number(event.target.value)
+      );
       setTimeout(() => {
         this.$emit("currentPage", this.currentPage);
       }, 300);
@@ -68,13 +73,13 @@ export default {
   justify-content: center;
   justify-content: space-between;
   align-items: center;
-  width: 200px;
+  width: 250px;
   margin: auto auto 0;
   &_button {
     background: #dec39e;
     border-radius: 1px;
     color: white;
-    padding: 3px 10px;
+    padding: 10px 15px;
     border-radius: 3px;
   }
   .first {
@@ -93,11 +98,12 @@ export default {
     display: flex;
     flex: 1;
     align-items: stretch;
-    font-size: 16px;
+    font-size: 20px;
 
-    > * {
-      flex: 0 1 33.3%;
-      width: 33.3%;
+    > input,
+    p {
+      flex: 0 1 45%;
+      width: 45%;
     }
     input {
       border-radius: 3px;
@@ -105,10 +111,17 @@ export default {
       text-align: center;
       width: 20px;
       padding: 0 5px;
+      font-size: 20px;
+      font-weight: 500;
+      color: #625c5cfa;
     }
     input::-webkit-textfield-decoration-container {
       height: 100%;
       justify-content: center;
+    }
+    .divider {
+      width: 10px;
+      margin: 0 5px 0 15px;
     }
   }
   .number_current {

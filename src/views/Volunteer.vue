@@ -87,16 +87,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-// * {
-//   outline: solid 1px red;
-// }
 main {
   position: relative;
-  padding-top: 60px;
+  padding-top: 10px;
   background-color: color.$brown_100;
-  @include breakpoint.tablet {
-    padding-top: 103px;
-  }
 }
 .container {
   padding: 10px 30px 30px 30px;

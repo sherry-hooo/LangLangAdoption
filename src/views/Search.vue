@@ -143,17 +143,17 @@ export default {
   font-size: 24px;
   font-weight: 500;
   color: color.$gray_700;
+  text-align: center;
+  margin-bottom: 16px;
 
   @include breakpoint.tablet {
+    text-align: left;
     font-size: 30px;
+    margin-bottom: 24px;
   }
   @include breakpoint.desktop {
     font-size: 50px;
   }
-}
-
-h2 {
-  @extend %title_h2;
 }
 
 main {
@@ -162,7 +162,7 @@ main {
   background: color.$brown_100;
   min-height: calc(100vh - 60px);
   height: fit-content;
-  padding: 10px 30px 20px;
+  padding: 10px 10px 20px;
 
   @include breakpoint.tablet {
     min-height: calc(100vh - 103px);
@@ -175,14 +175,6 @@ main {
 
   h2 {
     @extend %title_h2;
-
-    text-align: left;
-    margin-bottom: 16px;
-
-    @include breakpoint.desktop {
-      text-align: left;
-      margin-bottom: 24px;
-    }
   }
 }
 section {
@@ -192,7 +184,10 @@ section {
   text-align: center;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
+  margin-bottom: 16px;
+
   @include breakpoint.tablet {
+    margin-bottom: 20px;
     grid-template-columns: repeat(2, 1fr);
   }
   @include breakpoint.bgScreen {

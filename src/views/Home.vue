@@ -134,17 +134,18 @@
 </template>
 <script>
 export default {
+  data() {
+    return {
+      isShowImage: false,
+    };
+  },
   methods: {
     scrollEvent() {
       let slideInAt = window.scrollY + window.innerHeight;
-      console.log("slideInAt", slideInAt);
 
       //展開圖片的條件
       let showImage = slideInAt > 3300;
-      console.log(slideInAt, showImage);
-      console.log(this.isShowImage);
       if (showImage) {
-        console.log("enter", this.isShowImage);
         this.isShowImage = true;
       }
     },
