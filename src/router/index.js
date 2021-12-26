@@ -27,13 +27,6 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/Volunteer.vue"),
   },
   {
-    path: "/Custom",
-    name: "Custom",
-    props: true,
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Custom.vue"),
-  },
-  {
     path: "/Description/:petKind/:petID",
     name: "Description",
     props: true,

@@ -231,7 +231,7 @@ main {
   padding-top: 60px;
   background-color: color.$brown-100;
   position: relative;
-  overflow: hidden;
+  // overflow: hidden; //會卡到表單
   height: fit-content;
   min-height: 100vh;
   @include breakpoint.tablet {

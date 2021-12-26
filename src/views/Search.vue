@@ -7,7 +7,11 @@
       :shelterList="shelterList"
     ></Dropdown>
     <section>
-      <Card v-for="petData in petData" :key="petData" :petData="petData"></Card>
+      <Card
+        v-for="petData in singleShelterData"
+        :key="petData"
+        :petData="petData"
+      ></Card>
     </section>
     <Pagination
       @currentPage="receiveCurrentPage"

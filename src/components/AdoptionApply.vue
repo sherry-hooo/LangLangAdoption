@@ -189,7 +189,8 @@ export default {
   z-index: 999;
   width: 100vw;
   height: 100%;
-  min-height: fit-content;
+  min-height: 100vh;
+  overflow: scroll;
 
   @include breakpoint.tablet {
     height: 100%;
