@@ -159,19 +159,19 @@ export default {
       this.tracking = !this.tracking;
       let trackingList = this.getLocalStorage();
       const trackingPet = {
-        petID: parseInt(this.petID),
-        petKind: this.petKind,
-        petImg: this.petData.album_file,
-        petColour: this.petData.animal_colour,
-        petSex: this.petData.animal_sex,
-        petPlace: this.petData.animal_place,
+        animal_id: parseInt(this.petID),
+        animal_kind: this.petKind,
+        album_file: this.petData.album_file,
+        animal_colour: this.petData.animal_colour,
+        animal_sex: this.petData.animal_sex,
+        animal_place: this.petData.animal_place,
       };
       if (this.tracking) {
         trackingList.push(trackingPet);
         this.setLocalStorage(trackingList);
       } else {
         const removeTrackingIndex = trackingList.findIndex(
-          (trackedPet) => trackedPet.petID === trackingPet.petID
+          (trackedPet) => trackedPet.petID === trackingPet.animal_id
         );
         trackingList.splice(removeTrackingIndex, 1);
         this.setLocalStorage(trackingList);
@@ -190,7 +190,7 @@ export default {
     },
     checkTrackingStatus() {
       let inTrackingList = this.getLocalStorage()
-        .map((pet) => pet.petID)
+        .map((pet) => pet.animal_id)
         .includes(parseInt(this.petID));
       if (inTrackingList) {
         this.tracking = true;

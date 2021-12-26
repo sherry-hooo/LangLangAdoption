@@ -4,9 +4,9 @@
       <h3>追蹤浪浪</h3>
       <section>
         <Card
-          v-for="card in 0"
-          :key="card"
-          :petData="{ animal_id: 0, animal_kind: '' }"
+          v-for="petData in TrackingList"
+          :key="petData"
+          :petData="petData"
         ></Card>
       </section>
       <div class="pagination"><Pagination /></div>
@@ -24,7 +24,18 @@ export default {
     Pagination,
   },
   data() {
-    return {};
+    return {
+      TrackingList: [],
+    };
+  },
+  methods: {
+    getTrackingList() {
+      this.TrackingList = JSON.parse(localStorage.getItem("trackList"));
+      console.log(JSON.parse(localStorage.getItem("trackList")));
+    },
+  },
+  created() {
+    this.getTrackingList();
   },
 };
 </script>
