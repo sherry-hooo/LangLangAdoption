@@ -117,9 +117,9 @@ main {
   }
 }
 .container {
-  padding: 10px 30px 40px 30px;
+  padding: 10px 30px 30px 30px;
   @include breakpoint.tablet {
-    padding: 10px 50px 40px 50px;
+    padding: 10px 50px 80px 50px;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -127,7 +127,7 @@ main {
     margin: 0 auto;
   }
   @include breakpoint.bgScreen {
-    padding: 10px 100px 40px 100px;
+    padding: 10px 100px 80px 100px;
   }
 }
 h2 {
@@ -148,6 +148,7 @@ h2 {
 }
 .flex_1 {
   display: flex;
+  padding-top: 10px;
   gap: 10px;
   & .img_box {
     height: 50%;
@@ -270,7 +271,7 @@ h2 {
     margin-top: 0;
     position: absolute;
     right: 50px;
-    bottom: 40px;
+    bottom: 60px;
     max-width: 50%;
     gap: 60px;
   }
@@ -327,19 +328,26 @@ h2 {
 //   height: 70px;
 // }
 .layout_line_2 {
+  display: none;
   position: absolute;
-  top: -50px;
+  // top: -50px;
   right: 0;
 
   @include breakpoint.mobile {
     // top: 59%;
   }
   @include breakpoint.tablet {
+    display: block;
+    top: -90px;
     // top: 42%;
   }
   @include breakpoint.desktop {
+    top: -140px;
     // animation: rotate 5s running linear forwards;
     // top: 50%;
+  }
+  @include breakpoint.bgScreen {
+    top: -20px;
   }
 }
 .frame_line {
@@ -386,13 +394,13 @@ h2 {
     top: 59%;
   }
   @include breakpoint.tablet {
-    top: 42%;
+    top: 40%;
   }
   @include breakpoint.desktop {
-    top: 48%;
+    top: 47%;
   }
   @include breakpoint.bgScreen {
-    top: 55%;
+    top: 52%;
   }
 }
 .wave_box {
