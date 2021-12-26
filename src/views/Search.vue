@@ -8,7 +8,7 @@
     ></Dropdown>
     <section>
       <Card
-        v-for="petData in singleShelterData"
+        v-for="petData in petDataList"
         :key="petData"
         :petData="petData"
       ></Card>
@@ -16,6 +16,7 @@
     <Pagination
       @currentPage="receiveCurrentPage"
       :totalPage="totalPage"
+      :pageNumber="pageNumber"
     ></Pagination>
   </main>
 </template>
@@ -61,9 +62,10 @@ export default {
       this.selectedAnimanlKind = data;
       this.filteredShelterByKind(this.singleKindData);
     },
-    receiveSelection(data) {
+    async receiveSelection(data) {
       this.selectedAnimanlKind = data.animalKind;
       this.selectedShelterPkid = data.shelterPkid;
+      this.pageNumber = 1;
       this.getShelterAPI(data.animalKind, data.shelterPkid);
     },
     receiveCurrentPage(page) {
@@ -99,7 +101,7 @@ export default {
     },
   },
   computed: {
-    petData() {
+    petDataList() {
       return this.singleShelterData.slice(this.startIndex, this.endIndex);
     },
     startIndex() {

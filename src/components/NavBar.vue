@@ -7,8 +7,8 @@
         </router-link>
       </div>
       <label for="burger">&#9776;</label>
-      <input type="checkbox" id="burger" />
-      <ul class="navbar">
+      <input type="checkbox" id="burger" @click="openNav = true" />
+      <ul class="navbar" v-if="openNav" @click="openNav = false">
         <li><router-link :to="{ name: 'Home' }">回首頁</router-link></li>
         <li><router-link :to="{ name: 'Search' }">尋找浪浪</router-link></li>
         <li><router-link :to="{ name: 'Track' }">追蹤浪浪 </router-link></li>
@@ -20,6 +20,16 @@
     </div>
   </header>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      openNav: false,
+    };
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 header {
@@ -83,7 +93,6 @@ header {
   width: 100vw;
   text-align: right;
   background-color: color.$brown_100;
-  // padding: 10px;
   margin: 0;
   gap: 60px;
   list-style-type: none;
@@ -143,5 +152,14 @@ label {
   // #burger:checked + ul {
   //   display: block;
   // }
+}
+
+.toggle {
+  display: none !important;
+}
+
+.targeting {
+  text-decoration: underline color.$gray_500 2px;
+  text-underline-offset: 5px;
 }
 </style>

@@ -1,6 +1,7 @@
 <template>
   <NavBar />
   <router-view />
+  <footer>&copy; 2021GoodIdeas. All rights reserved.</footer>
 </template>
 
 <script>
@@ -16,5 +17,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+footer {
+  height: 60px;
+  line-height: 60px;
+  width: 100%;
+  background: white;
+  font-weight: 900;
+  color: color.$brown_300;
 }
 </style>

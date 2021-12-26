@@ -14,7 +14,6 @@
         :value="currentPage"
         required
       />
-      <!-- v-model.number="currentPage" -->
       <div>/</div>
       <div>{{ totalPage }}</div>
     </div>
@@ -30,11 +29,11 @@
 
 <script>
 export default {
-  props: ["totalPage"],
+  props: ["totalPage", "pageNumber"],
   data() {
     return {
-      currentPage: 1,
       test: true,
+      currentPage: this.pageNumber,
     };
   },
   methods: {

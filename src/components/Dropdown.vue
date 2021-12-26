@@ -66,7 +66,6 @@ export default {
       this.shelterName = place.shelter_name;
       this.shelterPkid = place.animal_shelter_pkid;
       this.showShelterList = false;
-      // this.$emit("selectedShelter", place.animal_shelter_pkid);
     },
     // 點選送出按鈕
     emitSelection() {
@@ -74,6 +73,11 @@ export default {
         animalKind: this.animalKind,
         shelterPkid: this.shelterPkid,
       });
+    },
+  },
+  watch: {
+    animalKind() {
+      this.shelterName = "";
     },
   },
 };
