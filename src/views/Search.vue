@@ -1,7 +1,11 @@
 <template>
   <main>
     <h3>尋找浪浪</h3>
-    <Dropdown @animalKind="receiveAnimalKind"></Dropdown>
+    <Dropdown
+      @selectedAnimalKind="receiveAnimalKind"
+      @selection="receiveSelection"
+      :shelterList="shelterList"
+    ></Dropdown>
     <section>
       <Card v-for="petData in petData" :key="petData" :petData="petData"></Card>
     </section>
@@ -27,24 +31,39 @@ export default {
   },
   data() {
     return {
-      petsDataInArray: [],
-      animalKind: "",
-      currentPage: 1,
+      singleKindData: [],
+      singleShelterData: [],
+      pageNumber: 1,
       cardAmount: 9,
+      selectedAnimanlKind: "",
+      selectedShelterPkid: "",
+      shelterList: [],
     };
   },
   methods: {
-    getAPI() {
-      getApi
-        .getAnimalData(this.animalKind)
-        .then((res) => (this.petsDataInArray = res.data.Data));
+    getAnimalAPI(kind) {
+      return getApi
+        .getAnimalData(kind)
+        .then((res) => (this.singleKindData = res.data.Data));
     },
-    receiveAnimalKind(data) {
-      this.animalKind = data;
-      this.getAPI(this.animalKind);
+    getShelterAPI(kind, shelterPkid) {
+      getApi
+        .getShelterData(kind, shelterPkid)
+        .then((res) => (this.singleShelterData = res.data.Data));
+    },
+    // 接收選取的動物類別
+    async receiveAnimalKind(data) {
+      await this.getAnimalAPI(data);
+      this.selectedAnimanlKind = data;
+      this.filteredShelterByKind(this.singleKindData);
+    },
+    receiveSelection(data) {
+      this.selectedAnimanlKind = data.animalKind;
+      this.selectedShelterPkid = data.shelterPkid;
+      this.getShelterAPI(data.animalKind, data.shelterPkid);
     },
     receiveCurrentPage(page) {
-      this.currentPage = page;
+      this.pageNumber = page;
       this.scrollToTop();
     },
     scrollToTop() {
@@ -53,50 +72,102 @@ export default {
         behavior: "smooth",
       });
     },
+    // 依照動物類別篩選出收容所
+    filteredShelterByKind(allList) {
+      let getShelterData = allList.map((data) => ({
+        shelter_name: data.shelter_name,
+        animal_shelter_pkid: data.animal_shelter_pkid,
+      }));
+
+      let sortedShelter = getShelterData.sort((front, back) => {
+        return front.animal_shelter_pkid - back.animal_shelter_pkid;
+      });
+      this.shelterList = sortedShelter.reduce((accumulator, current) => {
+        if (
+          accumulator.length === 0 ||
+          accumulator[accumulator.length - 1].animal_shelter_pkid !==
+            current.animal_shelter_pkid
+        ) {
+          accumulator.push(current);
+        }
+        return accumulator;
+      }, []);
+    },
   },
   computed: {
     petData() {
-      console.log(this.startIndex, this.endIndex);
-      return this.petsDataInArray.slice(this.startIndex, this.endIndex);
+      return this.singleShelterData.slice(this.startIndex, this.endIndex);
     },
     startIndex() {
-      return (this.currentPage - 1) * this.cardAmount;
+      return (this.pageNumber - 1) * this.cardAmount;
     },
     endIndex() {
-      return this.currentPage * this.cardAmount;
+      return this.pageNumber * this.cardAmount;
     },
     totalPage() {
-      return parseInt(this.petsDataInArray.length / this.cardAmount);
+      return Math.ceil(this.singleShelterData.length / this.cardAmount);
     },
+    // shelterList() {
+    //   let getShelterData = this.singleKindData.map((data) => ({
+    //     shelter_name: data.shelter_name,
+    //     animal_shelter_pkid: data.animal_shelter_pkid,
+    //   }));
+
+    //   let sortedShelter = getShelterData.sort((front, back) => {
+    //     return front.animal_shelter_pkid - back.animal_shelter_pkid;
+    //   });
+
+    //   return sortedShelter.reduce((accumulator, current) => {
+    //     if (
+    //       accumulator.length === 0 ||
+    //       accumulator[accumulator.length - 1].animal_shelter_pkid !==
+    //         current.animal_shelter_pkid
+    //     ) {
+    //       accumulator.push(current);
+    //     }
+    //     return accumulator;
+    //   }, []);
+    // },
   },
-  // created() {
-  //   this.getAPI();
-  // },
 };
 </script>
 
 <style lang="scss" scoped>
+%title_h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: color.$gray_700;
+
+  @include breakpoint.tablet {
+    font-size: 30px;
+  }
+  @include breakpoint.desktop {
+    font-size: 50px;
+  }
+}
+
 main {
   background: color.$brown_100;
   min-height: calc(100vh - 60px);
   height: fit-content;
   margin-top: 60px;
-  padding: 5px 10px;
+  padding: 10px 30px 20px;
 
   @include breakpoint.tablet {
     min-height: calc(100vh - 103px);
     margin-top: 103px;
     padding: 10px 100px;
   }
-  h3 {
-    font-size: 30px;
-    color: color.$gray_700;
-    text-align: middle;
+
+  h2 {
+    @extend %title_h2;
+
+    text-align: left;
     margin-bottom: 16px;
+
     @include breakpoint.desktop {
-      font-size: 50px;
       text-align: left;
-      margin-bottom: 60px;
+      margin-bottom: 24px;
     }
   }
 }
@@ -104,6 +175,9 @@ section {
   // 暫時設定高度 500px
   min-height: 500px;
   height: fit-content;
+
+  text-align: center;
+
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   @include breakpoint.tablet {

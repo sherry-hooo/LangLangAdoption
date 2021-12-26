@@ -11,19 +11,29 @@
             <img src="@/assets/img/Line3.svg" alt="" />
           </div>
         </div>
-        <div class="case">
+        <div v-if="petData" class="case">
           <div class="circle_box">
             <img src="@/assets/img/circles.svg" alt="" />
           </div>
           <div class="case_img_box">
             <div class="img_box">
-              <img :src="petData.album_file" alt="浪浪圖片" />
+              <img
+                v-if="petData.album_file"
+                :src="petData.album_file"
+                alt="浪浪圖片"
+              />
+              <img
+                v-else-if="petKind === '狗'"
+                src="@/assets/img/dog1.jpg"
+                alt="狗狗替代圖片"
+              />
+              <img v-else src="@/assets/img/cat1.jpg" alt="貓貓替代圖片" />
             </div>
             <div class="follow_box">
               <div class="follow">
                 <label class="heart_icon">
-                  <input type="checkbox" @click="setToTrack" />
-                  <i class="far fa-heart"></i>
+                  <input type="checkbox" @click="setTrack" />
+                  <i class="far fa-heart" :class="{ onTrack: tracking }"></i>
                 </label>
                 <span>{{ tracking ? "已追蹤" : "追蹤" }}</span>
               </div>
@@ -49,11 +59,11 @@
             </div>
             <div v-if="petData.animal_sex" class="case_wrapper wrapper_2">
               <p class="case_title">性別 &colon;</p>
-              <p class="case_content">{{ petData.animal_sex === "F" }}</p>
+              <p class="case_content">{{ petSex }}</p>
             </div>
             <div v-if="petData.animal_bodytype" class="case_wrapper wrapper_2">
               <p class="case_title">體型 &colon;</p>
-              <p class="case_content">{{ petData.animal_bodytype }}</p>
+              <p class="case_content">{{ petBodyType }}</p>
             </div>
             <div
               v-if="petData.animal_createtime"
@@ -95,13 +105,11 @@
     <AdoptionNotice
       v-if="showAdoptionNotice"
       @goNextPage="goNextPage"
-      @submitNoticeForm="receiveNoticeForm"
-      @cancelEdit="cancelEdit"
+      @closeFormSignal="showAdoptionNotice = false"
     ></AdoptionNotice>
     <AdoptionApply
       v-if="showAdoptionApply"
-      @cancelEdit="cancelEdit"
-      @submitApplyForm="receiveApplForm"
+      @closeFormSignal="showAdoptionApply = false"
     ></AdoptionApply>
   </main>
 </template>
@@ -119,48 +127,69 @@ export default {
     return {
       showAdoptionNotice: false,
       showAdoptionApply: false,
-      noticeForm: {},
       applyForm: {},
       tracking: false,
       petData: {},
     };
   },
   computed: {
-    // tracking() {
-    //   let ifTracking = this.getLocalStorage().find({
-    //     petID: this.petID,
-    //     petKind: this.petKind,
-    //   })
-    //     ? true
-    //     : false;
-    //   console.log(ifTracking);
-    //   return false;
-    // },
+    petBodyType() {
+      let bodyType = this.petData.animal_bodytype;
+      switch (bodyType) {
+        case "MEDIUM":
+          bodyType = "中型";
+          break;
+        case "BIG":
+          bodyType = "大型";
+          break;
+        case "SMALL":
+          bodyType = "小型";
+          break;
+      }
+      return bodyType;
+    },
+    petSex() {
+      let gender = this.petData.animal_sex;
+      switch (gender) {
+        case "F":
+          gender = "女孩";
+          break;
+        case "M":
+          gender = "男孩";
+          break;
+        case "N":
+          gender = "中性";
+          break;
+      }
+      return gender;
+    },
   },
   methods: {
     goNextPage(data) {
       this.showAdoptionNotice = false;
       this.showAdoptionApply = data;
     },
-    receiveNoticeForm(answer) {
-      console.log(answer);
-      this.noticeForm = answer;
-    },
-    cancelEdit(componentName) {
-      componentName === "AdoptionApply"
-        ? (this.showAdoptionApply = false)
-        : (this.showAdoptionNotice = false);
-    },
-    receiveApplForm(form) {
-      console.log("收到驗證後的資料了", form);
-      this.showAdoptionApply = false;
-    },
-    setToTrack() {
+    setTrack() {
       this.tracking = !this.tracking;
       let trackingList = this.getLocalStorage();
-      const trackingPet = { petID: this.petID, petKind: this.petKind };
-      trackingList.push(trackingPet);
-      this.setLocalStorage(trackingList);
+      const trackingPet = {
+        animal_id: parseInt(this.petID),
+        animal_kind: this.petKind,
+        album_file: this.petData.album_file,
+        animal_colour: this.petData.animal_colour,
+        animal_sex: this.petData.animal_sex,
+        animal_place: this.petData.animal_place,
+      };
+      if (this.tracking) {
+        trackingList.push(trackingPet);
+        this.setLocalStorage(trackingList);
+      } else {
+        const removeTrackingIndex = trackingList.findIndex(
+          (trackedPet) => trackedPet.petID === trackingPet.animal_id
+        );
+        trackingList.splice(removeTrackingIndex, 1);
+        this.setLocalStorage(trackingList);
+      }
     },
     getLocalStorage() {
       return JSON.parse(localStorage.getItem("trackList")) || [];
@@ -175,12 +204,12 @@ export default {
     },
     checkTrackingStatus() {
       let inTrackingList = this.getLocalStorage()
-        .map((pet) => pet.id)
-        .includes(this.petID);
+        .map((pet) => pet.animal_id)
+        .includes(parseInt(this.petID));
       if (inTrackingList) {
         this.tracking = true;
       } else {
-        return false;
+        this.tracking = false;
       }
     },
   },
@@ -418,8 +447,9 @@ main {
       font-size: 30px;
       color: red;
     }
-    input[type="checkbox"]:checked + i {
+    .onTrack {
       font-weight: 900;
+      transition: all 0.3s ease-in-out;
     }
   }
   span {
