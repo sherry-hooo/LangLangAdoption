@@ -1,9 +1,12 @@
 <template>
   <main>
     <div class="custom">
+      <img class="track2" src="@/assets/img/logo.svg">
+      <img class="track1" src="@/assets/img/logo.svg">
+      <img class="track3" src="@/assets/img/logo.svg">
       <h2>
         領養前的那些事
-        <img class="track1" src="@/assets/img/logo.svg">
+        <!-- <img class="track1" src="@/assets/img/logo.svg"> -->
         </h2>
       <div class="FAQ_group1">
         <div class="question wrap_why">
@@ -76,7 +79,7 @@
           </div>
         </div>
       </div>
-      <img class="track2" src="@/assets/img/logo.svg">
+      <!-- <img class="track2" src="@/assets/img/logo.svg"> -->
     </div>
   </main>
 </template>
@@ -252,45 +255,58 @@
 
 
 // 腳印動畫
-
+@keyframes shine{
+  from  { opacity: 0 };
+  to  { opacity: 1 }
+}
+// 位置相對於容器
+// 左邊的腳印
 .track1 {
+  // display: none;
   width: 40px;
   position: absolute; //相對於h2
-  bottom: 0;
-  left: 20%;
-  transform: rotate(45deg);
-  // animation: footprintR 2s steps(3, end) forwards;
+  top: 45%;
+  // bottom: 35%;
+  left: 5%;
+  transform: rotate(30deg);
+  opacity: 0;
+  animation: shine 1s infinite ease-in-out;
+  // animation: footprintL 2s steps(7, end) infinite;
   // animation-delay: 0.5s;
 }
 
 .track2{
-  width: 40px;
+  // 靜態位置樣式
+  // width: 40px;
+  // position: absolute;
+  // bottom: 40%;
+  // right: 20px;
+  // transform: rotate(-15deg);
+  
+  // 動畫參數
   position: absolute;
-  bottom: 40%;
-  right: 20px;
-  transform: rotate(-15deg);
-  // animation: footprintR 0.5s step(1, end) forwards;
-  // animation: footprintL 2s steps(2, end) forwards;
+  top: 30%;
+  left: 7%;
+  width: 40px;
+  opacity: 0;
+  transform: rotate(-30deg);
+  animation: shine 1s infinite ease-in-out;
+  animation-delay: 1s;
 }
 
-@keyframes footprintL {
+.track3{
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  transform: rotate(25deg);
+  animation: shine 2s infinite ease-in-out;
+  animation-delay: 2s;
+}
+
+@keyframes footprint {
   to {
-    left: 15px;
-    transform: translateY(5px);
-    // transform: translateY(-20px) translateX(50px);
+    transform: translateY(-100px) translateX(-10px);
   }
 }
 
-@keyframes footprintR {
-  to {
-    right: 10px;
-    transform: translateY(5px);
-    // transform: translateY(-20px) translateX(50px);
-  }
-}
-
-@keyframes fadeIn{
-  from  { opacity: 0 };
-  to  { opacity: 1 }
-}
 </style>
