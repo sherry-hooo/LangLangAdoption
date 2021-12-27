@@ -93,8 +93,10 @@
         </div>
         <div class="parallax_layer scroll_slogan">
           <div class="slogan">
-            <p>為牠駐足，尋找你們之間的命中註定</p>
-            <img src="@/assets/img/arrow.svg" />
+            <router-link :to="{ name: 'Search' }">
+              <p>為牠駐足，尋找你們之間的命中註定</p>
+              <img src="@/assets/img/arrow.svg" />
+            </router-link>
           </div>
         </div>
       </div>
@@ -107,7 +109,9 @@
         <div class="volunteer_image">
           <img src="@/assets/img/volunteer4.jpg" />
         </div>
-        <button>我有興趣</button>
+        <router-link :to="{ name: 'Volunteer' }">
+          <button>我有興趣</button>
+        </router-link>
       </div>
     </section>
 
@@ -123,7 +127,9 @@
       <div class="topic_content_area">
         <h2>領養前的那些事</h2>
         <p>多的是，你不知道的事。</p>
-        <button>我想知道</button>
+        <router-link :to="{ name: 'Custom' }">
+          <button>我想知道</button>
+        </router-link>
       </div>
       <div class="solid_circle">
         <img src="@/assets/img/solidCircle.svg" />
@@ -146,13 +152,12 @@ export default {
       let slideInAt = window.scrollY + window.innerHeight;
 
       //展開圖片的條件
-      let showImage = slideInAt > 4300;
+      let showImage = slideInAt > 3300;
       if (showImage) {
         this.isShowImage = true;
       }
     },
     dropDown() {
-      console.log("gi");
       window.scroll({
         top: innerHeight,
         behavior: "smooth",
@@ -169,6 +174,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+a {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+}
 // section共用h2樣式
 %title_h2 {
   font-size: 24px;
@@ -353,6 +363,7 @@ main {
     right: 0;
     bottom: 15%;
     transform: scale(0.8);
+    cursor: pointer;
 
     @include breakpoint.tablet {
       right: unset;
@@ -468,6 +479,7 @@ main {
   button {
     @extend %button;
     position: static;
+    cursor: pointer;
 
     @include breakpoint.desktop {
       position: absolute;
@@ -546,10 +558,12 @@ main {
 
   .hollow_circle {
     display: none;
+    animation: living 3s infinite ease-out;
   }
 
   .solid_circle {
     display: none;
+    animation: living 4s 1.2s infinite ease-out;
   }
 
   @include breakpoint.tablet {
@@ -603,6 +617,7 @@ main {
     @extend %button;
     margin-top: 30px;
     z-index: 3;
+    cursor: pointer;
   }
 }
 // gallery區塊
@@ -703,6 +718,7 @@ main {
       margin-top: 10px;
       width: 80px;
       animation: MoveLR 2s ease-in-out alternate infinite;
+      pointer-events: none;
     }
   }
 }
@@ -947,6 +963,17 @@ main {
 
   100% {
     transform: translateX(0);
+  }
+}
+
+@keyframes living {
+  from {
+    opacity: 1;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.2);
   }
 }
 </style>
