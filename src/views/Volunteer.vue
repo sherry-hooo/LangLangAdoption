@@ -4,12 +4,7 @@
       <h2>志工招募</h2>
       <div class="flex_1">
         <div class="layout_line_1">
-          <div class="wave_box">
-            <div class="wave">
-              <div class="circle"></div>
-              <div class="solid_circle"></div>
-            </div>
-          </div>
+          <div class="solid_circle"></div>
           <div class="frame_circle"></div>
         </div>
         <div class="img_box">
@@ -100,9 +95,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-// * {
-//   outline: solid 1px red;
-// }
 main {
   position: relative;
   padding-top: 60px;
@@ -154,7 +146,6 @@ h2 {
     gap: 70px;
     & .img_box {
       max-width: 50%;
-      // height: 35%;
       & img {
         width: 100%;
         height: 100%;
@@ -176,14 +167,11 @@ h2 {
   }
   @include breakpoint.tablet {
     flex: unset;
-    // margin-top: 60px;
   }
 }
 .info {
   text-align: start;
   flex: 1;
-  // &_content {
-  // }
   @include breakpoint.tablet {
     width: fit-content;
     margin-left: 15px;
@@ -360,23 +348,16 @@ h2 {
     top: 52%;
   }
 }
-.wave_box {
-  position: absolute;
-  top: 60px;
-  left: 70px;
-  width: 40%;
-  height: 40%;
-}
 .solid_circle {
   position: absolute;
   z-index: 999;
-  border-radius: 999em;
+  top: 60px;
+  left: 70px;
+  border-radius: 999rem;
   background-color: #af9380;
   width: 25px;
   height: 25px;
   animation: living 3s infinite ease-out;
-  border-radius: 50%;
-  padding: 0;
 }
 .frame_circle {
   border: solid 2px;
@@ -385,14 +366,6 @@ h2 {
   width: 70px;
   height: 70px;
   animation: living 3s infinite ease-out;
-}
-
-// 波動效果
-.wave {
-  position: relative;
-  width: 25px;
-  height: 25px;
-  text-align: center;
 }
 @keyframes living {
   from {
