@@ -180,11 +180,12 @@ export default {
 .wrapper {
   padding: 20px 0px 20px;
   background: rgba(190, 188, 188, 0.6);
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(2px);
   display: flex;
   justify-content: center;
   //達成滿版效果
-  position: absolute;
+  position: fixed;
+  overflow: scroll;
   top: 0;
   left: 0;
   right: 0;
@@ -195,11 +196,11 @@ export default {
   overflow: scroll;
 
   @include breakpoint.tablet {
-    height: 100%;
+    padding: 70px 0 20px;
   }
 
   @include breakpoint.desktop {
-    padding: 20px 0 40px;
+    padding: 100px 0 40px;
   }
 
   // 統一表單樣式
@@ -300,10 +301,10 @@ export default {
     width: 100px;
     height: 3px;
     background: color.$brown_500;
-    // margin: 0 auto;
     position: relative;
     vertical-align: middle;
     animation: progressing 1s 1 ease-in;
+
     &::before {
       content: "";
       display: inline-block;
@@ -325,12 +326,13 @@ export default {
       position: absolute;
       right: -20px;
       top: calc(50% - 10px);
-      // transition: all 0.3s 3s ease-in;
+      // transition: all 0.5s 2s ease-in;
+      animation: progressing 1.7s 1 ease-in;
     }
   }
   @include breakpoint.desktop {
     span {
-      width: 100px;
+      width: 140px;
       &::before {
         width: 40px;
         height: 40px;
@@ -349,12 +351,10 @@ export default {
 
 @keyframes progressing {
   0% {
-    width: 15px;
     background: color.$gray_300;
   }
   100% {
-    width: 100px;
-    background: color.$gray_300;
+    background: color.$brown_500;
   }
 }
 </style>

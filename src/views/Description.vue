@@ -229,9 +229,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-// * {
-//   outline: solid 1px red;
-// }
 .sample {
   padding: 10px;
   cursor: pointer;

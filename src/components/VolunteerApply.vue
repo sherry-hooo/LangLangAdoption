@@ -54,8 +54,10 @@ export default {
   width: 100vw;
   height: 100%;
   min-height: 100vh;
-  padding: 5% 0;
-  position: absolute;
+  padding: 20px 0;
+
+  position: fixed;
+  overflow: scroll;
   top: 0;
   left: 0;
   z-index: 999;
@@ -63,8 +65,13 @@ export default {
   backdrop-filter: blur(1px);
   display: flex;
   justify-content: center;
+
+  @include breakpoint.tablet {
+    padding: 70px 0 20px;
+  }
+
   @include breakpoint.desktop {
-    padding: 110px 0;
+    padding: 100px 0 40px;
   }
 }
 
