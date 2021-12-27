@@ -100,7 +100,7 @@
 
 .custom{
   position: relative;
-  margin-top: 60px;
+  // margin-top: 60px;
   padding: 10px 20px;
   background: color.$brown_100;
   // height: calc(100vh - 120px);
@@ -108,7 +108,7 @@
 
   @include breakpoint.tablet{
     // height: calc(100vh - 163px);
-    margin-top: 103px;
+    // margin-top: 103px;
   }
 
   h2{
@@ -270,7 +270,7 @@
   left: 5%;
   transform: rotate(30deg);
   opacity: 0;
-  animation: shine 1s infinite ease-in-out;
+  animation: shine 1s ease-in-out forwards;
   // animation: footprintL 2s steps(7, end) infinite;
   // animation-delay: 0.5s;
 }
@@ -290,22 +290,65 @@
   width: 40px;
   opacity: 0;
   transform: rotate(-30deg);
-  animation: shine 1s infinite ease-in-out;
-  animation-delay: 1s;
+  animation: shine 1s ease-in-out forwards;
+  animation-delay: 0.5s;
 }
 
 .track3{
   position: absolute;
   top: 10%;
   left: 5%;
+  opacity: 0;
   transform: rotate(25deg);
-  animation: shine 2s infinite ease-in-out;
-  animation-delay: 2s;
+  animation: shine 1s ease-in-out forwards;
+  animation-delay: 1.5s;
 }
 
 @keyframes footprint {
   to {
     transform: translateY(-100px) translateX(-10px);
+  }
+}
+
+// 開頭動畫
+@keyframes fadeIn  {
+  from  { opacity: 0 };
+  to  { opacity: 1 }
+  }
+
+
+.question{
+  .trigger{
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+  }
+}
+.wrap_much{
+  .trigger{
+    animation-delay: 0s;
+  }
+}
+
+.wrap_when{
+  .trigger{
+    animation-delay: 0.2s;
+  }
+}
+
+.wrap_how, .wrap_who{
+  .trigger{
+    animation-delay: 0.5s;
+}}
+
+.wrap_where, .wrap_why{
+  .trigger{
+    animation-delay: 0.6s;
+  }
+}
+
+.wrap_what{
+  .trigger{
+    animation-delay: 0.3s;
   }
 }
 

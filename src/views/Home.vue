@@ -45,7 +45,7 @@
     <section class="gallery_mobile">
       <div class="gallery_wrap">
         <div class="mb_first">
-          <img src="@/assets/img/dog6.jpg" />
+          <img src="@/assets/img/dog6.jpg" alt="take me home"/>
           <p class="text_1">
             希望能夠有一個家， <br />
             一個會好好愛我的主人
@@ -53,12 +53,12 @@
         </div>
 
         <div class="mb_mid">
-          <img src="@/assets/img/cat7.jpg" />
+          <img src="@/assets/img/cat7.jpg" alt="cute cat" />
           <p class="text_2">你能夠 帶我回家嗎？</p>
         </div>
 
         <div class="mb_last">
-          <img src="@/assets/img/dog9.jpg" />
+          <img src="@/assets/img/dog9.jpg" alt="cute dog"/>
           <img class="print1" src="@/assets/img/logo.svg" />
           <img class="print2" src="@/assets/img/logo.svg" />
         </div>
@@ -72,24 +72,20 @@
     <section class="gallery_desktop">
       <div class="parallax_group handheld_base">
         <div class="parallax_layer scroll_first">
-          <img src="@/assets/img/dog6.jpg" />
+          <img src="@/assets/img/dog6.jpg" alt="take me home"/>
         </div>
         <div class="parallax_layer scroll_mid">
-          <p>
-            希望能夠有一個家， <br />
-            一個會好好愛我的主人
-          </p>
-          <img src="@/assets/img/cat7.jpg" />
+          <img src="@/assets/img/cat7.jpg"  alt="cute cat"/>
         </div>
         <div class="parallax_layer scroll_second">
-          <img src="@/assets/img/cat2.jpg" />
+          <img src="@/assets/img/cat2.jpg" alt="kitten"/>
         </div>
         <div class="parallax_layer scroll_last">
-          <img src="@/assets/img/dog5.jpg" />
+          <img src="@/assets/img/dog5.jpg" alt="cute dog"/>
         </div>
         <div class="parallax_layer scroll_slow">
           <p>你能夠帶我回家嗎？</p>
-          <img src="@/assets/img/dog9.jpg" />
+          <img src="@/assets/img/dog9.jpg" alt="cute dog"/>
         </div>
         <div class="parallax_layer scroll_slogan">
           <div class="slogan">
@@ -726,9 +722,8 @@ main {
     height: 100vh;
     z-index: 1;
     // margin-bottom: -250px;
-
-    background-image: url(../assets/img/wishahome375.svg);
     background-repeat: no-repeat;
+    background-size: contain;
     background-position-y: 50px;
     position: relative;
     @include breakpoint.tablet {
@@ -760,6 +755,10 @@ main {
       width: 100vw;
       height: 100%;
       background: transparent;
+
+      img{
+        box-shadow: 2px 2px 7px rgba(81, 81, 81, 0.4);
+      }
     }
     .scroll_first {
       transform: translateZ(2px) scale(0.8);
@@ -772,14 +771,14 @@ main {
         @include breakpoint.desktop {
           position: absolute;
           bottom: 5%;
-          left: 100px;
+          left: 60px;
           width: 300px;
         }
 
         @include breakpoint.bgScreen {
           position: absolute;
           bottom: 5%;
-          left: 100px;
+          left: 80px;
           width: 370px;
         }
       }
@@ -803,7 +802,7 @@ main {
 
       img {
         position: absolute;
-        top: 45%;
+        top: 40%;
         left: 50%;
         transform: translateX(-50%);
         width: 350px;
@@ -823,7 +822,7 @@ main {
 
       img {
         position: absolute;
-        bottom: 15%;
+        bottom: 20%;
         right: 30px;
         width: 250px;
 
@@ -846,16 +845,17 @@ main {
     .scroll_slow {
       transform: translateZ(-15px) scale(2.5);
       p {
-        position: absolute;
-        left: 80px;
-        bottom: 300px;
-        font-weight: 600;
-        font-size: 20px;
-        color: color.$gray_500;
-        background: rgba($color: #fff, $alpha: 0.8);
+        display: none;
+        // position: absolute;
+        // left: 80px;
+        // bottom: 300px;
+        // font-weight: 600;
+        // font-size: 20px;
+        // color: color.$gray_500;
+        // background: rgba($color: #fff, $alpha: 0.8);
 
         @include breakpoint.bgScreen {
-          font-size: 24px;
+          // font-size: 24px;
         }
       }
       img {
@@ -927,6 +927,7 @@ main {
         display: inline-block;
         animation: MoveLR 2s ease-in-out alternate infinite;
         width: 100px;
+        box-shadow: none;
 
         @include breakpoint.bgScreen {
           width: 200px;
