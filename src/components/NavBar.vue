@@ -104,6 +104,9 @@ header {
 
   @include breakpoint.tablet {
     display: flex;
+    /* fixed */
+    align-items: center;
+    //
     position: unset;
     right: unset;
     top: unset;
@@ -115,17 +118,35 @@ header {
     padding: 7px;
     text-align: center;
     @include breakpoint.tablet {
+      display: flex;
+      align-items: center;
       background-color: unset;
+      height: 100px;
       padding: 10px 0px;
+      &:first-child {
+        width: 64px;
+        justify-content: center;
+      }
+    }
+    @include breakpoint.desktop {
     }
     &:hover {
-      background-color: color.$brown_300;
+      // background-color: color.$brown_300;
       @include breakpoint.tablet {
-        background-color: unset;
-        & a:hover {
-          text-decoration: underline color.$gray_500 2px;
-          text-underline-offset: 5px;
-        }
+        // background-color: unset;
+        background-image: url("~@/assets/img/Union2.svg");
+        background-repeat: no-repeat;
+        background-position: bottom;
+        align-self: center;
+        // background-size: 70%;
+        // transform: rotate(30deg);
+        // z-index: -1;
+        // & a:hover {
+        //   // text-decoration: underline color.$gray_500 2px;
+        //   // text-underline-offset: 5px;
+        // }
+      }
+      @include breakpoint.desktop {
       }
     }
     @include breakpoint.tablet {
