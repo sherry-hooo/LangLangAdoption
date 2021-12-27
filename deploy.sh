@@ -26,6 +26,6 @@ git commit -m 'deploy'
 
 # 除此之外，也可以改走 HTTPS 模式
 # git push -f https://github.com/sherry-hooo/HexfootMusic.git master:gh-pages
-git push -f https://github.com/sherry-hooo/LangLangAdoption.git main:gh-pages
+git push -f https://github.com/sherry-hooo/LangLangAdoption.git master:gh-pages
 
 cd -

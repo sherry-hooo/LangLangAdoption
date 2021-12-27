@@ -45,7 +45,7 @@
     <section class="gallery_mobile">
       <div class="gallery_wrap">
         <div class="mb_first">
-          <img src="@/assets/img/dog6.jpg" alt="take me home"/>
+          <img src="@/assets/img/dog6.jpg" alt="take me home" />
           <p class="text_1">
             希望能夠有一個家， <br />
             一個會好好愛我的主人
@@ -54,17 +54,19 @@
 
         <div class="mb_mid">
           <img src="@/assets/img/cat7.jpg" alt="cute cat" />
-          <p class="text_2">你能夠 帶我回家嗎？</p>
+          <p class="text_2">你能夠帶我回家嗎？</p>
         </div>
 
         <div class="mb_last">
-          <img src="@/assets/img/dog9.jpg" alt="cute dog"/>
+          <img src="@/assets/img/dog9.jpg" alt="cute dog" />
           <img class="print1" src="@/assets/img/logo.svg" />
           <img class="print2" src="@/assets/img/logo.svg" />
         </div>
         <div class="slogan">
-          <p>為牠駐足，尋找你們之間的命中註定</p>
-          <img src="@/assets/img/arrow.svg" />
+          <router-link :to="{ name: 'Search' }">
+            <p>為牠駐足，尋找你們之間的命中註定</p>
+            <img src="@/assets/img/arrow.svg" />
+          </router-link>
         </div>
       </div>
     </section>
@@ -72,20 +74,20 @@
     <section class="gallery_desktop">
       <div class="parallax_group handheld_base">
         <div class="parallax_layer scroll_first">
-          <img src="@/assets/img/dog6.jpg" alt="take me home"/>
+          <img src="@/assets/img/dog6.jpg" alt="take me home" />
         </div>
         <div class="parallax_layer scroll_mid">
-          <img src="@/assets/img/cat7.jpg"  alt="cute cat"/>
+          <img src="@/assets/img/cat7.jpg" alt="cute cat" />
         </div>
         <div class="parallax_layer scroll_second">
-          <img src="@/assets/img/cat2.jpg" alt="kitten"/>
+          <img src="@/assets/img/cat2.jpg" alt="kitten" />
         </div>
         <div class="parallax_layer scroll_last">
-          <img src="@/assets/img/dog5.jpg" alt="cute dog"/>
+          <img src="@/assets/img/dog5.jpg" alt="cute dog" />
         </div>
         <div class="parallax_layer scroll_slow">
           <p>你能夠帶我回家嗎？</p>
-          <img src="@/assets/img/dog9.jpg" alt="cute dog"/>
+          <img src="@/assets/img/dog9.jpg" alt="cute dog" />
         </div>
         <div class="parallax_layer scroll_slogan">
           <div class="slogan">
@@ -772,7 +774,7 @@ main {
       height: 100%;
       background: transparent;
 
-      img{
+      img {
         box-shadow: 2px 2px 7px rgba(81, 81, 81, 0.4);
       }
     }

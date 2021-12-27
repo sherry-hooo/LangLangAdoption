@@ -15,7 +15,7 @@
         <li>
           <router-link :to="{ name: 'Volunteer' }">志工招募 </router-link>
         </li>
-        <li><router-link :to="{ name: 'Custom' }">愛心項圈 </router-link></li>
+        <li><router-link :to="{ name: 'Custom' }">我想知道 </router-link></li>
       </ul>
       <ul class="lg_nav navbar" @click="openNav = false">
         <li><router-link :to="{ name: 'Home' }">首頁</router-link></li>

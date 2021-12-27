@@ -255,46 +255,48 @@
 // 位置相對於容器
 // 左邊的腳印
 .track1 {
-  // display: none;
   width: 40px;
   position: absolute; //相對於h2
   top: 45%;
-  // bottom: 35%;
   left: 5%;
-  transform: rotate(30deg);
+  transform: scale(0.5) rotate(25deg);
   opacity: 0;
   animation: shine 1s ease-in-out forwards;
-  // animation: footprintL 2s steps(7, end) infinite;
-  // animation-delay: 0.5s;
+  @include breakpoint.tablet {
+    left: 5%;
+    transform: rotate(30deg);
+  }
 }
 
 .track2 {
-  // 靜態位置樣式
-  // width: 40px;
-  // position: absolute;
-  // bottom: 40%;
-  // right: 20px;
-  // transform: rotate(-15deg);
-
   // 動畫參數
   position: absolute;
   top: 30%;
   left: 7%;
   width: 40px;
   opacity: 0;
-  transform: rotate(-30deg);
+  transform: scale(0.5) rotate(-25deg);
   animation: shine 1s ease-in-out forwards;
   animation-delay: 0.5s;
+  @include breakpoint.tablet {
+    left: 5%;
+    transform: rotate(-30deg);
+  }
 }
 
 .track3 {
   position: absolute;
   top: 10%;
-  left: 5%;
+  left: 1px;
   opacity: 0;
-  transform: rotate(25deg);
+  transform: scale(0.5) rotate(25deg);
   animation: shine 1s ease-in-out forwards;
   animation-delay: 1.5s;
+
+  @include breakpoint.tablet {
+    left: 5%;
+    transform: rotate(25deg);
+  }
 }
 
 @keyframes footprint {
@@ -304,45 +306,50 @@
 }
 
 // 開頭動畫
-@keyframes fadeIn  {
-  from  { opacity: 0 };
-  to  { opacity: 1 }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
+  to {
+    opacity: 1;
+  }
+}
 
-
-.question{
-  .trigger{
+.question {
+  .trigger {
     opacity: 0;
     animation: fadeIn 0.5s forwards;
   }
 }
-.wrap_much{
-  .trigger{
+.wrap_much {
+  .trigger {
     animation-delay: 0s;
   }
 }
 
-.wrap_when{
-  .trigger{
+.wrap_when {
+  .trigger {
     animation-delay: 0.2s;
   }
 }
 
-.wrap_how, .wrap_who{
-  .trigger{
+.wrap_how,
+.wrap_who {
+  .trigger {
     animation-delay: 0.5s;
-}}
+  }
+}
 
-.wrap_where, .wrap_why{
-  .trigger{
+.wrap_where,
+.wrap_why {
+  .trigger {
     animation-delay: 0.6s;
   }
 }
 
-.wrap_what{
-  .trigger{
+.wrap_what {
+  .trigger {
     animation-delay: 0.3s;
   }
 }
-
 </style>
