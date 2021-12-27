@@ -5,6 +5,8 @@
       @selectedAnimalKind="receiveAnimalKind"
       @selection="receiveSelection"
       :shelterList="shelterList"
+      :selectedKind="$route.query.animalKind"
+      :selectedShelter="$route.query.animalPlace"
     ></Dropdown>
     <section>
       <Card
@@ -113,27 +115,12 @@ export default {
     totalPage() {
       return Math.ceil(this.singleShelterData.length / this.cardAmount);
     },
-    // shelterList() {
-    //   let getShelterData = this.singleKindData.map((data) => ({
-    //     shelter_name: data.shelter_name,
-    //     animal_shelter_pkid: data.animal_shelter_pkid,
-    //   }));
-
-    //   let sortedShelter = getShelterData.sort((front, back) => {
-    //     return front.animal_shelter_pkid - back.animal_shelter_pkid;
-    //   });
-
-    //   return sortedShelter.reduce((accumulator, current) => {
-    //     if (
-    //       accumulator.length === 0 ||
-    //       accumulator[accumulator.length - 1].animal_shelter_pkid !==
-    //         current.animal_shelter_pkid
-    //     ) {
-    //       accumulator.push(current);
-    //     }
-    //     return accumulator;
-    //   }, []);
-    // },
+  },
+  created() {
+    if (this.$route.query.animalKind) {
+      this.receiveAnimalKind(this.$route.query.animalKind);
+      this.receiveSelection(this.$route.query);
+    }
   },
 };
 </script>

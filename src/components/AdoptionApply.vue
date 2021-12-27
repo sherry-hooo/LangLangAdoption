@@ -2,7 +2,9 @@
   <section class="wrapper">
     <div class="adoption_apply">
       <div class="progress_bar">
-        <span></span>
+        <div>
+          <span></span>
+        </div>
       </div>
       <h3>步驟二 認養申請</h3>
       <label class="accept_container">
@@ -290,21 +292,25 @@ export default {
     line-height: 40px;
     margin-bottom: 20px;
   }
+  div {
+    margin: 0 auto;
+  }
   span {
     display: inline-block;
     width: 100px;
     height: 3px;
-    background: color.$gray_300;
-    margin: 0 auto;
+    background: color.$brown_500;
+    // margin: 0 auto;
     position: relative;
     vertical-align: middle;
+    animation: progressing 1s 1 ease-in;
     &::before {
       content: "";
       display: inline-block;
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: color.$gray_300;
+      background: color.$brown_500;
       position: absolute;
       left: -20px;
       top: calc(50% - 10px);
@@ -319,11 +325,12 @@ export default {
       position: absolute;
       right: -20px;
       top: calc(50% - 10px);
+      // transition: all 0.3s 3s ease-in;
     }
   }
   @include breakpoint.desktop {
     span {
-      width: 140px;
+      width: 100px;
       &::before {
         width: 40px;
         height: 40px;
@@ -337,6 +344,17 @@ export default {
         top: calc(50% - 20px);
       }
     }
+  }
+}
+
+@keyframes progressing {
+  0% {
+    width: 15px;
+    background: color.$gray_300;
+  }
+  100% {
+    width: 100px;
+    background: color.$gray_300;
   }
 }
 </style>

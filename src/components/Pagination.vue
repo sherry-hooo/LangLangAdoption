@@ -79,7 +79,7 @@ export default {
     background: #dec39e;
     border-radius: 1px;
     color: white;
-    padding: 10px 15px;
+    padding: 5px 15px;
     border-radius: 3px;
   }
   .first {
@@ -98,7 +98,10 @@ export default {
     display: flex;
     flex: 1;
     align-items: stretch;
-    font-size: 20px;
+    font-size: 16px;
+    @include breakpoint.tablet {
+      font-size: 20px;
+    }
 
     > input,
     p {
@@ -109,11 +112,14 @@ export default {
       border-radius: 3px;
       border: 1px solid darkgray;
       text-align: center;
-      width: 20px;
+      width: 60px;
       padding: 0 5px;
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 500;
       color: #625c5cfa;
+      @include breakpoint.tablet {
+        font-size: 20px;
+      }
     }
     input::-webkit-textfield-decoration-container {
       height: 100%;
@@ -121,7 +127,7 @@ export default {
     }
     .divider {
       width: 10px;
-      margin: 0 5px 0 15px;
+      margin: 0 18px 0 15px;
     }
   }
   .number_current {

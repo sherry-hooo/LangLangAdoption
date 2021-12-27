@@ -93,7 +93,16 @@
           </div>
         </div>
         <div class="look_more">
-          <router-link :to="{ name: 'Search' }">
+          <router-link
+            :to="{
+              name: 'Search',
+              query: {
+                animalKind: petKind,
+                animalPlace: petData.animal_place,
+                shelterPkid: petData.animal_shelter_pkid,
+              },
+            }"
+          >
             <span> 尋找其它浪浪 </span>
             <div class="arrow_box">
               <img src="@/assets/img/arrow.svg" alt="" />
@@ -228,15 +237,11 @@ export default {
   cursor: pointer;
 }
 main {
-  padding-top: 60px;
   background-color: color.$brown-100;
-  position: relative;
+  // position: relative;
   // overflow: hidden; //會卡到表單
   height: fit-content;
   min-height: 100vh;
-  @include breakpoint.tablet {
-    padding-top: 103px;
-  }
 }
 .description {
   padding: 10px 30px 30px 30px;
