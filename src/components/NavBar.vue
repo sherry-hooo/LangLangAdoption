@@ -131,20 +131,13 @@ header {
     @include breakpoint.desktop {
     }
     &:hover {
-      // background-color: color.$brown_300;
       @include breakpoint.tablet {
-        // background-color: unset;
         background-image: url("~@/assets/img/Union2.svg");
         background-repeat: no-repeat;
         background-position: bottom;
         align-self: center;
-        // background-size: 70%;
-        // transform: rotate(30deg);
-        // z-index: -1;
-        // & a:hover {
-        //   // text-decoration: underline color.$gray_500 2px;
-        //   // text-underline-offset: 5px;
-        // }
+        background-size: 30%;
+        background-position: top 20px center;
       }
       @include breakpoint.desktop {
       }
