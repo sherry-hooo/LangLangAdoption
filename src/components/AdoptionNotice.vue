@@ -309,7 +309,8 @@ export default {
 
 // 統一表單wrapper樣式
 .wrapper {
-  position: absolute;
+  position: fixed;
+  overflow: scroll;
   top: 0;
   right: 0;
   left: 0;
@@ -317,19 +318,18 @@ export default {
   width: 100vw;
   min-height: 100vh;
   height: 100%;
-  overflow: scroll;
   padding: 20px 0 20px;
   background: #bebabaab;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(2px);
   display: flex;
   justify-content: center;
 
-  // @include breakpoint.tablet {
-  //   height: 100%;
-  // }
+  @include breakpoint.tablet {
+    padding: 70px 0 20px;
+  }
 
   @include breakpoint.desktop {
-    padding: 20px 0 40px;
+    padding: 100px 0 40px;
   }
 }
 // 統一表單樣式
