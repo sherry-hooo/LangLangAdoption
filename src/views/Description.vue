@@ -343,6 +343,7 @@ main {
     margin-top: 5px;
     font-size: 18px;
     font-weight: 400;
+    word-break: break-all;
     color: color.$gray_500;
     @include breakpoint.desktop {
       font-size: 21px;
@@ -412,9 +413,11 @@ main {
   background-color: color.$brown_100;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4);
   max-width: 500px;
+  max-height: 60vh;
   & img {
     width: 100%;
     height: 100%;
+    object-fit: contain;
   }
   @include breakpoint.desktop {
     flex: unset;
