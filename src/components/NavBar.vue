@@ -24,7 +24,7 @@
         <li>
           <router-link :to="{ name: 'Volunteer' }">志工招募 </router-link>
         </li>
-        <li><router-link :to="{ name: 'Custom' }">愛心項圈 </router-link></li>
+        <li><router-link :to="{ name: 'Custom' }">我想知道 </router-link></li>
       </ul>
     </div>
   </header>
@@ -104,6 +104,9 @@ header {
 
   @include breakpoint.tablet {
     display: flex;
+    /* fixed */
+    align-items: center;
+    //
     position: unset;
     right: unset;
     top: unset;
@@ -115,17 +118,28 @@ header {
     padding: 7px;
     text-align: center;
     @include breakpoint.tablet {
+      display: flex;
+      align-items: center;
       background-color: unset;
+      height: 100px;
       padding: 10px 0px;
+      &:first-child {
+        width: 64px;
+        justify-content: center;
+      }
+    }
+    @include breakpoint.desktop {
     }
     &:hover {
-      background-color: color.$brown_300;
       @include breakpoint.tablet {
-        background-color: unset;
-        & a:hover {
-          text-decoration: underline color.$gray_500 2px;
-          text-underline-offset: 5px;
-        }
+        background-image: url("~@/assets/img/Union2.svg");
+        background-repeat: no-repeat;
+        background-position: bottom;
+        align-self: center;
+        background-size: 30%;
+        background-position: top 20px center;
+      }
+      @include breakpoint.desktop {
       }
     }
     @include breakpoint.tablet {

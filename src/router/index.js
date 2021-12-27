@@ -10,28 +10,28 @@ const routes = [
     component: Home,
   },
   {
-    path: "/Search",
+    path: "/search",
     name: "Search",
     props: true,
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Search.vue"),
   },
   {
-    path: "/Track",
+    path: "/track",
     name: "Track",
     props: true,
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Track.vue"),
   },
   {
-    path: "/Volunteer",
+    path: "/volunteer",
     name: "Volunteer",
     props: true,
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Volunteer.vue"),
   },
   {
-    path: "/Description/:petKind/:petID",
+    path: "/description/:petKind/:petID",
     name: "Description",
     props: true,
     component: () =>

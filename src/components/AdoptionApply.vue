@@ -91,7 +91,6 @@ export default {
           type: "text",
           maxlength: "10",
           rules: Yup.string()
-            .matches(/(hi|bye)/, { message: "請勿輸入標點符號" })
             .typeError("age must be a number")
             .required("required"),
         },
