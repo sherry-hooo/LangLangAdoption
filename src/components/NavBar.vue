@@ -123,6 +123,7 @@ header {
       background-color: unset;
       height: 100px;
       padding: 10px 0px;
+      position: relative;
       &:first-child {
         width: 64px;
         justify-content: center;
@@ -132,12 +133,23 @@ header {
     }
     &:hover {
       @include breakpoint.tablet {
-        background-image: url("~@/assets/img/Union2.svg");
-        background-repeat: no-repeat;
-        background-position: bottom;
         align-self: center;
-        background-size: 30%;
-        background-position: top 20px center;
+        ::before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+
+          left: -10px;
+          bottom: 0;
+
+          background: url("~@/assets/img/Union2.svg");
+          background-repeat: no-repeat;
+          background-position: top 20px center;
+          background-size: 30%;
+
+          transform: rotate(30deg);
+        }
       }
       @include breakpoint.desktop {
       }

@@ -23,6 +23,7 @@
       class="pagination_button last"
       type="button"
       @click="switchNextPage"
+      :disabled="currentPage >= totalPage ? true : false"
     >
       <i class="fas fa-chevron-right fa-fw"></i>
     </button>
