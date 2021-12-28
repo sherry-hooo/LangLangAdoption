@@ -283,6 +283,7 @@ main {
   }
   &_img_box {
     display: flex;
+    flex: 40%;
     flex-direction: column;
     @include breakpoint.mobile {
       flex-direction: unset;
@@ -409,7 +410,7 @@ main {
   border-color: color.$white;
   background-color: color.$brown_100;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4);
-  max-width: 500px;
+  height: 300px;
   max-height: 60vh;
   & img {
     width: 100%;
@@ -417,7 +418,7 @@ main {
     object-fit: contain;
   }
   @include breakpoint.desktop {
-    flex: unset;
+    height: 500px;
   }
 }
 .follow_box {
