@@ -283,8 +283,8 @@ main {
   }
   &_img_box {
     display: flex;
-    flex: 40%;
     flex-direction: column;
+    flex: 40%;
     @include breakpoint.mobile {
       flex-direction: unset;
       justify-content: space-between;
@@ -404,7 +404,6 @@ main {
 }
 .img_box {
   position: relative;
-  flex: 40%;
   line-height: 0;
   border: solid 8px;
   border-color: color.$white;
@@ -412,6 +411,9 @@ main {
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4);
   height: 300px;
   max-height: 60vh;
+  @include breakpoint.mobile {
+    flex: 40%;
+  }
   & img {
     width: 100%;
     height: 100%;
@@ -419,21 +421,23 @@ main {
   }
   @include breakpoint.desktop {
     height: 500px;
+    flex: initial;
   }
 }
 .follow_box {
   display: flex;
   margin-top: 20px;
   gap: 5px;
-  flex: 40%;
   @include breakpoint.mobile {
     flex-direction: column;
+    flex: 40%;
     margin-top: 0;
     gap: 30px;
     justify-content: flex-end;
   }
   @include breakpoint.desktop {
     margin-top: 50px;
+    flex: initial;
     justify-content: flex-start;
   }
 }
