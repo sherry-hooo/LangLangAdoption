@@ -112,4 +112,20 @@ export default {
     }
   }
 }
+// 新增使用者hover效果
+.case_card:hover{
+  transition: all 0.2s ease-in;
+  position: relative;
+  top: 1px;
+  box-shadow: 4px 8px 4px rgba(0, 0, 0, 0.25);
+  
+  .case_image{
+    overflow: hidden;
+  }
+
+  img{
+    transition: all 0.3s ease-out;
+    transform: scale(1.3);
+  }
+}
 </style>
